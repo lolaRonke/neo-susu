@@ -2,8 +2,8 @@
   "name": "NEO-SUSU — L'épargne communautaire intelligente",
   "short_name": "NEO-SUSU",
   "description": "Digitalisez et sécurisez votre tontine. IA vocale 5 langues, paiements PSP agréés, agents cash certifiés.",
-  "start_url": "/index.html",
-  "scope": "/",
+  "start_url": "./NEO-SUSU-App-Premium.html",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#070810",
@@ -20,35 +20,26 @@
     { "src": "icons/icon-384.png",  "sizes": "384x384", "type": "image/png", "purpose": "any maskable" },
     { "src": "icons/icon-512.png",  "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ],
-  "screenshots": [
-    {
-      "src": "icons/screenshot-mobile.png",
-      "sizes": "390x844",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "NEO-SUSU App Mobile"
-    }
-  ],
   "shortcuts": [
     {
       "name": "Mon Dashboard",
       "short_name": "Dashboard",
       "description": "Accéder à mon tableau de bord tontines",
-      "url": "/NEO-SUSU-App-Premium.html",
+      "url": "./NEO-SUSU-App-Premium.html",
       "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
     },
     {
       "name": "Site Web",
       "short_name": "Site",
       "description": "Site officiel NEO-SUSU",
-      "url": "/neo-susu-website.html",
+      "url": "./neo-susu-website.html",
       "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
     },
     {
-      "name": "Présentation",
-      "short_name": "Pitch",
-      "description": "Présentation marketing NEO-SUSU",
-      "url": "/NEO-SUSU_Presentation.html",
+      "name": "Inscription",
+      "short_name": "S'inscrire",
+      "description": "Créer un compte NEO-SUSU",
+      "url": "./signup.html",
       "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
     }
   ],
