@@ -1,0 +1,1962 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>NEO-SUSU — L'épargne communautaire intelligente</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500;1,700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════
+   RESET & DESIGN TOKENS
+════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root {
+  /* Mode mobile */
+  --void: #07080F;
+  --deep: #0C0E1C;
+  --surface: #111526;
+  --panel: #161B2E;
+  --card: #1C2138;
+  --raised: #222840;
+  --gold: #D4A82A;
+  --gold2: #B8860B;
+  --gold-lo: #A06B0A;
+  --gold-pale: #F5E09A;
+  --em: #1CC48A;
+  --em2: #0FA870;
+  --red: #E8445A;
+  --sky: #4AA8FF;
+  --violet: #9B6EF8;
+  --text: #EEF1FF;
+  --text2: #8892BB;
+  --text3: #404868;
+  --stroke: #1E2540;
+  --stroke2: #252C4A;
+  --ff-serif: 'Cormorant Garamond', Georgia, serif;
+  --ff-body: 'Outfit', system-ui, sans-serif;
+}
+
+html { font-size: 16px; }
+body {
+  font-family: var(--ff-body);
+  background: #050508;
+  color: var(--text);
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ════════════════════════════════════════
+   OUTER SHELL — phone frame on desktop
+════════════════════════════════════════ */
+.outer {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  gap: 8px;
+}
+.mode-btn {
+  background: rgba(22,27,46,.9);
+  border: 1px solid var(--stroke2);
+  color: var(--text2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-family: var(--ff-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+  backdrop-filter: blur(10px);
+}
+.mode-btn.on { background: var(--gold); color: #050508; border-color: var(--gold); }
+.mode-btn:hover:not(.on) { border-color: var(--gold); color: var(--gold); }
+
+/* ════════════════════════════════════════
+   PHONE DEVICE FRAME
+════════════════════════════════════════ */
+.phone-frame {
+  width: 393px;
+  flex-shrink: 0;
+  position: relative;
+}
+.phone-shell {
+  width: 393px;
+  height: 852px;
+  background: var(--deep);
+  border-radius: 52px;
+  border: 2px solid #222640;
+  box-shadow:
+    0 0 0 1px #0a0c14,
+    0 60px 150px rgba(0,0,0,.85),
+    0 0 80px rgba(212,168,42,.05),
+    inset 0 0 0 1px rgba(255,255,255,.03);
+  position: relative;
+  overflow: hidden;
+}
+.phone-shell::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 126px; height: 36px;
+  background: #040508;
+  border-radius: 0 0 24px 24px;
+  z-index: 100;
+}
+
+/* ════════════════════════════════════════
+   SCREENS
+════════════════════════════════════════ */
+.screen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+}
+.screen.active { display: flex; }
+
+/* Status bar */
+.statusbar {
+  height: 50px;
+  padding: 0 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+.st-time { font-size: 15px; font-weight: 700; color: var(--text); }
+.st-icons { display: flex; gap: 5px; align-items: center; color: var(--text); font-size: 12px; }
+
+/* Scrollable content area */
+.scrl {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+.scrl::-webkit-scrollbar { display: none; }
+
+/* ── BOTTOM NAV ── */
+.bnav {
+  height: 80px;
+  background: rgba(16,20,38,.97);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--stroke);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px 14px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 20;
+}
+.bnav-item {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  cursor: pointer; padding: 8px 16px; border-radius: 16px;
+  transition: background .2s;
+  border: none; background: none; font-family: var(--ff-body);
+}
+.bnav-item:hover { background: rgba(212,168,42,.07); }
+.bnav-item.on .bnav-ico { color: var(--gold); }
+.bnav-item.on .bnav-lbl { color: var(--gold); }
+.bnav-ico { font-size: 22px; color: var(--text3); }
+.bnav-lbl { font-size: 10px; font-weight: 600; color: var(--text3); letter-spacing: .3px; }
+
+/* ── VOICE FAB ── */
+.voice-fab {
+  position: absolute;
+  bottom: 90px; right: 18px;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--em), var(--em2));
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; z-index: 50;
+  box-shadow: 0 6px 24px rgba(28,196,138,.35);
+  transition: transform .2s;
+  animation: voicePulse 2.5s ease-in-out infinite;
+}
+.voice-fab:active { transform: scale(.9); }
+.voice-fab.listening {
+  background: linear-gradient(135deg, var(--red), #C0392B);
+  animation: voicePulseRed 1s ease-in-out infinite;
+}
+@keyframes voicePulse {
+  0%,100%{box-shadow:0 6px 24px rgba(28,196,138,.35);}
+  50%{box-shadow:0 6px 36px rgba(28,196,138,.6),0 0 0 10px rgba(28,196,138,.06);}
+}
+@keyframes voicePulseRed {
+  0%,100%{box-shadow:0 6px 24px rgba(232,68,90,.5);}
+  50%{box-shadow:0 6px 36px rgba(232,68,90,.8),0 0 0 14px rgba(232,68,90,.07);}
+}
+
+/* ── VOICE PANEL ── */
+.voice-panel {
+  position: absolute;
+  bottom: 158px; right: 12px;
+  width: 280px;
+  background: var(--card);
+  border: 1px solid var(--stroke2);
+  border-radius: 24px;
+  padding: 20px;
+  display: none;
+  z-index: 51;
+  box-shadow: 0 24px 60px rgba(0,0,0,.5);
+  animation: panelIn .3s cubic-bezier(.34,1.56,.64,1);
+}
+.voice-panel.show { display: block; }
+@keyframes panelIn {
+  from{opacity:0;transform:scale(.85) translateY(12px);}
+  to{opacity:1;transform:none;}
+}
+.vp-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.vp-title { font-weight: 700; font-size: 15px; color: var(--text); }
+.vp-close {
+  background: none; border: none; color: var(--text3);
+  font-size: 18px; cursor: pointer; padding: 4px;
+}
+.vp-status { font-size: 13px; color: var(--text2); text-align: center; padding: 12px; }
+.vp-transcript {
+  background: var(--surface); border-radius: 12px;
+  padding: 10px 14px; font-size: 13px; color: var(--text2);
+  margin-top: 10px; display: none; line-height: 1.5;
+}
+.vp-response {
+  background: rgba(28,196,138,.08); border: 1px solid rgba(28,196,138,.2);
+  border-radius: 12px; padding: 10px 14px;
+  font-size: 13px; color: var(--text); margin-top: 8px;
+  display: none; line-height: 1.5;
+}
+.vp-waves {
+  display: flex; gap: 4px; align-items: center; justify-content: center;
+  height: 36px; margin: 8px 0;
+}
+.wave-bar {
+  width: 4px; border-radius: 4px; background: var(--em);
+  animation: wave .8s ease-in-out infinite;
+}
+.wave-bar:nth-child(2){animation-delay:.1s;}
+.wave-bar:nth-child(3){animation-delay:.2s;}
+.wave-bar:nth-child(4){animation-delay:.3s;}
+.wave-bar:nth-child(5){animation-delay:.4s;}
+@keyframes wave{0%,100%{height:8px;opacity:.4;}50%{height:28px;opacity:1;}}
+
+/* ════════════════════════════════════════
+   SHARED COMPONENTS
+════════════════════════════════════════ */
+.chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  border-radius: 30px; padding: 4px 12px;
+  font-size: 11px; font-weight: 700;
+}
+.chip-g { background:rgba(212,168,42,.12);color:var(--gold); }
+.chip-e { background:rgba(28,196,138,.12);color:var(--em); }
+.chip-r { background:rgba(232,68,90,.12);color:var(--red); }
+.chip-b { background:rgba(74,168,255,.12);color:var(--sky); }
+.chip-v { background:rgba(155,110,248,.12);color:var(--violet); }
+
+.sec-label {
+  font-size: 11px; font-weight: 700; color: var(--text3);
+  letter-spacing: 1.2px; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.divider { height: 1px; background: var(--stroke); margin: 16px 0; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; padding: 14px 22px; border-radius: 18px;
+  font-family: var(--ff-body); font-size: 14px; font-weight: 700;
+  cursor: pointer; border: none; transition: all .2s; letter-spacing: .2px;
+}
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: #050508;
+  box-shadow: 0 6px 22px rgba(212,168,42,.28);
+}
+.btn-gold:hover { box-shadow: 0 8px 30px rgba(212,168,42,.45); transform: translateY(-1px); }
+.btn-em {
+  background: linear-gradient(135deg, var(--em), var(--em2));
+  color: #050508;
+  box-shadow: 0 6px 22px rgba(28,196,138,.22);
+}
+.btn-ghost {
+  background: var(--raised); border: 1px solid var(--stroke2);
+  color: var(--text);
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+.btn-danger { background: rgba(232,68,90,.15); border: 1px solid rgba(232,68,90,.3); color: var(--red); }
+.btn-sm { padding: 8px 16px; font-size: 12px; border-radius: 12px; }
+.btn-full { width: 100%; }
+
+/* ════════════════════════════════════════
+   SCREEN 0 — SPLASH
+════════════════════════════════════════ */
+#s-splash {
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 20%, rgba(212,168,42,.1) 0,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(28,196,138,.07) 0,transparent 55%),
+    var(--deep);
+}
+.splash-logo {
+  width: 90px; height: 90px; border-radius: 28px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ff-serif); font-size: 50px; font-weight: 700;
+  color: #050508;
+  box-shadow: 0 16px 50px rgba(212,168,42,.45);
+  margin: 0 auto 28px;
+  animation: floatLogo 3s ease-in-out infinite;
+}
+@keyframes floatLogo {0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.splash-title {
+  font-family: var(--ff-serif);
+  font-size: 54px; font-weight: 700; color: var(--text);
+  text-align: center; letter-spacing: -1px; line-height: 1;
+}
+.splash-sub {
+  text-align: center; color: var(--text2); font-size: 15px;
+  line-height: 1.6; max-width: 280px; margin: 12px auto 0;
+}
+.splash-flags { display: flex; gap: 14px; justify-content: center; margin: 28px 0 32px; }
+.flag-pill {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--card); border: 1px solid var(--stroke2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; transition: transform .2s;
+}
+.flag-pill:hover { transform: scale(1.15); }
+.splash-ticker {
+  overflow: hidden; width: 100%; padding: 10px 0;
+  background: rgba(212,168,42,.05);
+  border-top: 1px solid rgba(212,168,42,.1);
+  border-bottom: 1px solid rgba(212,168,42,.1);
+  flex-shrink: 0;
+}
+.ticker-track {
+  display: flex; white-space: nowrap;
+  animation: ticker 20s linear infinite; width: max-content;
+}
+.ticker-i {
+  padding: 0 28px; font-size: 12px; font-weight: 600;
+  color: rgba(212,168,42,.6); letter-spacing: .5px;
+}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ════════════════════════════════════════
+   SCREEN 1 — DASHBOARD
+════════════════════════════════════════ */
+#s-dash {
+  background:
+    radial-gradient(ellipse 70% 40% at 80% -5%, rgba(212,168,42,.06) 0,transparent 55%),
+    var(--void);
+}
+.dash-header { padding: 0 22px 18px; flex-shrink: 0; }
+.dash-greet-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px;
+}
+.dash-greet-name {
+  font-family: var(--ff-serif); font-size: 24px; font-weight: 700;
+  color: var(--text); line-height: 1.1;
+}
+.dash-greet-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
+.dash-avatar {
+  width: 46px; height: 46px; border-radius: 16px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(212,168,42,.3);
+}
+.notif-dot-btn {
+  position: relative; width: 44px; height: 44px;
+  background: var(--card); border: 1px solid var(--stroke); border-radius: 15px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; cursor: pointer;
+}
+.notif-dot {
+  position: absolute; top: 8px; right: 8px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--red); border: 2px solid var(--deep);
+}
+
+/* HERO SCORE CARD */
+.score-hero {
+  border-radius: 26px; padding: 24px;
+  background: linear-gradient(135deg,#1A2845 0%,#0F1A32 60%,#0A1224 100%);
+  border: 1px solid rgba(74,168,255,.15);
+  position: relative; overflow: hidden; margin-bottom: 18px;
+}
+.score-hero::before {
+  content: '';
+  position: absolute; top: -50px; right: -50px;
+  width: 180px; height: 180px; border-radius: 50%;
+  background: radial-gradient(circle,rgba(212,168,42,.08),transparent 70%);
+}
+.score-hero::after {
+  content: '';
+  position: absolute; bottom: -40px; left: -20px;
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle,rgba(28,196,138,.06),transparent 70%);
+}
+.sh-label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.35); letter-spacing: 1px; text-transform: uppercase; }
+.sh-val {
+  font-family: var(--ff-serif); font-size: 52px; font-weight: 700;
+  background: linear-gradient(135deg,var(--text),rgba(212,168,42,.9));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1; margin: 6px 0 4px;
+}
+.sh-sub { font-size: 12px; color: rgba(255,255,255,.4); }
+.score-bar { height: 5px; background: rgba(255,255,255,.1); border-radius: 3px; overflow: hidden; margin: 14px 0; }
+.score-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg,var(--em),var(--gold)); width: 82%; transition: width .8s ease; }
+.sh-stats { display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; gap: 0; position: relative; z-index: 1; }
+.sh-stat { text-align: center; }
+.sh-stat-v { font-family: var(--ff-serif); font-size: 22px; font-weight: 700; }
+.sh-stat-l { font-size: 9px; color: rgba(255,255,255,.3); text-transform: uppercase; letter-spacing: .5px; margin-top: 2px; }
+.sh-divider { background: rgba(255,255,255,.06); }
+
+/* QUICK ACTIONS */
+.qa-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 20px; }
+.qa {
+  background: var(--card); border: 1px solid var(--stroke);
+  border-radius: 20px; padding: 14px 6px 12px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  cursor: pointer; transition: all .2s;
+  border: none; font-family: var(--ff-body);
+}
+.qa:hover { background: var(--raised); transform: translateY(-2px); }
+.qa:active { transform: scale(.95); }
+.qa-ico {
+  width: 46px; height: 46px; border-radius: 15px;
+  display: flex; align-items: center; justify-content: center; font-size: 22px;
+}
+.qa-lbl { font-size: 10px; font-weight: 700; color: var(--text2); text-align: center; }
+
+/* TONTINE CARDS */
+.tc {
+  background: var(--card); border: 1px solid var(--stroke);
+  border-radius: 22px; padding: 18px; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 14px;
+  cursor: pointer; transition: all .22s;
+}
+.tc:hover { border-color: rgba(212,168,42,.2); transform: translateX(3px); }
+.tc-ico {
+  width: 50px; height: 50px; border-radius: 17px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; flex-shrink: 0;
+}
+.tc-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.tc-meta { font-size: 12px; color: var(--text2); }
+.tc-amount { font-family: var(--ff-serif); font-size: 20px; font-weight: 700; color: var(--gold); flex-shrink: 0; }
+
+/* ACTIVITY */
+.act-row {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--card); border-radius: 18px;
+  padding: 14px 16px; margin-bottom: 8px;
+}
+.act-ico {
+  width: 40px; height: 40px; border-radius: 13px;
+  display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+}
+.act-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.act-sub { font-size: 12px; color: var(--text2); }
+.act-amt { font-family: var(--ff-serif); font-size: 17px; font-weight: 700; margin-left: auto; }
+
+/* ════════════════════════════════════════
+   SCREEN 2 — GROUPES
+════════════════════════════════════════ */
+#s-groups { background: var(--void); }
+.groups-hero {
+  background: linear-gradient(135deg,rgba(28,196,138,.07),rgba(7,8,15,.8));
+  border-bottom: 1px solid var(--stroke);
+  padding: 0 22px 20px; flex-shrink: 0;
+}
+.group-detail {
+  background: var(--card); border: 1px solid var(--stroke);
+  border-radius: 22px; padding: 20px; margin-bottom: 10px;
+}
+.gd-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.gd-ico {
+  width: 52px; height: 52px; border-radius: 18px;
+  display: flex; align-items: center; justify-content: center; font-size: 26px;
+}
+.gd-name { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.gd-meta { font-size: 12px; color: var(--text2); }
+.progress-row { margin-bottom: 12px; }
+.progress-bar { height: 6px; background: var(--stroke); border-radius: 3px; overflow: hidden; margin-top: 6px; }
+.progress-fill { height: 100%; border-radius: 3px; transition: width .8s; }
+.member-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.member-row:last-child { border-bottom: none; }
+.member-av {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.member-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.member-status { font-size: 11px; color: var(--text2); margin-top: 1px; }
+.member-dot { width: 8px; height: 8px; border-radius: 50%; margin-left: auto; }
+
+/* ════════════════════════════════════════
+   SCREEN 3 — PAIEMENT
+════════════════════════════════════════ */
+#s-pay { background: var(--void); }
+.pay-hero {
+  background: linear-gradient(135deg,rgba(212,168,42,.07),rgba(7,8,15,.8));
+  border-radius: 26px; margin: 0 20px 20px; padding: 28px 22px;
+  text-align: center; position: relative; overflow: hidden;
+  border: 1px solid rgba(212,168,42,.15);
+  flex-shrink: 0;
+}
+.pay-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%,rgba(212,168,42,.08),transparent 60%);
+}
+.pay-amount-lbl { font-size: 11px; color: rgba(255,255,255,.3); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; }
+.pay-amount {
+  font-family: var(--ff-serif); font-size: 68px; font-weight: 700;
+  background: linear-gradient(135deg,var(--gold),var(--gold-pale));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1; position: relative;
+}
+.pay-amount-meta { color: rgba(255,255,255,.3); font-size: 13px; margin-top: 6px; }
+.pay-method {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--card); border: 1.5px solid var(--stroke);
+  border-radius: 20px; padding: 16px 18px; margin-bottom: 10px;
+  cursor: pointer; transition: all .22s;
+}
+.pay-method:hover { border-color: rgba(212,168,42,.3); }
+.pay-method.on { border-color: var(--gold); background: rgba(212,168,42,.06); }
+.pm-ico { font-size: 28px; }
+.pm-name { font-size: 15px; font-weight: 700; color: var(--text); }
+.pm-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
+.pm-check { color: var(--gold); font-size: 18px; margin-left: auto; opacity: 0; transition: opacity .2s; }
+.pay-method.on .pm-check { opacity: 1; }
+.pay-summary {
+  background: var(--panel); border-radius: 18px; padding: 16px; margin: 18px 0;
+}
+.ps-row { display: flex; justify-content: space-between; padding: 6px 0; }
+.ps-row + .ps-row { border-top: 1px solid rgba(255,255,255,.04); }
+.ps-key { font-size: 13px; color: var(--text2); }
+.ps-val { font-size: 14px; font-weight: 700; color: var(--text); }
+
+/* ════════════════════════════════════════
+   SCREEN 4 — PROFIL
+════════════════════════════════════════ */
+#s-profile { background: var(--void); }
+.profile-hero {
+  background: linear-gradient(180deg,rgba(212,168,42,.07) 0%,transparent 100%);
+  border-bottom: 1px solid var(--stroke); padding: 0 22px 24px; flex-shrink: 0;
+}
+.prof-av-wrap {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: linear-gradient(135deg,var(--gold),var(--gold2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 38px; margin: 0 auto 14px;
+  box-shadow: 0 8px 30px rgba(212,168,42,.3);
+}
+.prof-name { font-family: var(--ff-serif); font-size: 26px; font-weight: 700; color: var(--text); text-align: center; }
+.prof-phone { font-size: 14px; color: var(--text2); text-align: center; margin-top: 4px; }
+.wallet-card {
+  background: linear-gradient(135deg,#1A2845,#0F1830);
+  border: 1px solid rgba(74,168,255,.15);
+  border-radius: 22px; padding: 22px; margin-bottom: 16px;
+}
+.wallet-label { font-size: 11px; color: rgba(255,255,255,.35); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.wallet-val {
+  font-family: var(--ff-serif); font-size: 36px; font-weight: 700;
+  color: var(--text); margin-bottom: 14px;
+}
+.prof-row {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--card); border-radius: 18px;
+  padding: 16px; margin-bottom: 10px; cursor: pointer;
+  transition: all .2s;
+}
+.prof-row:hover { background: var(--raised); }
+.prof-row-ico {
+  width: 40px; height: 40px; border-radius: 13px;
+  display: flex; align-items: center; justify-content: center; font-size: 20px;
+}
+.prof-row-title { font-size: 14px; font-weight: 700; color: var(--text); }
+.prof-row-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
+.prof-row-arrow { color: var(--text3); font-size: 18px; margin-left: auto; }
+
+/* ════════════════════════════════════════
+   SUCCESS OVERLAY
+════════════════════════════════════════ */
+.suc-overlay {
+  position: absolute; inset: 0;
+  background: rgba(7,8,15,.97);
+  display: none; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 200; text-align: center; padding: 32px;
+}
+.suc-overlay.show { display: flex; }
+.suc-circle {
+  width: 100px; height: 100px; border-radius: 50%;
+  background: linear-gradient(135deg,var(--em),var(--em2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px; margin-bottom: 24px;
+  animation: popIn .5s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: 0 0 60px rgba(28,196,138,.4);
+}
+@keyframes popIn{from{transform:scale(.6) rotate(-10deg);opacity:0;}to{transform:none;opacity:1;}}
+.suc-title { font-family: var(--ff-serif); font-size: 34px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+.suc-sub { color: var(--text2); font-size: 15px; line-height: 1.6; }
+
+/* Dots loader */
+.dots { display: flex; gap: 8px; justify-content: center; margin-top: 24px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); animation: dotFade 1.2s ease infinite; opacity: .3; }
+.dot:nth-child(2){animation-delay:.2s;}.dot:nth-child(3){animation-delay:.4s;}
+@keyframes dotFade{0%,100%{opacity:.3;transform:scale(1);}50%{opacity:1;transform:scale(1.3);}}
+
+/* ════════════════════════════════════════
+   ADMIN PANEL (right side)
+════════════════════════════════════════ */
+.admin-panel {
+  flex: 1;
+  min-width: 500px;
+  max-width: 800px;
+  background: var(--deep);
+  border-radius: 28px;
+  border: 1px solid var(--stroke);
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,.6);
+  display: none;
+}
+.admin-panel.show { display: block; }
+.ap-header {
+  background: var(--surface);
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--stroke);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.ap-logo { font-family: var(--ff-serif); font-size: 22px; font-weight: 700; color: var(--text); }
+.ap-logo em { color: var(--gold); font-style: normal; }
+.ap-tabs { display: flex; gap: 4px; margin: 20px 28px 0; }
+.ap-tab {
+  padding: 9px 20px; border-radius: 12px;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  color: var(--text2); transition: all .2s; border: none;
+  background: none; font-family: var(--ff-body);
+  border-bottom: 2px solid transparent;
+}
+.ap-tab.on { color: var(--gold); border-bottom-color: var(--gold); }
+.ap-content { padding: 20px 28px 28px; }
+
+/* KPI CARDS */
+.kpi-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 24px; }
+.kpi-card {
+  background: var(--panel); border: 1px solid var(--stroke);
+  border-radius: 20px; padding: 20px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.kpi-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.kpi-card.gold::before { background: linear-gradient(90deg,var(--gold),var(--gold2)); }
+.kpi-card.em::before { background: linear-gradient(90deg,var(--em),var(--em2)); }
+.kpi-card.red::before { background: var(--red); }
+.kpi-card.sky::before { background: var(--sky); }
+.kpi-val {
+  font-family: var(--ff-serif); font-size: 38px; font-weight: 700;
+  line-height: 1; margin-bottom: 4px;
+}
+.kpi-card.gold .kpi-val { color: var(--gold); }
+.kpi-card.em .kpi-val { color: var(--em); }
+.kpi-card.red .kpi-val { color: var(--red); }
+.kpi-card.sky .kpi-val { color: var(--sky); }
+.kpi-lbl { font-size: 11px; color: var(--text2); }
+.kpi-delta { font-size: 12px; font-weight: 700; margin-top: 4px; }
+
+/* CHART SIMULATION */
+.chart-card {
+  background: var(--panel); border: 1px solid var(--stroke);
+  border-radius: 20px; padding: 20px; margin-bottom: 20px;
+}
+.chart-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 16px; }
+.chart-bars {
+  display: flex; align-items: flex-end; gap: 6px; height: 120px;
+}
+.chart-bar {
+  flex: 1; border-radius: 6px 6px 0 0;
+  background: linear-gradient(180deg,var(--gold),var(--gold2));
+  transition: height .5s ease;
+  position: relative; min-height: 4px;
+}
+.chart-bar.low { background: linear-gradient(180deg,var(--em),var(--em2)); }
+.chart-bar.mid { background: linear-gradient(180deg,var(--sky),#2680CC); }
+.chart-bar.high { background: linear-gradient(180deg,var(--red),#A0192C); }
+.chart-labels { display: flex; gap: 6px; margin-top: 8px; }
+.chart-lbl { flex: 1; text-align: center; font-size: 9px; color: var(--text3); }
+
+/* TABLE */
+.data-table { width: 100%; border-collapse: collapse; }
+.dt-head { background: var(--surface); }
+.dt-head th {
+  padding: 11px 14px; text-align: left;
+  font-size: 11px; font-weight: 700; color: var(--text3);
+  letter-spacing: .8px; text-transform: uppercase;
+}
+.dt-row { border-top: 1px solid var(--stroke); transition: background .2s; }
+.dt-row:hover { background: rgba(255,255,255,.02); }
+.dt-row td { padding: 14px; font-size: 13px; color: var(--text2); }
+.dt-row td:first-child { font-weight: 700; color: var(--text); }
+.dt-btn {
+  padding: 7px 14px; border-radius: 10px;
+  border: none; cursor: pointer; font-size: 12px; font-weight: 700;
+  transition: all .2s; font-family: var(--ff-body);
+}
+
+/* TIMELINE */
+.timeline-card {
+  background: var(--panel); border: 1px solid var(--stroke);
+  border-radius: 20px; padding: 20px;
+}
+.tl { display: flex; align-items: stretch; justify-content: space-between; position: relative; margin-top: 20px; }
+.tl::before {
+  content: ''; position: absolute;
+  top: 26px; left: 26px; right: 26px; height: 2px;
+  background: linear-gradient(90deg,var(--sky),var(--gold),var(--red));
+}
+.tl-step { display: flex; flex-direction: column; align-items: center; flex: 1; z-index: 1; }
+.tl-circle {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; margin-bottom: 10px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.3);
+}
+.tl-day { font-size: 12px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+.tl-lbl { font-size: 10px; color: var(--text3); text-align: center; line-height: 1.4; padding: 0 4px; }
+
+/* ════════════════════════════════════════
+   ANIMATIONS — screen transitions
+════════════════════════════════════════ */
+@keyframes slideRight {
+  from{transform:translateX(100%);opacity:.5;}to{transform:none;opacity:1;}
+}
+@keyframes slideLeft {
+  from{transform:translateX(-30%);opacity:.5;}to{transform:none;opacity:1;}
+}
+@keyframes fadeZoom {
+  from{opacity:0;transform:scale(.94);}to{opacity:1;transform:none;}
+}
+.anim-r { animation: slideRight .36s cubic-bezier(.25,.46,.45,.94) both; }
+.anim-l { animation: slideLeft .36s cubic-bezier(.25,.46,.45,.94) both; }
+.anim-z { animation: fadeZoom .3s ease both; }
+
+/* ════════════════════════════════════════
+   TOAST
+════════════════════════════════════════ */
+.toast {
+  position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
+  background: var(--card); border: 1px solid var(--stroke2);
+  color: var(--text); padding: 12px 22px; border-radius: 40px;
+  font-size: 13px; font-weight: 600; z-index: 9000;
+  backdrop-filter: blur(10px);
+  animation: toastIn .3s ease;
+  white-space: nowrap;
+  box-shadow: 0 8px 30px rgba(0,0,0,.4);
+}
+@keyframes toastIn {
+  from{opacity:0;transform:translateX(-50%) translateY(10px);}
+  to{opacity:1;transform:translateX(-50%) translateY(0);}
+}
+
+/* progress indicator */
+.flow-dots { display: flex; gap: 6px; }
+.flow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--stroke2); transition: all .3s; }
+.flow-dot.on { background: var(--gold); transform: scale(1.4); }
+.flow-dot.done { background: var(--em); }
+</style>
+</head>
+<body>
+
+<!-- ── MODE TOGGLE ── -->
+<div class="mode-toggle">
+  <button class="mode-btn on" id="btn-mobile" onclick="showPanel(false)">📱 Mobile</button>
+  <button class="mode-btn" id="btn-admin" onclick="showPanel(true)">💻 Admin</button>
+</div>
+
+<div class="outer">
+
+  <!-- ════════════════════════════════════════
+       PHONE FRAME
+  ════════════════════════════════════════ -->
+  <div class="phone-frame">
+    <div class="phone-shell" id="phoneShell">
+
+      <!-- ── SCREEN 0: SPLASH ── -->
+      <div class="screen active" id="s-splash">
+        <div style="height:52px;flex-shrink:0;"></div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 28px;">
+          <div class="splash-logo">N</div>
+          <div class="splash-title">NEO-<br>SUSU</div>
+          <p class="splash-sub">L'épargne communautaire intelligente 🌍</p>
+          <div class="splash-flags">
+            <div class="flag-pill">🇫🇷</div>
+            <div class="flag-pill">🇸🇳</div>
+            <div class="flag-pill">🇳🇬</div>
+            <div class="flag-pill">🇨🇮</div>
+            <div class="flag-pill">🇨🇩</div>
+          </div>
+          <button class="btn btn-gold btn-full" onclick="goTo('dash','r')" style="animation:none;margin-bottom:14px;">
+            Commencer — C'est gratuit ✦
+          </button>
+          <button class="btn btn-ghost btn-full" onclick="goTo('dash','r')">
+            Déjà membre ? Se connecter
+          </button>
+        </div>
+        <div class="splash-ticker">
+          <div class="ticker-track">
+            <span class="ticker-i">✦ PSP Agréé · Sécurisé</span>
+            <span class="ticker-i">✦ IA Vocale 5 Langues</span>
+            <span class="ticker-i">✦ Cash & Digital</span>
+            <span class="ticker-i">✦ DSP2 Compliant</span>
+            <span class="ticker-i">✦ KYC Intégré</span>
+            <span class="ticker-i">✦ PSP Agréé · Sécurisé</span>
+            <span class="ticker-i">✦ IA Vocale 5 Langues</span>
+            <span class="ticker-i">✦ Cash & Digital</span>
+            <span class="ticker-i">✦ DSP2 Compliant</span>
+            <span class="ticker-i">✦ KYC Intégré</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 1: DASHBOARD ── -->
+      <div class="screen" id="s-dash">
+        <div class="statusbar" style="padding-top:6px;">
+          <span class="st-time">9:42</span>
+          <div class="st-icons"><span>●●●</span><span>5G</span><span>🔋</span></div>
+        </div>
+
+        <div class="dash-header">
+          <div class="dash-greet-row">
+            <div>
+              <div class="dash-greet-sub">Bonjour ✦</div>
+              <div class="dash-greet-name">Mamadou<br>Diallo</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <div class="notif-dot-btn" onclick="showToast('📬 2 nouvelles notifications')">
+                🔔<div class="notif-dot"></div>
+              </div>
+              <div class="dash-avatar">👨🏿</div>
+            </div>
+          </div>
+
+          <!-- SCORE HERO -->
+          <div class="score-hero">
+            <div class="sh-label">Score de fiabilité</div>
+            <div class="sh-val">82<span style="font-size:24px;opacity:.4;">/100</span></div>
+            <div class="sh-sub">★★★★☆ Membre Premium · KYC Vérifié ✓</div>
+            <div class="score-bar"><div class="score-bar-fill"></div></div>
+            <div class="sh-stats">
+              <div class="sh-stat">
+                <div class="sh-stat-v" style="color:var(--gold);">2</div>
+                <div class="sh-stat-l">Tontines</div>
+              </div>
+              <div class="sh-divider"></div>
+              <div class="sh-stat">
+                <div class="sh-stat-v" style="color:var(--em);">35K</div>
+                <div class="sh-stat-l">Cotisé</div>
+              </div>
+              <div class="sh-divider"></div>
+              <div class="sh-stat">
+                <div class="sh-stat-v" style="color:var(--sky);">T4</div>
+                <div class="sh-stat-l">Mon tour</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- QUICK ACTIONS -->
+          <div class="qa-grid">
+            <button class="qa" onclick="goTo('pay','r')">
+              <div class="qa-ico" style="background:rgba(212,168,42,.1);">💳</div>
+              <span class="qa-lbl">Payer</span>
+            </button>
+            <button class="qa" onclick="goTo('groups','r')">
+              <div class="qa-ico" style="background:rgba(28,196,138,.1);">👥</div>
+              <span class="qa-lbl">Groupes</span>
+            </button>
+            <button class="qa" onclick="goTo('retrait','r')">
+              <div class="qa-ico" style="background:rgba(74,168,255,.1);">💸</div>
+              <span class="qa-lbl">Retrait</span>
+            </button>
+            <button class="qa" onclick="goTo('profile','r')">
+              <div class="qa-ico" style="background:rgba(155,110,248,.1);">👤</div>
+              <span class="qa-lbl">Profil</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SCROLLABLE -->
+        <div class="scrl" style="padding:0 20px;">
+          <div class="sec-label">Mes Tontines</div>
+
+          <div class="tc" onclick="goTo('groups','r')">
+            <div class="tc-ico" style="background:rgba(212,168,42,.1);">🏆</div>
+            <div style="flex:1;">
+              <div class="tc-name">Épargne Solidaire</div>
+              <div class="tc-meta">12 membres · Tour 4/12 · Mensuel</div>
+              <div style="margin-top:6px;display:flex;gap:5px;">
+                <span class="chip chip-e">À jour ✓</span>
+                <span class="chip chip-b">Tour J+18</span>
+              </div>
+            </div>
+            <div class="tc-amount">10K</div>
+          </div>
+
+          <div class="tc" style="border-color:rgba(232,68,90,.2);" onclick="goTo('pay','r')">
+            <div class="tc-ico" style="background:rgba(232,68,90,.1);">⚠️</div>
+            <div style="flex:1;">
+              <div class="tc-name">Tontine Commerçants</div>
+              <div class="tc-meta">8 membres · Tour 2/8 · Hebdo</div>
+              <div style="margin-top:6px;display:flex;gap:5px;">
+                <span class="chip chip-r">Retard 3j ⚠</span>
+                <span class="chip chip-g">IA active</span>
+              </div>
+            </div>
+            <div class="tc-amount" style="color:var(--red);">25K</div>
+          </div>
+
+          <div class="divider"></div>
+          <div class="sec-label" style="display:flex;align-items:center;justify-content:space-between;">
+            Activité récente
+            <span style="font-size:12px;color:var(--gold);font-weight:600;cursor:pointer;">Voir tout →</span>
+          </div>
+
+          <div class="act-row">
+            <div class="act-ico" style="background:rgba(28,196,138,.1);">✅</div>
+            <div style="flex:1;">
+              <div class="act-title">Cotisation reçue</div>
+              <div class="act-sub">Épargne Solidaire · 01/04</div>
+            </div>
+            <div class="act-amt" style="color:var(--em);">+10K</div>
+          </div>
+          <div class="act-row">
+            <div class="act-ico" style="background:rgba(74,168,255,.1);">💳</div>
+            <div style="flex:1;">
+              <div class="act-title">Paiement effectué</div>
+              <div class="act-sub">Commerçants · 28/03</div>
+            </div>
+            <div class="act-amt" style="color:var(--text2);">-25K</div>
+          </div>
+          <div class="act-row">
+            <div class="act-ico" style="background:rgba(212,168,42,.1);">🎉</div>
+            <div style="flex:1;">
+              <div class="act-title">Distribution reçue</div>
+              <div class="act-sub">Épargne Solidaire · 20/03</div>
+            </div>
+            <div class="act-amt" style="color:var(--em);">+50K</div>
+          </div>
+          <div style="height:24px;"></div>
+        </div>
+
+        <!-- BOTTOM NAV -->
+        <div class="bnav">
+          <button class="bnav-item on" onclick="goTo('dash','z')">
+            <span class="bnav-ico">🏠</span><span class="bnav-lbl">Accueil</span>
+          </button>
+          <button class="bnav-item" onclick="goTo('groups','r')">
+            <span class="bnav-ico">👥</span><span class="bnav-lbl">Groupes</span>
+          </button>
+          <button class="bnav-item" onclick="goTo('pay','r')">
+            <span class="bnav-ico">💳</span><span class="bnav-lbl">Payer</span>
+          </button>
+          <button class="bnav-item" onclick="goTo('profile','r')">
+            <span class="bnav-ico">👤</span><span class="bnav-lbl">Profil</span>
+          </button>
+        </div>
+
+        <!-- VOICE FAB -->
+        <button class="voice-fab" id="vfab-dash" onclick="toggleVoice('dash')">🎙️</button>
+        <div class="voice-panel" id="vpanel-dash">
+          <div class="vp-head">
+            <span class="vp-title">🤖 Assistant IA Vocal</span>
+            <button class="vp-close" onclick="closeVoice('dash')">✕</button>
+          </div>
+          <div class="vp-waves">
+            <div class="wave-bar" style="height:10px;"></div>
+            <div class="wave-bar" style="height:18px;"></div>
+            <div class="wave-bar" style="height:24px;"></div>
+            <div class="wave-bar" style="height:18px;"></div>
+            <div class="wave-bar" style="height:10px;"></div>
+          </div>
+          <div class="vp-status" id="vs-dash">Appuyez pour parler en wolof, français, yoruba...</div>
+          <div class="vp-transcript" id="vt-dash"></div>
+          <div class="vp-response" id="vr-dash"></div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 2: GROUPES ── -->
+      <div class="screen" id="s-groups">
+        <div class="statusbar" style="padding-top:6px;">
+          <span class="st-time">9:43</span>
+          <div class="st-icons"><span>●●●</span><span>5G</span><span>🔋</span></div>
+        </div>
+
+        <div class="groups-hero">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <button class="btn btn-ghost btn-sm" onclick="goTo('dash','l')" style="padding:8px 14px;">← Retour</button>
+            <div style="font-family:var(--ff-serif);font-size:22px;font-weight:700;color:var(--text);">Mes Tontines</div>
+          </div>
+        </div>
+
+        <div class="scrl" style="padding:16px 20px;">
+          <!-- GROUP 1 -->
+          <div class="group-detail">
+            <div class="gd-header">
+              <div class="gd-ico" style="background:rgba(212,168,42,.1);">🏆</div>
+              <div style="flex:1;">
+                <div class="gd-name">Épargne Solidaire</div>
+                <div class="gd-meta">12 membres · 10 000 FCFA / mois</div>
+              </div>
+              <span class="chip chip-e">À jour</span>
+            </div>
+            <!-- Progress -->
+            <div class="progress-row">
+              <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text2);">
+                <span>Cycle 4/12</span><span style="color:var(--em);">33%</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" style="width:33%;background:var(--em);"></div></div>
+            </div>
+            <!-- Members -->
+            <div class="sec-label">Membres</div>
+            <div class="member-row">
+              <div class="member-av" style="background:rgba(28,196,138,.1);">👨🏿</div>
+              <div style="flex:1;">
+                <div class="member-name">Mamadou Diallo <span style="color:var(--gold);font-size:11px;">● Toi</span></div>
+                <div class="member-status">Payé le 01/04 · Score 82</div>
+              </div>
+              <div class="member-dot" style="background:var(--em);box-shadow:0 0 6px var(--em);"></div>
+            </div>
+            <div class="member-row">
+              <div class="member-av" style="background:rgba(28,196,138,.1);">👩🏾</div>
+              <div style="flex:1;">
+                <div class="member-name">Aïcha Konaté</div>
+                <div class="member-status">Payé le 31/03 · Score 95</div>
+              </div>
+              <div class="member-dot" style="background:var(--em);"></div>
+            </div>
+            <div class="member-row">
+              <div class="member-av" style="background:rgba(232,68,90,.1);">👨🏾</div>
+              <div style="flex:1;">
+                <div class="member-name">Kofi Mensah</div>
+                <div class="member-status" style="color:var(--red);">⚠ Retard J+5 · IA relance active</div>
+              </div>
+              <div class="member-dot" style="background:var(--red);box-shadow:0 0 6px var(--red);"></div>
+            </div>
+            <div style="margin-top:14px;display:flex;gap:10px;">
+              <button class="btn btn-gold" style="flex:1;padding:12px;" onclick="goTo('pay','r')">💳 Cotiser</button>
+              <button class="btn btn-ghost" style="flex:1;padding:12px;" onclick="showToast('📤 Lien d\'invitation copié !')">📤 Inviter</button>
+            </div>
+          </div>
+
+          <!-- GROUP 2 -->
+          <div class="group-detail" style="border-color:rgba(232,68,90,.2);">
+            <div class="gd-header">
+              <div class="gd-ico" style="background:rgba(232,68,90,.1);">⚠️</div>
+              <div style="flex:1;">
+                <div class="gd-name">Tontine Commerçants</div>
+                <div class="gd-meta">8 membres · 25 000 FCFA / semaine</div>
+              </div>
+              <span class="chip chip-r">Retard 3j</span>
+            </div>
+            <div class="progress-row">
+              <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text2);">
+                <span>Cycle 2/8</span><span style="color:var(--gold);">25%</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" style="width:25%;background:var(--gold);"></div></div>
+            </div>
+            <div style="background:rgba(232,68,90,.06);border:1px solid rgba(232,68,90,.2);border-radius:14px;padding:12px 14px;font-size:13px;color:var(--text2);margin-top:4px;">
+              🤖 L'IA a envoyé 2 relances vocales. Voulez-vous payer maintenant ou planifier un remboursement ?
+            </div>
+            <button class="btn btn-gold btn-full" style="margin-top:12px;" onclick="goTo('pay','r')">Régulariser maintenant →</button>
+          </div>
+          <div style="height:20px;"></div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 3: PAIEMENT ── -->
+      <div class="screen" id="s-pay">
+        <div class="statusbar" style="padding-top:6px;">
+          <span class="st-time">9:44</span>
+          <div class="st-icons"><span>●●●</span><span>5G</span><span>🔋</span></div>
+        </div>
+        <div style="padding:0 22px 16px;flex-shrink:0;">
+          <button class="btn btn-ghost btn-sm" onclick="goTo('dash','l')" style="padding:8px 14px;margin-bottom:14px;">← Retour</button>
+          <div style="font-family:var(--ff-serif);font-size:28px;font-weight:700;color:var(--text);">Paiement</div>
+        </div>
+
+        <div class="scrl" style="padding:0 20px;">
+          <div class="pay-hero">
+            <div class="pay-amount-lbl">Montant dû · Commerçants · Tour 2</div>
+            <div class="pay-amount">25 000</div>
+            <div class="pay-amount-meta">FCFA · Échéance 29/03/2025 · <span style="color:var(--red);">+3j</span></div>
+          </div>
+
+          <div class="sec-label">Méthode de paiement</div>
+          <div class="pay-method on" onclick="selectPM(this)">
+            <span class="pm-ico">💳</span>
+            <div class="pm-name">Carte bancaire<div class="pm-sub">Visa ···· 4832 · Mangopay</div></div>
+            <span class="pm-check">✓</span>
+          </div>
+          <div class="pay-method" onclick="selectPM(this)">
+            <span class="pm-ico">🏦</span>
+            <div class="pm-name">Virement SEPA<div class="pm-sub">Gratuit · 1-2 jours ouvrés</div></div>
+            <span class="pm-check">✓</span>
+          </div>
+          <div class="pay-method" onclick="selectPM(this)">
+            <span class="pm-ico">📱</span>
+            <div class="pm-name">Mobile Money<div class="pm-sub">Orange · MTN · Wave</div></div>
+            <span class="pm-check">✓</span>
+          </div>
+
+          <div class="pay-summary">
+            <div class="ps-row"><span class="ps-key">Cotisation</span><span class="ps-val">25 000 FCFA</span></div>
+            <div class="ps-row"><span class="ps-key">Frais PSP</span><span class="ps-val" style="color:var(--em);">0 FCFA</span></div>
+            <div class="ps-row"><span class="ps-key" style="color:var(--text);font-weight:700;">Total</span><span class="ps-val" style="color:var(--gold);font-family:var(--ff-serif);font-size:18px;">25 000 FCFA</span></div>
+          </div>
+
+          <button class="btn btn-gold btn-full" style="margin-bottom:12px;" onclick="doPay()">
+            🔒 Confirmer le paiement
+          </button>
+          <p style="font-size:12px;color:var(--text3);text-align:center;line-height:1.6;">
+            Paiement sécurisé via Mangopay · Aucun fonds détenu par NEO-SUSU · DSP2 ✓
+          </p>
+          <div style="height:20px;"></div>
+        </div>
+
+        <!-- SUCCESS OVERLAY -->
+        <div class="suc-overlay" id="pay-suc">
+          <div class="suc-circle">✅</div>
+          <div class="suc-title">Paiement réussi !</div>
+          <div class="suc-sub">25 000 FCFA · Tontine Commerçants<br>Confirmé par Mangopay ✓</div>
+          <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+          <p style="color:var(--text2);font-size:13px;margin-top:8px;">Retour au tableau de bord…</p>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 4: PROFIL ── -->
+      <div class="screen" id="s-profile">
+        <div class="statusbar" style="padding-top:6px;">
+          <span class="st-time">9:45</span>
+          <div class="st-icons"><span>●●●</span><span>5G</span><span>🔋</span></div>
+        </div>
+
+        <div class="profile-hero">
+          <button class="btn btn-ghost btn-sm" onclick="goTo('dash','l')" style="padding:8px 14px;margin-bottom:16px;">← Retour</button>
+          <div class="prof-av-wrap">👨🏿</div>
+          <div class="prof-name">Mamadou Diallo</div>
+          <div class="prof-phone">+221 77 123 45 67</div>
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;">
+            <span class="chip chip-e">✓ KYC Vérifié</span>
+            <span class="chip chip-g">Score 82/100</span>
+            <span class="chip chip-b">Premium</span>
+          </div>
+        </div>
+
+        <div class="scrl" style="padding:18px 20px;">
+          <div class="wallet-card">
+            <div class="wallet-label">Mon Portefeuille</div>
+            <div class="wallet-val">145 000 <span style="font-size:20px;opacity:.6;">FCFA</span></div>
+            <div style="display:flex;gap:10px;">
+              <button class="btn btn-gold" style="flex:1;padding:12px;" onclick="goTo('retrait','r')">💸 Retirer</button>
+              <button class="btn btn-ghost" style="flex:1;padding:12px;" onclick="showToast('💳 Ajout de fonds')">+ Recharger</button>
+            </div>
+          </div>
+
+          <div class="prof-row">
+            <div class="prof-row-ico" style="background:rgba(212,168,42,.1);">🌍</div>
+            <div>
+              <div class="prof-row-title">Langue & Région</div>
+              <div class="prof-row-sub">Français · Sénégal</div>
+            </div>
+            <span class="prof-row-arrow">›</span>
+          </div>
+          <div class="prof-row">
+            <div class="prof-row-ico" style="background:rgba(28,196,138,.1);">🔔</div>
+            <div>
+              <div class="prof-row-title">Notifications</div>
+              <div class="prof-row-sub">Push, SMS, Vocal IA</div>
+            </div>
+            <span class="prof-row-arrow">›</span>
+          </div>
+          <div class="prof-row">
+            <div class="prof-row-ico" style="background:rgba(74,168,255,.1);">🔐</div>
+            <div>
+              <div class="prof-row-title">Sécurité & KYC</div>
+              <div class="prof-row-sub">Vérifié · 2FA actif</div>
+            </div>
+            <span class="prof-row-arrow">›</span>
+          </div>
+          <div class="prof-row">
+            <div class="prof-row-ico" style="background:rgba(155,110,248,.1);">🤖</div>
+            <div>
+              <div class="prof-row-title">Assistant Vocal IA</div>
+              <div class="prof-row-sub">Actif · Français par défaut</div>
+            </div>
+            <span class="prof-row-arrow">›</span>
+          </div>
+          <div class="prof-row">
+            <div class="prof-row-ico" style="background:rgba(232,68,90,.1);">🚪</div>
+            <div>
+              <div class="prof-row-title">Se déconnecter</div>
+              <div class="prof-row-sub">Session active depuis 2h</div>
+            </div>
+            <span class="prof-row-arrow">›</span>
+          </div>
+          <div style="height:24px;"></div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 5: RETRAIT ── -->
+      <div class="screen" id="s-retrait" style="background:var(--void);">
+        <div class="statusbar" style="padding-top:6px;">
+          <span class="st-time">9:46</span>
+          <div class="st-icons"><span>●●●</span><span>5G</span><span>🔋</span></div>
+        </div>
+
+        <!-- RETRAIT CHOICE -->
+        <div id="ret-choice" style="display:flex;flex-direction:column;flex:1;">
+          <div style="padding:0 22px 16px;flex-shrink:0;">
+            <button class="btn btn-ghost btn-sm" onclick="goTo('dash','l')" style="padding:8px 14px;margin-bottom:14px;">← Retour</button>
+            <div style="font-family:var(--ff-serif);font-size:28px;font-weight:700;color:var(--text);">Retrait</div>
+          </div>
+          <div class="scrl" style="padding:0 20px;">
+            <!-- Wallet card -->
+            <div style="background:linear-gradient(135deg,#1A2845,#0F1830);border:1px solid rgba(74,168,255,.18);border-radius:24px;padding:22px;margin-bottom:18px;position:relative;overflow:hidden;">
+              <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,42,.08),transparent 70%);"></div>
+              <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Solde disponible</div>
+              <div id="ret-balance" style="font-family:var(--ff-serif);font-size:44px;font-weight:700;background:linear-gradient(135deg,var(--text),rgba(212,168,42,.9));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:6px;">145 000 FCFA</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.3);">Portefeuille NEO-SUSU · Mangopay · KYC ✓</div>
+            </div>
+            <!-- Method choice -->
+            <div class="sec-label" style="margin-bottom:12px;">Mode de retrait</div>
+            <div onclick="retShowVirement()" style="display:flex;align-items:center;gap:14px;background:var(--card);border:1.5px solid rgba(212,168,42,.25);border-radius:22px;padding:18px;margin-bottom:12px;cursor:pointer;transition:all .22s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(212,168,42,.25)'">
+              <div style="width:48px;height:48px;border-radius:15px;background:rgba(212,168,42,.1);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">🏦</div>
+              <div style="flex:1;">
+                <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px;">Virement bancaire</div>
+                <div style="font-size:12px;color:var(--text2);">Via Mangopay · SEPA Instant · 1-3 jours</div>
+              </div>
+              <div style="color:var(--gold);font-size:20px;">›</div>
+            </div>
+            <div onclick="retShowQr()" style="display:flex;align-items:center;gap:14px;background:var(--card);border:1.5px solid rgba(28,196,138,.2);border-radius:22px;padding:18px;margin-bottom:20px;cursor:pointer;transition:all .22s;" onmouseover="this.style.borderColor='var(--em)'" onmouseout="this.style.borderColor='rgba(28,196,138,.2)'">
+              <div style="width:48px;height:48px;border-radius:15px;background:rgba(28,196,138,.1);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">📱</div>
+              <div style="flex:1;">
+                <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px;">Code OTP agent cash</div>
+                <div style="font-size:12px;color:var(--text2);">Code sécurisé · Agent certifié · 48h</div>
+              </div>
+              <div style="color:var(--em);font-size:20px;">›</div>
+            </div>
+            <div style="background:rgba(255,255,255,.03);border:1px solid var(--stroke);border-radius:16px;padding:14px;display:flex;gap:10px;align-items:flex-start;">
+              <span style="font-size:18px;flex-shrink:0;">🔒</span>
+              <div style="font-size:12px;color:var(--text3);line-height:1.6;">Transactions chiffrées · KYC requis · Aucun fonds détenu par NEO-SUSU · Sécurisé via Mangopay DSP2</div>
+            </div>
+            <div style="height:24px;"></div>
+          </div>
+        </div>
+
+        <!-- VIREMENT FLOW -->
+        <div id="ret-virement" style="display:none;flex-direction:column;flex:1;">
+          <div style="padding:0 22px 14px;flex-shrink:0;">
+            <button class="btn btn-ghost btn-sm" onclick="retBack()" style="padding:8px 14px;margin-bottom:14px;">← Retour</button>
+            <div style="font-family:var(--ff-serif);font-size:24px;font-weight:700;color:var(--text);">Virement SEPA</div>
+            <!-- steps -->
+            <div style="display:flex;gap:8px;margin-top:12px;">
+              <div id="vstep1" style="flex:1;text-align:center;padding:7px;border-radius:20px;background:var(--gold);color:var(--void);font-size:12px;font-weight:700;">1. Montant</div>
+              <div id="vstep2" style="flex:1;text-align:center;padding:7px;border-radius:20px;background:var(--raised);color:var(--text3);font-size:12px;font-weight:600;">2. IBAN</div>
+              <div id="vstep3" style="flex:1;text-align:center;padding:7px;border-radius:20px;background:var(--raised);color:var(--text3);font-size:12px;font-weight:600;">3. Confirm.</div>
+            </div>
+          </div>
+          <div class="scrl" style="padding:0 20px;">
+            <div style="background:var(--card);border:1px solid var(--stroke);border-radius:22px;padding:20px;margin-bottom:14px;">
+              <div class="sec-label" style="margin-bottom:12px;">Montant (FCFA)</div>
+              <div style="background:var(--raised);border:2px solid rgba(212,168,42,.3);border-radius:18px;padding:14px 18px;margin-bottom:16px;">
+                <input id="vir-amount" type="number" value="50000" step="5000" min="1000"
+                  style="width:100%;background:none;border:none;outline:none;font-family:var(--ff-serif);font-size:38px;font-weight:700;color:var(--gold);text-align:center;">
+                <div style="text-align:center;font-size:11px;color:var(--text3);margin-top:4px;">FCFA</div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px;">
+                <button onclick="document.getElementById('vir-amount').value=25000" style="background:var(--raised);border:1px solid var(--stroke);border-radius:14px;padding:10px;font-size:13px;font-weight:700;color:var(--text2);cursor:pointer;font-family:var(--ff-body);">25K</button>
+                <button onclick="document.getElementById('vir-amount').value=50000" style="background:var(--raised);border:1px solid var(--stroke);border-radius:14px;padding:10px;font-size:13px;font-weight:700;color:var(--text2);cursor:pointer;font-family:var(--ff-body);">50K</button>
+                <button onclick="document.getElementById('vir-amount').value=100000" style="background:var(--raised);border:1px solid var(--stroke);border-radius:14px;padding:10px;font-size:13px;font-weight:700;color:var(--text2);cursor:pointer;font-family:var(--ff-body);">100K</button>
+              </div>
+              <div class="sec-label" style="margin-bottom:8px;">IBAN destinataire</div>
+              <input id="vir-iban" type="text" placeholder="FR76 1234 5678 9012 3456 7890 123"
+                value="FR76 1234 5678 9012 3456 7890 123"
+                style="width:100%;background:var(--raised);border:1.5px solid var(--stroke);border-radius:16px;padding:14px 16px;font-family:var(--ff-body);font-size:13px;color:var(--text);outline:none;">
+            </div>
+            <!-- Summary -->
+            <div style="background:var(--panel);border-radius:18px;padding:16px;margin-bottom:14px;">
+              <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);">
+                <span style="font-size:13px;color:var(--text2);">Montant</span>
+                <span id="vir-sum-amt" style="font-size:14px;font-weight:700;color:var(--text);">50 000 FCFA</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);">
+                <span style="font-size:13px;color:var(--text2);">Frais SEPA</span>
+                <span style="font-size:14px;font-weight:700;color:var(--em);">0 FCFA</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;">
+                <span style="font-size:13px;font-weight:700;color:var(--text);">Total prélevé</span>
+                <span id="vir-sum-total" style="font-family:var(--ff-serif);font-size:18px;font-weight:700;color:var(--gold);">50 000 FCFA</span>
+              </div>
+            </div>
+            <button onclick="doVirement()" class="btn btn-gold btn-full" style="margin-bottom:10px;">🔒 Confirmer le virement</button>
+            <p style="font-size:12px;color:var(--text3);text-align:center;line-height:1.6;">Sécurisé via Mangopay · DSP2 · Aucun fonds détenu par NEO-SUSU</p>
+            <div style="height:20px;"></div>
+          </div>
+          <!-- SUCCESS OVERLAY VIREMENT -->
+          <div id="vir-suc" style="position:absolute;inset:0;background:rgba(7,8,15,.97);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:200;text-align:center;padding:32px;">
+            <div style="width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--em),var(--em2));display:flex;align-items:center;justify-content:center;font-size:44px;margin-bottom:22px;animation:popIn .5s cubic-bezier(.34,1.56,.64,1);box-shadow:0 0 50px rgba(28,196,138,.4);">✅</div>
+            <div style="font-family:var(--ff-serif);font-size:30px;font-weight:700;color:var(--text);margin-bottom:10px;">Virement envoyé !</div>
+            <div id="vir-suc-msg" style="color:var(--text2);font-size:14px;line-height:1.7;">50 000 FCFA envoyé<br>vers votre compte bancaire</div>
+            <div style="margin-top:16px;font-size:13px;color:var(--em);">💡 Arrivée sous 1-3 jours · SEPA Instant disponible</div>
+            <div style="display:flex;gap:8px;margin-top:24px;width:100%;">
+              <button onclick="retBack();document.getElementById('vir-suc').style.display='none';" class="btn btn-ghost" style="flex:1;">Nouveau retrait</button>
+              <button onclick="goTo('dash','l');document.getElementById('vir-suc').style.display='none';" class="btn btn-gold" style="flex:1;">Accueil</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- QR CODE FLOW -->
+        <div id="ret-qr" style="display:none;flex-direction:column;flex:1;">
+          <div style="padding:0 22px 14px;flex-shrink:0;">
+            <button class="btn btn-ghost btn-sm" onclick="retBack()" style="padding:8px 14px;margin-bottom:14px;">← Retour</button>
+            <div style="font-family:var(--ff-serif);font-size:24px;font-weight:700;color:var(--text);">Code OTP Agent</div>
+            <div style="display:flex;gap:8px;margin-top:12px;">
+              <div id="qstep1" style="flex:1;text-align:center;padding:7px;border-radius:20px;background:var(--em);color:var(--void);font-size:12px;font-weight:700;">1. Montant</div>
+              <div id="qstep2" style="flex:1;text-align:center;padding:7px;border-radius:20px;background:var(--raised);color:var(--text3);font-size:12px;font-weight:600;">2. Code QR</div>
+              <div id="qstep3" style="flex:1;text-align:center;padding:7px;border-radius:20px;background:var(--raised);color:var(--text3);font-size:12px;font-weight:600;">3. Validation</div>
+            </div>
+          </div>
+
+          <!-- QR STEP 1: Montant -->
+          <div id="qr-s1" class="scrl" style="padding:0 20px;">
+            <div style="background:var(--card);border:1px solid var(--stroke);border-radius:22px;padding:20px;margin-bottom:14px;">
+              <div class="sec-label" style="margin-bottom:10px;">Montant à retirer (FCFA)</div>
+              <div style="background:var(--raised);border:2px solid rgba(28,196,138,.3);border-radius:18px;padding:14px 18px;margin-bottom:14px;">
+                <input id="qr-amount" type="number" value="50000" step="5000" min="1000"
+                  style="width:100%;background:none;border:none;outline:none;font-family:var(--ff-serif);font-size:38px;font-weight:700;color:var(--em);text-align:center;">
+                <div style="text-align:center;font-size:11px;color:var(--text3);margin-top:4px;">FCFA · Commission 1,5%</div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
+                <button onclick="document.getElementById('qr-amount').value=25000" style="background:var(--raised);border:1px solid var(--stroke);border-radius:14px;padding:10px;font-size:13px;font-weight:700;color:var(--text2);cursor:pointer;font-family:var(--ff-body);">25K</button>
+                <button onclick="document.getElementById('qr-amount').value=50000" style="background:var(--raised);border:1px solid var(--stroke);border-radius:14px;padding:10px;font-size:13px;font-weight:700;color:var(--text2);cursor:pointer;font-family:var(--ff-body);">50K</button>
+                <button onclick="document.getElementById('qr-amount').value=100000" style="background:var(--raised);border:1px solid var(--stroke);border-radius:14px;padding:10px;font-size:13px;font-weight:700;color:var(--text2);cursor:pointer;font-family:var(--ff-body);">100K</button>
+              </div>
+              <div style="background:rgba(28,196,138,.06);border:1px solid rgba(28,196,138,.15);border-radius:14px;padding:12px;font-size:12px;color:var(--text2);line-height:1.6;">
+                📍 <strong style="color:var(--text);">Comment ça marche ?</strong><br>
+                Générez un code OTP sécurisé → Rendez-vous chez un agent certifié NEO-SUSU → Présentez le code → Recevez le cash immédiatement.
+              </div>
+            </div>
+            <button onclick="doGenerateQr()" class="btn btn-em btn-full" style="margin-bottom:20px;">🔐 Générer mon code OTP →</button>
+          </div>
+
+          <!-- QR STEP 2: Code affiché -->
+          <div id="qr-s2" style="display:none;" class="scrl">
+            <div style="padding:0 20px 20px;">
+              <!-- OTP Card -->
+              <div style="background:linear-gradient(135deg,rgba(28,196,138,.08),rgba(7,8,15,.9));border:2px solid rgba(28,196,138,.3);border-radius:24px;padding:28px 20px;text-align:center;margin-bottom:14px;position:relative;overflow:hidden;">
+                <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,rgba(28,196,138,.1),transparent 70%);"></div>
+                <div style="font-size:11px;font-weight:700;color:rgba(28,196,138,.5);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;">Code OTP Agent Certifié</div>
+                <!-- QR Visual -->
+                <div style="background:white;padding:16px;border-radius:16px;display:inline-block;margin-bottom:16px;box-shadow:0 4px 20px rgba(0,0,0,.3);">
+                  <div style="font-size:11px;font-family:monospace;line-height:1.4;color:#111;letter-spacing:2px;">
+                    ██████████████<br>██ ██  ██  ███<br>██ ██████  ███<br>██  ████ ████<br>██████████████
+                  </div>
+                </div>
+                <!-- Token -->
+                <div id="ret-token-display" style="font-family:var(--ff-body);font-size:34px;font-weight:800;letter-spacing:8px;background:linear-gradient(135deg,var(--em),var(--gold-pale));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;">NS-XXXX</div>
+                <div id="ret-qr-expiry" style="font-size:12px;color:var(--text3);">⏱️ Valable 48h · Usage unique · Sécurisé</div>
+              </div>
+              <!-- Agent info -->
+              <div style="background:var(--card);border:1px solid var(--stroke);border-radius:20px;padding:16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;">
+                <div style="width:44px;height:44px;border-radius:14px;background:rgba(28,196,138,.1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🏪</div>
+                <div style="flex:1;">
+                  <div style="font-size:14px;font-weight:700;color:var(--text);">Mohamed Kouyaté · Agent certifié ✓</div>
+                  <div style="font-size:12px;color:var(--text2);">📍 14 Rue Médina, Dakar · 2.1 km</div>
+                  <div style="font-size:11px;color:var(--em);margin-top:3px;font-weight:700;">● Ouvert · 08h–20h</div>
+                </div>
+              </div>
+              <!-- Instructions -->
+              <div style="background:var(--raised);border-radius:16px;padding:14px 16px;margin-bottom:14px;font-size:12px;color:var(--text3);line-height:1.8;">
+                <span style="color:var(--text);font-weight:700;">Instructions :</span><br>
+                1️⃣ Montrez le code <span id="ret-instr-code" style="color:var(--em);font-weight:800;font-family:monospace;">NS-XXXX</span> à l'agent<br>
+                2️⃣ L'agent valide sur son terminal NEO-SUSU<br>
+                3️⃣ Vous recevez les fonds en espèces immédiatement<br>
+                4️⃣ SMS de confirmation automatique envoyé
+              </div>
+              <div style="display:flex;gap:10px;margin-bottom:14px;">
+                <button onclick="retCopyCode()" style="flex:1;background:var(--raised);border:1px solid var(--stroke);border-radius:16px;padding:12px;font-size:13px;font-weight:700;color:var(--text2);cursor:pointer;font-family:var(--ff-body);">📋 Copier le code</button>
+                <button onclick="retCancelCode()" style="flex:1;background:rgba(232,68,90,.08);border:1px solid rgba(232,68,90,.2);border-radius:16px;padding:12px;font-size:13px;font-weight:700;color:var(--red);cursor:pointer;font-family:var(--ff-body);">❌ Annuler</button>
+              </div>
+              <button onclick="showQrValidation()" class="btn btn-em btn-full" style="margin-bottom:10px;">✅ Confirmer le retrait cash</button>
+            </div>
+          </div>
+
+          <!-- QR STEP 3: Validation finale -->
+          <div id="qr-s3" style="display:none;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:24px;text-align:center;">
+            <div style="width:60px;height:60px;border-radius:50%;background:rgba(212,168,42,.1);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:16px;animation:blink 1.5s infinite;">🔍</div>
+            <div style="font-family:var(--ff-serif);font-size:22px;font-weight:700;color:var(--text);margin-bottom:8px;">Vérification en cours</div>
+            <div id="qr-val-info" style="font-size:14px;color:var(--text2);margin-bottom:24px;line-height:1.6;background:var(--card);border-radius:16px;padding:14px 18px;width:100%;">Code : NS-XXXX<br>Montant : 50 000 FCFA</div>
+            <button onclick="doConsumeQr()" class="btn btn-gold btn-full" style="margin-bottom:10px;">💸 Finaliser le retrait cash</button>
+            <button onclick="document.getElementById('qr-s3').style.display='none';document.getElementById('qr-s2').style.display='block';" class="btn btn-ghost btn-full">← Retour au code</button>
+          </div>
+
+          <!-- QR SUCCESS -->
+          <div id="qr-suc" style="position:absolute;inset:0;background:rgba(7,8,15,.97);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:200;text-align:center;padding:32px;">
+            <div style="width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:44px;margin-bottom:22px;animation:popIn .5s cubic-bezier(.34,1.56,.64,1);box-shadow:0 0 50px rgba(212,168,42,.4);">💵</div>
+            <div style="font-family:var(--ff-serif);font-size:30px;font-weight:700;color:var(--text);margin-bottom:10px;">Retrait confirmé !</div>
+            <div id="qr-suc-msg" style="color:var(--text2);font-size:14px;line-height:1.7;">50 000 FCFA retirés<br>via agent certifié</div>
+            <div style="margin-top:10px;font-size:12px;color:var(--em);">✓ SMS de confirmation envoyé · Code invalidé</div>
+            <div style="display:flex;gap:8px;margin-top:24px;width:100%;">
+              <button onclick="retBack();document.getElementById('qr-suc').style.display='none';" class="btn btn-ghost" style="flex:1;">Nouveau retrait</button>
+              <button onclick="goTo('dash','l');document.getElementById('qr-suc').style.display='none';" class="btn btn-gold" style="flex:1;">Accueil</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /phone-shell -->
+
+    <!-- Progress dots -->
+    <div style="display:flex;justify-content:center;margin-top:20px;">
+      <div class="flow-dots" id="flowDots">
+        <div class="flow-dot on" data-s="splash"></div>
+        <div class="flow-dot" data-s="dash"></div>
+        <div class="flow-dot" data-s="groups"></div>
+        <div class="flow-dot" data-s="pay"></div>
+        <div class="flow-dot" data-s="retrait"></div>
+        <div class="flow-dot" data-s="profile"></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:10px;font-size:11px;color:#30384a;">← → clavier pour naviguer</div>
+  </div><!-- /phone-frame -->
+
+  <!-- ════════════════════════════════════════
+       ADMIN PANEL
+  ════════════════════════════════════════ -->
+  <div class="admin-panel" id="adminPanel">
+    <div class="ap-header">
+      <div class="ap-logo">NEO-<em>SUSU</em> <span style="font-size:14px;color:var(--text2);font-weight:400;">— Dashboard Admin</span></div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--em);animation:voicePulse 2s infinite;"></div>
+        <span style="font-size:13px;font-weight:600;color:var(--em);">Système actif</span>
+      </div>
+    </div>
+
+    <div class="ap-tabs">
+      <button class="ap-tab on" onclick="apTab(this,'tab-kpi')">📊 KPIs</button>
+      <button class="ap-tab" onclick="apTab(this,'tab-users')">👥 Utilisateurs</button>
+      <button class="ap-tab" onclick="apTab(this,'tab-timeline')">⏱ Recouvrement</button>
+      <button class="ap-tab" onclick="apTab(this,'tab-agents')">🏪 Agents</button>
+    </div>
+
+    <!-- TAB: KPIs -->
+    <div class="ap-content" id="tab-kpi">
+      <div class="kpi-row">
+        <div class="kpi-card gold">
+          <div class="kpi-lbl">Total retards</div>
+          <div class="kpi-val">2.45M</div>
+          <div class="kpi-delta" style="color:var(--red);">▲ +12% ce mois</div>
+        </div>
+        <div class="kpi-card red">
+          <div class="kpi-lbl">Taux de défaut</div>
+          <div class="kpi-val">8.2%</div>
+          <div class="kpi-delta" style="color:var(--red);">▲ +1.2%</div>
+        </div>
+        <div class="kpi-card em">
+          <div class="kpi-lbl">Taux récupération</div>
+          <div class="kpi-val">67%</div>
+          <div class="kpi-delta" style="color:var(--em);">▲ +5%</div>
+        </div>
+        <div class="kpi-card sky">
+          <div class="kpi-lbl">Agents actifs</div>
+          <div class="kpi-val">34</div>
+          <div class="kpi-delta" style="color:var(--red);">▼ -2</div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">📈 Évolution des retards — 30 derniers jours</div>
+        <div class="chart-bars" id="chartBars"></div>
+        <div class="chart-labels" id="chartLabels"></div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">🤖 États IA Recouvrement</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:13px;color:var(--text2);min-width:120px;">À jour</span>
+            <div style="flex:1;height:6px;background:var(--stroke);border-radius:3px;overflow:hidden;"><div style="width:68%;height:100%;background:var(--em);border-radius:3px;"></div></div>
+            <span style="font-size:13px;font-weight:700;color:var(--em);">68%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:13px;color:var(--text2);min-width:120px;">Retard léger</span>
+            <div style="flex:1;height:6px;background:var(--stroke);border-radius:3px;overflow:hidden;"><div style="width:14%;height:100%;background:var(--sky);border-radius:3px;"></div></div>
+            <span style="font-size:13px;font-weight:700;color:var(--sky);">14%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:13px;color:var(--text2);min-width:120px;">Retard moyen</span>
+            <div style="flex:1;height:6px;background:var(--stroke);border-radius:3px;overflow:hidden;"><div style="width:9%;height:100%;background:var(--gold);border-radius:3px;"></div></div>
+            <span style="font-size:13px;font-weight:700;color:var(--gold);">9%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:13px;color:var(--text2);min-width:120px;">Retard critique</span>
+            <div style="flex:1;height:6px;background:var(--stroke);border-radius:3px;overflow:hidden;"><div style="width:5%;height:100%;background:var(--red);border-radius:3px;"></div></div>
+            <span style="font-size:13px;font-weight:700;color:var(--red);">5%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:13px;color:var(--text2);min-width:120px;">Défaut</span>
+            <div style="flex:1;height:6px;background:var(--stroke);border-radius:3px;overflow:hidden;"><div style="width:4%;height:100%;background:var(--text3);border-radius:3px;"></div></div>
+            <span style="font-size:13px;font-weight:700;color:var(--text3);">4%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: USERS -->
+    <div class="ap-content" id="tab-users" style="display:none;">
+      <div class="chart-card" style="padding:0;overflow:hidden;">
+        <table class="data-table">
+          <thead class="dt-head">
+            <tr>
+              <th>Utilisateur</th>
+              <th>Téléphone</th>
+              <th>Montant dû</th>
+              <th>Retard</th>
+              <th>Statut</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="usersTbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB: TIMELINE RECOUVREMENT -->
+    <div class="ap-content" id="tab-timeline" style="display:none;">
+      <div class="timeline-card">
+        <div class="chart-title">⏱ Timeline de recouvrement automatique</div>
+        <div class="tl">
+          <div class="tl-step">
+            <div class="tl-circle" style="background:rgba(74,168,255,.15);color:var(--sky);">💬</div>
+            <div class="tl-day">J-2</div>
+            <div class="tl-lbl">Rappel SMS automatique</div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-circle" style="background:rgba(155,110,248,.15);color:var(--violet);">🎙️</div>
+            <div class="tl-day">J-1</div>
+            <div class="tl-lbl">Rappel vocal IA</div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-circle" style="background:rgba(212,168,42,.15);color:var(--gold);">🔔</div>
+            <div class="tl-day">Jour J</div>
+            <div class="tl-lbl">Alerte groupe</div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-circle" style="background:rgba(212,168,42,.12);color:var(--gold);">📧</div>
+            <div class="tl-day">J+15</div>
+            <div class="tl-lbl">Email formel + IA</div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-circle" style="background:rgba(232,68,90,.15);color:var(--red);">⚖️</div>
+            <div class="tl-day">J+30</div>
+            <div class="tl-lbl">Recouvrement actif</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-card" style="margin-top:20px;">
+        <div class="chart-title">💡 Plans de remboursement IA</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;">
+          <div style="background:var(--surface);border-radius:16px;padding:16px;text-align:center;">
+            <div style="font-size:28px;margin-bottom:8px;">⚡</div>
+            <div style="font-size:13px;font-weight:700;color:var(--em);">Paiement immédiat</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:4px;line-height:1.5;">Règlement total avec réduction de pénalités</div>
+          </div>
+          <div style="background:var(--surface);border-radius:16px;padding:16px;text-align:center;">
+            <div style="font-size:28px;margin-bottom:8px;">📅</div>
+            <div style="font-size:13px;font-weight:700;color:var(--gold);">Fractionné</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:4px;line-height:1.5;">Plan sur 2-4 mois selon le profil</div>
+          </div>
+          <div style="background:var(--surface);border-radius:16px;padding:16px;text-align:center;">
+            <div style="font-size:28px;margin-bottom:8px;">⏳</div>
+            <div style="font-size:13px;font-weight:700;color:var(--sky);">Report</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:4px;line-height:1.5;">Report unique si score ≥ 70</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: AGENTS -->
+    <div class="ap-content" id="tab-agents" style="display:none;">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+        <div class="kpi-card em" style="text-align:left;">
+          <div class="kpi-lbl">Agents actifs</div>
+          <div class="kpi-val" style="font-size:32px;">34</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:4px;">Dans 8 pays africains</div>
+        </div>
+        <div class="kpi-card gold" style="text-align:left;">
+          <div class="kpi-lbl">Commissions versées</div>
+          <div class="kpi-val" style="font-size:32px;">€8.4K</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:4px;">Ce mois · +18%</div>
+        </div>
+        <div class="kpi-card sky" style="text-align:left;">
+          <div class="kpi-lbl">Transactions cash</div>
+          <div class="kpi-val" style="font-size:32px;">1 247</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:4px;">Ce mois</div>
+        </div>
+      </div>
+      <div class="chart-card" style="margin-top:20px;">
+        <div class="chart-title">🌍 Agents certifiés — Top performeurs</div>
+        <table class="data-table" style="margin-top:12px;">
+          <thead class="dt-head">
+            <tr><th>Agent</th><th>Localisation</th><th>Commission</th><th>Tx</th><th>Statut</th></tr>
+          </thead>
+          <tbody>
+            <tr class="dt-row"><td>Mohamed Kouyaté</td><td>🇸🇳 Dakar</td><td style="color:var(--gold);">€234</td><td>47</td><td><span class="chip chip-e">Actif</span></td></tr>
+            <tr class="dt-row"><td>Grace Osei</td><td>🇬🇭 Accra</td><td style="color:var(--gold);">€189</td><td>38</td><td><span class="chip chip-e">Actif</span></td></tr>
+            <tr class="dt-row"><td>Bakary Touré</td><td>🇲🇱 Bamako</td><td style="color:var(--gold);">€112</td><td>22</td><td><span class="chip chip-e">Actif</span></td></tr>
+            <tr class="dt-row"><td>Awa Diallo</td><td>🇸🇳 Saint-Louis</td><td style="color:var(--gold);">€98</td><td>19</td><td><span class="chip chip-b">Pause</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- /admin-panel -->
+
+</div><!-- /outer -->
+
+<script>
+// ── SCREENS ORDER ──
+const ORDER = ['splash','dash','groups','pay','retrait','profile'];
+let cur = 'splash';
+const visited = new Set(['splash']);
+
+// ════════════════════════════════
+//  RETRAIT MODULE
+// ════════════════════════════════
+let retWallet = 145000; // FCFA
+let activeToken = null;
+
+function retFmt(n) { return n.toLocaleString('fr-FR') + ' FCFA'; }
+
+function retUpdateBalance() {
+  const el = document.getElementById('ret-balance');
+  if(el) el.textContent = retFmt(retWallet);
+}
+
+function retShowAll(choiceVis, virVis, qrVis) {
+  document.getElementById('ret-choice').style.display = choiceVis ? 'flex' : 'none';
+  document.getElementById('ret-virement').style.display = virVis ? 'flex' : 'none';
+  document.getElementById('ret-qr').style.display = qrVis ? 'flex' : 'none';
+}
+
+function retBack() {
+  retShowAll(true, false, false);
+  retUpdateBalance();
+}
+
+function retShowVirement() {
+  retShowAll(false, true, false);
+  updateVirSummary();
+}
+
+function retShowQr() {
+  retShowAll(false, false, true);
+  showQrStep(1);
+}
+
+function updateVirSummary() {
+  const amt = parseInt(document.getElementById('vir-amount')?.value) || 0;
+  const el1 = document.getElementById('vir-sum-amt');
+  const el2 = document.getElementById('vir-sum-total');
+  if(el1) el1.textContent = retFmt(amt);
+  if(el2) el2.textContent = retFmt(amt);
+}
+document.addEventListener('input', e => {
+  if(e.target.id === 'vir-amount') updateVirSummary();
+});
+
+function doVirement() {
+  const amt = parseInt(document.getElementById('vir-amount')?.value) || 0;
+  const iban = document.getElementById('vir-iban')?.value?.trim() || '';
+  if(amt <= 0 || amt > retWallet) { showToast('❌ Montant invalide ou solde insuffisant'); return; }
+  if(!iban || iban.length < 8) { showToast('❌ IBAN invalide'); return; }
+  // Simulate Mangopay payout
+  retWallet -= amt;
+  retUpdateBalance();
+  const msg = document.getElementById('vir-suc-msg');
+  if(msg) msg.innerHTML = `${retFmt(amt)} envoyé<br>vers ${iban.substring(0,15)}...`;
+  const suc = document.getElementById('vir-suc');
+  if(suc) suc.style.display = 'flex';
+  if('speechSynthesis' in window) {
+    const u = new SpeechSynthesisUtterance(`Virement de ${amt} F CFA confirmé. Mangopay a traité votre demande.`);
+    u.lang='fr-FR'; window.speechSynthesis.speak(u);
+  }
+}
+
+function generateToken() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
+  let t = 'NS-';
+  for(let i=0;i<6;i++) t += chars[Math.floor(Math.random()*chars.length)];
+  return t;
+}
+
+function showQrStep(n) {
+  ['qr-s1','qr-s2','qr-s3'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    if(el) el.style.display = (i+1===n) ? 'block' : 'none';
+  });
+  ['qstep1','qstep2','qstep3'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    if(i+1 < n) { el.style.background='var(--em2)'; el.style.color='white'; }
+    else if(i+1 === n) { el.style.background='var(--em)'; el.style.color='var(--void)'; }
+    else { el.style.background='var(--raised)'; el.style.color='var(--text3)'; }
+  });
+}
+
+function doGenerateQr() {
+  const amt = parseInt(document.getElementById('qr-amount')?.value) || 0;
+  if(amt <= 0 || amt > retWallet) { showToast('❌ Montant invalide ou solde insuffisant'); return; }
+  const token = generateToken();
+  activeToken = { token, montant: amt, expiry: Date.now() + 48*3600*1000, used: false };
+  const td = document.getElementById('ret-token-display');
+  const ic = document.getElementById('ret-instr-code');
+  if(td) td.textContent = token;
+  if(ic) ic.textContent = token;
+  showQrStep(2);
+  showToast(`🔐 Code ${token} généré — valable 48h`);
+}
+
+function retCopyCode() {
+  if(!activeToken) return;
+  if(navigator.clipboard) navigator.clipboard.writeText(activeToken.token);
+  showToast(`📋 Code ${activeToken.token} copié !`);
+}
+
+function retCancelCode() {
+  if(activeToken) activeToken.used = true;
+  showToast('❌ Code annulé');
+  retBack();
+}
+
+function showQrValidation() {
+  if(!activeToken || activeToken.used || Date.now() > activeToken.expiry) {
+    showToast('❌ Code invalide ou expiré'); retBack(); return;
+  }
+  const el = document.getElementById('qr-val-info');
+  if(el) el.innerHTML = `Code : <strong style="color:var(--em);font-family:monospace;">${activeToken.token}</strong><br>Montant : <strong style="color:var(--gold);">${retFmt(activeToken.montant)}</strong>`;
+  showQrStep(3);
+}
+
+function doConsumeQr() {
+  if(!activeToken || activeToken.used || Date.now() > activeToken.expiry) {
+    showToast('❌ Code invalide'); retBack(); return;
+  }
+  retWallet -= activeToken.montant;
+  activeToken.used = true;
+  retUpdateBalance();
+  const msg = document.getElementById('qr-suc-msg');
+  if(msg) msg.innerHTML = `${retFmt(activeToken.montant)} retirés<br>via agent certifié`;
+  const suc = document.getElementById('qr-suc');
+  if(suc) suc.style.display = 'flex';
+  if('speechSynthesis' in window) {
+    const u = new SpeechSynthesisUtterance(`Retrait de ${activeToken.montant} F CFA confirmé. Votre argent a été remis par l'agent.`);
+    u.lang='fr-FR'; window.speechSynthesis.speak(u);
+  }
+}
+
+function goTo(id, dir='r') {
+  if(id === cur) return;
+  const prev = document.getElementById('s-'+cur);
+  const next = document.getElementById('s-'+id);
+  if(!next) return;
+  prev.classList.remove('active');
+  const anim = dir==='r'?'anim-r':dir==='l'?'anim-l':'anim-z';
+  next.classList.add('active', anim);
+  next.addEventListener('animationend', ()=>next.classList.remove(anim), {once:true});
+  cur = id;
+  visited.add(id);
+  updateDots();
+}
+
+function updateDots() {
+  document.querySelectorAll('.flow-dot').forEach(d=>{
+    const s = d.dataset.s;
+    d.classList.remove('on','done');
+    if(s===cur) d.classList.add('on');
+    else if(visited.has(s)) d.classList.add('done');
+  });
+}
+
+// ── KEYBOARD NAV ──
+document.addEventListener('keydown', e=>{
+  const i = ORDER.indexOf(cur);
+  if(e.key==='ArrowRight' && i<ORDER.length-1) goTo(ORDER[i+1],'r');
+  if(e.key==='ArrowLeft' && i>0) goTo(ORDER[i-1],'l');
+});
+
+// ── TOAST ──
+let toastTimer;
+function showToast(msg) {
+  document.querySelectorAll('.toast').forEach(t=>t.remove());
+  const t = document.createElement('div');
+  t.className = 'toast'; t.textContent = msg;
+  document.body.appendChild(t);
+  if(toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.remove(), 2800);
+}
+
+// ── PAYMENT ──
+function selectPM(el) {
+  document.querySelectorAll('.pay-method').forEach(m=>m.classList.remove('on'));
+  el.classList.add('on');
+}
+function doPay() {
+  const ov = document.getElementById('pay-suc');
+  ov.classList.add('show');
+  setTimeout(()=>{
+    ov.classList.remove('show');
+    goTo('dash','l');
+  }, 3200);
+}
+
+// ── VOICE ──
+function toggleVoice(id) {
+  const panel = document.getElementById('vpanel-'+id);
+  const btn = document.getElementById('vfab-'+id);
+  const isOpen = panel.classList.contains('show');
+  document.querySelectorAll('.voice-panel').forEach(p=>p.classList.remove('show'));
+  document.querySelectorAll('.voice-fab').forEach(b=>b.classList.remove('listening'));
+  if(!isOpen) {
+    panel.classList.add('show');
+    btn.classList.add('listening');
+    simulateVoice(id);
+  }
+}
+function closeVoice(id) {
+  document.getElementById('vpanel-'+id).classList.remove('show');
+  document.getElementById('vfab-'+id).classList.remove('listening');
+}
+
+function simulateVoice(id) {
+  const status = document.getElementById('vs-'+id);
+  const trans = document.getElementById('vt-'+id);
+  const resp = document.getElementById('vr-'+id);
+  const responses = [
+    { said: "Quel est mon solde ?", reply: "Votre solde est de 145 000 FCFA. Votre score de fiabilité est de 82/100. Bravo !" },
+    { said: "Je veux payer ma cotisation", reply: "Je vais vous rediriger vers le paiement de 25 000 FCFA pour la Tontine Commerçants." },
+    { said: "Mon prochain tour ?", reply: "Votre prochain tour de recevoir est le tour 4. Encore 18 jours !" },
+  ];
+  const r = responses[Math.floor(Math.random()*responses.length)];
+  status.textContent = '🎤 Écoute en cours...';
+  trans.style.display = 'none'; resp.style.display = 'none';
+  setTimeout(()=>{
+    status.textContent = '✅ Message reçu';
+    trans.style.display = 'block';
+    trans.innerHTML = `<strong style="color:var(--text2);">Vous :</strong> "${r.said}"`;
+    setTimeout(()=>{
+      resp.style.display = 'block';
+      resp.innerHTML = `<strong style="color:var(--em);">🤖 IA :</strong> ${r.reply}`;
+      if('speechSynthesis' in window) {
+        const u = new SpeechSynthesisUtterance(r.reply);
+        u.lang='fr-FR'; window.speechSynthesis.speak(u);
+      }
+      setTimeout(()=>closeVoice(id), 4000);
+    }, 800);
+  }, 1800);
+}
+
+// ── ADMIN PANEL ──
+function showPanel(isAdmin) {
+  document.getElementById('adminPanel').classList.toggle('show', isAdmin);
+  document.getElementById('btn-mobile').classList.toggle('on', !isAdmin);
+  document.getElementById('btn-admin').classList.toggle('on', isAdmin);
+  if(isAdmin) renderAdmin();
+}
+
+function apTab(btn, tabId) {
+  document.querySelectorAll('.ap-tab').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.ap-content').forEach(c=>c.style.display='none');
+  document.getElementById(tabId).style.display = 'block';
+}
+
+function renderAdmin() {
+  // Chart
+  const bars = document.getElementById('chartBars');
+  const labels = document.getElementById('chartLabels');
+  if(!bars.children.length) {
+    const data = [40,60,35,80,55,90,45,70,65,85,50,75,60,95,40,70,55,80,65,90,45,85,60,75,50,80,70,60,85,95];
+    const days = ['1','','','5','','','10','','','15','','','20','','','25','','','30'];
+    bars.innerHTML = data.map((h,i)=>{
+      const cls = h<50?'low':h<70?'mid':h<85?'':'high';
+      return `<div class="chart-bar ${cls}" style="height:${h}%;"></div>`;
+    }).join('');
+    labels.innerHTML = days.map(d=>`<div class="chart-lbl">${d}</div>`).join('');
+  }
+  // Users table
+  const tbody = document.getElementById('usersTbody');
+  if(!tbody.innerHTML.trim()) {
+    const users = [
+      {name:'Koné Ibrahim', phone:'+225 07 89 10 11', amt:'75 000 FCFA', days:32, status:'Critique'},
+      {name:'Diallo Mamadou', phone:'+221 77 123 45 67', amt:'50 000 FCFA', days:15, status:'Moyen'},
+      {name:'Ndiaye Fatou', phone:'+221 78 90 12 34', amt:'25 000 FCFA', days:8, status:'Léger'},
+      {name:'Bah Aminata', phone:'+224 620 12 34', amt:'100 000 FCFA', days:45, status:'Défaut'},
+      {name:'Traoré Jean', phone:'+223 70 12 34 56', amt:'30 000 FCFA', days:3, status:'Léger'},
+    ];
+    const colors = {Critique:'var(--red)',Moyen:'var(--gold)',Léger:'var(--sky)',Défaut:'var(--text3)'};
+    const chips = {Critique:'chip-r',Moyen:'chip-g',Léger:'chip-b',Défaut:''};
+    tbody.innerHTML = users.map(u=>`
+      <tr class="dt-row">
+        <td>${u.name}</td>
+        <td>${u.phone}</td>
+        <td style="color:var(--gold);font-weight:700;">${u.amt}</td>
+        <td style="color:${colors[u.status]};font-weight:700;">J+${u.days}</td>
+        <td><span class="chip ${chips[u.status] || 'chip-r'}">${u.status}</span></td>
+        <td>
+          <button class="dt-btn btn-gold" style="background:linear-gradient(135deg,var(--gold),var(--gold2));color:#050508;font-weight:700;" 
+            onclick="showToast('🤖 Relance IA envoyée à ${u.name}')">
+            🤖 Relancer
+          </button>
+        </td>
+      </tr>
+    `).join('');
+  }
+}
+
+// Init
+updateDots();
+</script>
+</body>
+</html>

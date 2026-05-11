@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEO-SUSU — Dossier INPI · Dépôt de Marque</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,700&family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#08090C;--paper:#FAFAF8;--warm:#F5F3EE;
+  --gold:#B8860B;--gold-light:#D4A820;--gold-pale:#F5E8C0;--gold-bg:#FDF8ED;
+  --em:#0B6B48;--em-bg:#EEF7F3;
+  --blue:#0D3B6E;--blue-bg:#EEF4FB;
+  --red:#8B1A1A;--red-bg:#FDF0F0;
+  --muted:#6B6B6B;--border:#E2DDD4;--border2:#CCC5B8;
+  --ff-serif:'EB Garamond',Georgia,serif;
+  --ff-body:'Plus Jakarta Sans',system-ui,sans-serif;
+  --ff-mono:'DM Mono',monospace;
+}
+html{font-size:16px;scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:var(--ff-body);line-height:1.6;}
+@media print{.no-print{display:none!important;}.slide{page-break-after:always;box-shadow:none;border:none;}body{background:white;}.slide-wrap{padding:0;}}
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(250,250,248,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 40px;height:58px;display:flex;align-items:center;justify-content:space-between;}
+.tn-logo{font-family:var(--ff-serif);font-size:18px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:10px;}
+.tn-gem{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--gold-light),var(--gold));display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:white;font-family:var(--ff-serif);}
+.tn-links{display:flex;gap:6px;}
+.tn-link{font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;padding:5px 12px;border-radius:20px;transition:all .2s;border:1px solid transparent;}
+.tn-link:hover{color:var(--gold);border-color:var(--gold-pale);}
+.tn-link.on{color:var(--gold);background:var(--gold-bg);border-color:var(--gold-pale);}
+.tn-print{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--blue);background:var(--blue-bg);border:1px solid rgba(13,59,110,.15);border-radius:20px;padding:6px 16px;cursor:pointer;font-family:var(--ff-body);transition:all .2s;}
+.tn-print:hover{background:#D8E8F8;}
+.slide-wrap{max-width:960px;margin:0 auto;padding:80px 40px 60px;}
+.slide{background:white;border:1px solid var(--border);border-radius:4px;margin-bottom:2px;box-shadow:0 2px 20px rgba(0,0,0,.04),0 1px 4px rgba(0,0,0,.06);overflow:hidden;opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
+.slide.vis{opacity:1;transform:none;}
+.s-header{background:var(--warm);border-bottom:1px solid var(--border);padding:14px 40px;display:flex;align-items:center;justify-content:space-between;}
+.s-num{font-family:var(--ff-mono);font-size:11px;font-weight:500;color:var(--muted);letter-spacing:.5px;}
+.s-section{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;}
+.s-body{padding:48px 40px;}
+.s-body-compact{padding:32px 40px;}
+.t-eyebrow{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.t-eyebrow::before{content:'—';color:var(--gold-pale);}
+.t-h1{font-family:var(--ff-serif);font-size:clamp(38px,5vw,64px);font-weight:700;line-height:1.05;letter-spacing:-.5px;color:var(--ink);margin-bottom:16px;}
+.t-h1 em{font-style:italic;color:var(--gold);}
+.t-h2{font-family:var(--ff-serif);font-size:32px;font-weight:700;color:var(--ink);line-height:1.15;margin-bottom:14px;letter-spacing:-.3px;}
+.t-h2 em{font-style:italic;color:var(--gold);}
+.t-h3{font-family:var(--ff-serif);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.t-lead{font-size:17px;color:var(--muted);line-height:1.75;max-width:600px;}
+.t-body{font-size:14px;color:var(--muted);line-height:1.75;}
+.gold-line{height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-pale),transparent);margin:32px 0;}
+.divider{height:1px;background:var(--border);margin:24px 0;}
+.inpi-table{width:100%;border-collapse:collapse;font-size:13px;}
+.inpi-table th{background:var(--warm);border:1px solid var(--border);padding:11px 16px;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;text-align:left;}
+.inpi-table td{border:1px solid var(--border);padding:13px 16px;vertical-align:top;line-height:1.6;}
+.inpi-table tr:nth-child(even) td{background:var(--warm);}
+.inpi-table td:first-child{font-weight:700;color:var(--ink);white-space:nowrap;}
+.td-gold{color:var(--gold);font-weight:700;}
+.td-em{color:var(--em);font-weight:700;}
+.td-code{font-family:var(--ff-mono);font-size:12px;color:var(--blue);}
+.info-box{border-radius:4px;padding:20px 22px;margin:16px 0;border-left:4px solid;}
+.info-box.gold{background:var(--gold-bg);border-color:var(--gold);}
+.info-box.em{background:var(--em-bg);border-color:var(--em);}
+.info-box.blue{background:var(--blue-bg);border-color:var(--blue);}
+.info-box.red{background:var(--red-bg);border-color:var(--red);}
+.info-box-title{font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:7px;}
+.info-box.gold .info-box-title{color:var(--gold);}
+.info-box.em .info-box-title{color:var(--em);}
+.info-box.blue .info-box-title{color:var(--blue);}
+.info-box.red .info-box-title{color:var(--red);}
+.info-box p{font-size:13px;color:var(--muted);line-height:1.7;}
+.info-box p strong{color:var(--ink);}
+.checklist{list-style:none;display:flex;flex-direction:column;gap:10px;margin:16px 0;}
+.checklist li{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--muted);line-height:1.55;}
+.checklist li::before{content:'';width:18px;height:18px;border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:10px;}
+.cl-check li::before{background:var(--em-bg);color:var(--em);content:'✓';font-weight:800;}
+.cl-dot li::before{background:var(--gold-bg);content:'✦';color:var(--gold);font-size:8px;}
+.cl-num{counter-reset:li;}
+.cl-num li{counter-increment:li;}
+.cl-num li::before{background:var(--gold);color:white;content:counter(li);font-weight:700;width:22px;height:22px;border-radius:50%;font-family:var(--ff-mono);font-size:11px;}
+.checklist li strong{color:var(--ink);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
+.timeline{display:flex;flex-direction:column;gap:0;position:relative;}
+.timeline::before{content:'';position:absolute;left:22px;top:24px;bottom:24px;width:2px;background:linear-gradient(180deg,var(--gold),var(--gold-pale));}
+.tl-item{display:flex;gap:22px;padding:0 0 28px;position:relative;z-index:1;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-circle{width:44px;height:44px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;box-shadow:0 0 0 4px white;}
+.tl-date{font-family:var(--ff-mono);font-size:11px;color:var(--gold);font-weight:500;margin-bottom:4px;letter-spacing:.5px;}
+.tl-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.tl-sub{font-size:13px;color:var(--muted);line-height:1.6;}
+.mark-display{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px;background:var(--warm);border:2px dashed var(--border2);border-radius:4px;text-align:center;margin:24px 0;}
+.mark-gem{width:100px;height:100px;border-radius:28px;background:linear-gradient(135deg,var(--gold-light),var(--gold));display:flex;align-items:center;justify-content:center;font-family:var(--ff-serif);font-size:60px;font-weight:700;color:white;box-shadow:0 12px 40px rgba(184,134,11,.3);margin-bottom:20px;}
+.mark-wordmark{font-family:var(--ff-serif);font-size:52px;font-weight:700;color:var(--ink);letter-spacing:-1px;line-height:1;margin-bottom:8px;}
+.mark-wordmark span{color:var(--gold);}
+.mark-tagline{font-size:14px;color:var(--muted);letter-spacing:.5px;}
+.mark-caption{font-family:var(--ff-mono);font-size:11px;color:var(--muted);margin-top:20px;text-align:center;line-height:1.7;}
+.nice-classes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0;}
+.nc{background:var(--warm);border:1px solid var(--border);border-radius:4px;padding:18px;}
+.nc-num{font-family:var(--ff-mono);font-size:28px;font-weight:500;color:var(--gold);line-height:1;margin-bottom:8px;}
+.nc-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:5px;}
+.nc-desc{font-size:12px;color:var(--muted);line-height:1.55;}
+.costs-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;}
+.cost-card{background:var(--warm);border:1px solid var(--border);border-radius:4px;padding:20px;}
+.cost-label{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+.cost-val{font-family:var(--ff-serif);font-size:32px;font-weight:700;color:var(--ink);line-height:1;margin-bottom:4px;}
+.cost-sub{font-size:12px;color:var(--muted);}
+.cover-slide{background:var(--ink);color:white;}
+.cover-body{padding:64px 40px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+.cover-overline{font-family:var(--ff-mono);font-size:11px;letter-spacing:2px;color:var(--gold-pale);opacity:.7;margin-bottom:20px;text-transform:uppercase;}
+.cover-h{font-family:var(--ff-serif);font-size:clamp(40px,5vw,68px);font-weight:700;color:white;line-height:1.0;letter-spacing:-.5px;margin-bottom:10px;}
+.cover-h em{font-style:italic;background:linear-gradient(135deg,var(--gold-pale),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.cover-sub{font-size:17px;color:rgba(255,255,255,.5);margin-bottom:36px;line-height:1.6;}
+.cover-meta{display:flex;flex-direction:column;gap:8px;}
+.cover-meta-row{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.45);}
+.cover-meta-row strong{color:rgba(255,255,255,.75);}
+.cover-gem-large{width:160px;height:160px;border-radius:40px;background:linear-gradient(135deg,var(--gold-light),var(--gold));display:flex;align-items:center;justify-content:center;font-family:var(--ff-serif);font-size:96px;font-weight:700;color:var(--ink);box-shadow:0 24px 80px rgba(184,134,11,.3);flex-shrink:0;}
+.cover-footer{background:rgba(255,255,255,.04);border-top:1px solid rgba(255,255,255,.08);padding:18px 40px;display:flex;align-items:center;justify-content:space-between;}
+.cover-footer-left{font-family:var(--ff-mono);font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.5px;}
+.cover-footer-right{display:flex;gap:14px;}
+.cover-badge{font-family:var(--ff-mono);font-size:10px;font-weight:500;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:4px 12px;letter-spacing:.5px;}
+.pg{display:flex;align-items:center;gap:8px;font-family:var(--ff-mono);font-size:11px;color:var(--muted);}
+.pg-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);}
+@media(max-width:720px){.two-col,.three-col,.nice-classes,.costs-grid{grid-template-columns:1fr;}.cover-body{grid-template-columns:1fr;}.cover-gem-large{display:none;}.s-body,.s-body-compact{padding:28px 22px;}.top-nav{padding:0 20px;}.tn-links{display:none;}}
+</style>
+</head>
+<body>
+<nav class="top-nav no-print">
+  <div class="tn-logo"><div class="tn-gem">N</div>NEO-SUSU — Dossier INPI</div>
+  <div class="tn-links">
+    <a class="tn-link on" href="#s1">Couverture</a>
+    <a class="tn-link" href="#s3">Marque</a>
+    <a class="tn-link" href="#s5">Classes Nice</a>
+    <a class="tn-link" href="#s7">Procédure</a>
+    <a class="tn-link" href="#s9">Budget</a>
+    <a class="tn-link" href="#s11">PI élargie</a>
+  </div>
+  <button class="tn-print no-print" onclick="window.print()">🖨️ Imprimer / PDF</button>
+</nav>
+<div class="slide-wrap">
+<!-- SLIDE 1 COVER -->
+<div class="slide cover-slide" id="s1">
+  <div class="cover-body">
+    <div class="cover-left">
+      <div class="cover-overline">Institut National de la Propriété Industrielle · France</div>
+      <div class="cover-h">Dossier de Dépôt<br><em>de Marque</em></div>
+      <div class="cover-sub">Demande d'enregistrement de la marque NEO-SUSU<br>Marque verbale + Semi-figurative</div>
+      <div class="cover-meta">
+        <div class="cover-meta-row"><strong>Déposant :</strong> NEO-SUSU SAS — Paris, France</div>
+        <div class="cover-meta-row"><strong>Nature :</strong> Marque verbale + Semi-figurative</div>
+        <div class="cover-meta-row"><strong>Organismes :</strong> INPI (France) + EUIPO (Union Européenne)</div>
+        <div class="cover-meta-row"><strong>Préparation :</strong> Mai 2026 — Version 1.0</div>
+      </div>
+    </div>
+    <div class="cover-gem-large">N</div>
+  </div>
+  <div class="cover-footer">
+    <span class="cover-footer-left">© 2026 NEO-SUSU SAS · Dossier confidentiel · Usage exclusif INPI/EUIPO</span>
+    <div class="cover-footer-right">
+      <span class="cover-badge">INPI France</span>
+      <span class="cover-badge">EUIPO UE</span>
+      <span class="cover-badge">Confidentiel</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 IDENTITE -->
+<div class="slide" id="s2">
+  <div class="s-header"><div class="s-num">SECTION 01</div><div class="s-section">Identité & Déposant</div></div>
+  <div class="s-body">
+    <div class="t-eyebrow">Déposant</div>
+    <h2 class="t-h2">Identité du <em>déposant</em></h2>
+    <div class="gold-line"></div>
+    <div class="two-col">
+      <div>
+        <table class="inpi-table">
+          <tbody>
+            <tr><td>Dénomination sociale</td><td class="td-gold">NEO-SUSU SAS</td></tr>
+            <tr><td>Forme juridique</td><td>Société par Actions Simplifiée</td></tr>
+            <tr><td>Siège social</td><td>Paris, France (Île-de-France)</td></tr>
+            <tr><td>Nationalité</td><td>Française</td></tr>
+            <tr><td>Capital social</td><td>€ 10 000</td></tr>
+            <tr><td>Code APE / NAF</td><td class="td-code">6619B</td></tr>
+            <tr><td>Email</td><td class="td-code">contact@neo-susu.com</td></tr>
+            <tr><td>Site web</td><td class="td-code">www.neo-susu.com</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="info-box gold">
+          <div class="info-box-title">Qui est NEO-SUSU ?</div>
+          <p>Plateforme fintech qui digitalise les <strong>tontines</strong> pour la diaspora africaine en Europe. Paiements sécurisés via PSP agréés DSP2, IA vocale 5 langues, réseau d'agents cash certifiés en Afrique.</p>
+        </div>
+        <div class="info-box blue" style="margin-top:14px;">
+          <div class="info-box-title">Documents à joindre au dossier INPI</div>
+          <p>• Extrait K-bis moins de 3 mois<br>• Statuts de la SAS<br>• Pièce d'identité du représentant légal<br>• Logotype haute définition (PNG + SVG)<br>• Pouvoir mandataire si dépôt via conseil PI</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="s-header" style="border-top:1px solid var(--border);border-bottom:none;"><div class="pg"><div class="pg-dot"></div>Page 2 / 12</div><div class="s-num">NEO-SUSU SAS · INPI 2026</div></div>
+</div>
+
+<!-- SLIDE 3 REPRESENTATION -->
+<div class="slide" id="s3">
+  <div class="s-header"><div class="s-num">SECTION 02</div><div class="s-section">Représentation de la Marque</div></div>
+  <div class="s-body">
+    <div class="t-eyebrow">Marque verbale + semi-figurative</div>
+    <h2 class="t-h2">Description et <em>représentation</em></h2>
+    <div class="gold-line"></div>
+    <div class="mark-display">
+      <div class="mark-gem">N</div>
+      <div class="mark-wordmark">NEO-<span>SUSU</span></div>
+      <div class="mark-tagline">L'épargne communautaire intelligente</div>
+      <div class="mark-caption">Marque verbale : NEO-SUSU · Logotype : lettre N stylisée sur fond doré<br>Couleurs : Or #D4A820 (Pantone 7753 C) · Noir #07090F (Pantone Black 7 C)<br>Typographie display : Cormorant Garamond · Corps : Syne</div>
+    </div>
+    <div class="three-col">
+      <div class="info-box gold"><div class="info-box-title">Marque verbale</div><p>Le signe <strong>NEO-SUSU</strong> est l'élément principal. Terme inventé, distinctif, sans signification technique dans les services financiers.</p></div>
+      <div class="info-box blue"><div class="info-box-title">Marque semi-figurative</div><p>Le logotype N doré est la partie figurative. Dépôt avec représentation graphique haute définition PNG + SVG vectoriel obligatoire.</p></div>
+      <div class="info-box em"><div class="info-box-title">Couleurs revendiquées</div><p><strong>Or :</strong> #D4A820 · Pantone 7753 C<br><strong>Noir :</strong> #07090F · Pantone Black 7<br><strong>Émeraude :</strong> #1CC88A (accent)</p></div>
+    </div>
+    <div class="info-box gold" style="margin-top:16px;">
+      <div class="info-box-title">Base légale — Art. L.711-1 Code de la Propriété Intellectuelle</div>
+      <p>La marque doit être <strong>distinctive</strong>, <strong>licite</strong>, <strong>disponible</strong> et <strong>représentable graphiquement</strong>. NEO-SUSU remplit l'ensemble de ces conditions : terme inventé, non descriptif, non déceptif, représentable sous forme de logotype.</p>
+    </div>
+  </div>
+  <div class="s-header" style="border-top:1px solid var(--border);border-bottom:none;"><div class="pg"><div class="pg-dot"></div>Page 3 / 12</div><div class="s-num">NEO-SUSU SAS · INPI 2026</div></div>
+</div>
+<!-- SLIDE 4 ANTERIORITES -->
+<div class="slide" id="s4">
+  <div class="s-header"><div class="s-num">SECTION 03</div><div class="s-section">Antériorités & Distinctivité</div></div>
+  <div class="s-body">
+    <div class="t-eyebrow">Recherche d'antériorité</div>
+    <h2 class="t-h2">Disponibilité de la <em>marque</em></h2>
+    <div class="gold-line"></div>
+    <div class="info-box blue"><div class="info-box-title">Étape préalable obligatoire — Recherche d'antériorités</div><p>Avant tout dépôt, vérifier qu'aucune marque antérieure identique ou similaire n'existe pour des produits/services similaires. Recherche via <strong>Eurekali</strong> (INPI) et <strong>eSearch plus</strong> (EUIPO). Un rapport de recherche professionnel est recommandé.</p></div>
+    <div style="margin-top:24px;">
+      <table class="inpi-table">
+        <thead><tr><th>Base</th><th>Outil</th><th>Ce qu'il faut vérifier</th><th>Statut</th></tr></thead>
+        <tbody>
+          <tr><td>INPI France</td><td class="td-code">data.inpi.fr / Eurekali</td><td>"NEO-SUSU", "NEOSUSU", "SUSU" — classes 36, 38, 42</td><td class="td-em">À faire</td></tr>
+          <tr><td>EUIPO (UE)</td><td class="td-code">euipo.europa.eu/eSearch</td><td>Identique dans 27 pays UE — classes Nice 36, 38, 42</td><td class="td-em">À faire</td></tr>
+          <tr><td>WIPO (International)</td><td class="td-code">branddb.wipo.int</td><td>Marques internationales "SUSU" en services financiers</td><td class="td-em">Recommandé</td></tr>
+          <tr><td>Nom de domaine</td><td class="td-code">neo-susu.com</td><td>Cohérence marque / domaine</td><td class="td-gold">Déjà enregistré</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="two-col" style="margin-top:20px;">
+      <div class="info-box em"><div class="info-box-title">Arguments de distinctivité</div><p>• <strong>NEO-SUSU</strong> combine le préfixe futuriste "NEO" et le terme culturel africain "SUSU"<br>• Pas de signification descriptive dans les services financiers européens<br>• Combinaison originale et mémorable — distinctivité forte<br>• Aucun concurrent direct n'utilise ce nom en Europe</p></div>
+      <div class="info-box red"><div class="info-box-title">Points de vigilance</div><p>• "SUSU" est utilisé informellement dans la communauté africaine — vérifier que personne ne l'a déposé en classe 36<br>• "NEO" seul est générique — c'est la combinaison <strong>NEO-SUSU</strong> qui est protégeable<br>• Effectuer la recherche AVANT le dépôt pour éviter toute opposition</p></div>
+    </div>
+  </div>
+  <div class="s-header" style="border-top:1px solid var(--border);border-bottom:none;"><div class="pg"><div class="pg-dot"></div>Page 4 / 12</div><div class="s-num">NEO-SUSU SAS · INPI 2026</div></div>
+</div>
+
+<!-- SLIDE 5 CLASSES NICE -->
+<div class="slide" id="s5">
+  <div class="s-header"><div class="s-num">SECTION 04</div><div class="s-section">Classes Nice</div></div>
+  <div class="s-body-compact">
+    <div class="t-eyebrow">Classification internationale de Nice (12e édition)</div>
+    <h2 class="t-h2">Classes <em>Nice</em> recommandées</h2>
+    <div class="gold-line"></div>
+    <div class="nice-classes">
+      <div class="nc"><div class="nc-num">36</div><div class="nc-title">Services financiers ⭐ Prioritaire</div><div class="nc-desc">Paiements électroniques, transferts de fonds, épargne collective, gestion de portefeuilles électroniques, microfinance, intermédiation financière, services d'assurance.</div></div>
+      <div class="nc"><div class="nc-num">38</div><div class="nc-title">Télécommunications ⭐ Prioritaire</div><div class="nc-desc">Messagerie électronique, notifications push, communication vocale et textuelle via application mobile, transmission de données, services de communication multilingue.</div></div>
+      <div class="nc"><div class="nc-num">42</div><div class="nc-title">Services technologiques ⭐ Prioritaire</div><div class="nc-desc">Plateforme SaaS, développement de logiciels, services informatiques via internet, intelligence artificielle, traitement de données, services API.</div></div>
+      <div class="nc"><div class="nc-num">35</div><div class="nc-title">Services commerciaux</div><div class="nc-desc">Gestion de communautés, administration d'affaires, marketing digital, gestion de programmes d'ambassadeurs et de fidélité.</div></div>
+      <div class="nc"><div class="nc-num">45</div><div class="nc-title">Services juridiques</div><div class="nc-desc">Médiation entre membres, vérification d'identité (KYC), conformité réglementaire, résolution de conflits.</div></div>
+      <div class="nc" style="background:var(--gold-bg);border-color:var(--gold-pale);"><div class="nc-num" style="color:var(--muted);">09</div><div class="nc-title">Logiciels (optionnel)</div><div class="nc-desc">Application mobile NEO-SUSU iOS & Android, algorithme de score de fiabilité, logiciel de recouvrement automatisé.</div></div>
+    </div>
+    <div class="info-box gold"><div class="info-box-title">Stratégie recommandée</div><p>Déposer en priorité les classes <strong>36, 38 et 42</strong> qui couvrent le cœur de l'activité. Ajouter la classe <strong>35</strong> pour les activités commerciales. Chaque classe supplémentaire au-delà de la 1ère coûte €40 à l'INPI et €150 à l'EUIPO.</p></div>
+  </div>
+  <div class="s-header" style="border-top:1px solid var(--border);border-bottom:none;"><div class="pg"><div class="pg-dot"></div>Page 5 / 12</div><div class="s-num">NEO-SUSU SAS · INPI 2026</div></div>
+</div>
+
+<!-- SLIDE 6 TERRITOIRE -->
+<div class="slide" id="s6">
+  <div class="s-header"><div class="s-num">SECTION 05</div><div class="s-section">Territoire & Stratégie</div></div>
+  <div class="s-body">
+    <div class="t-eyebrow">Déploiement géographique</div>
+    <h2 class="t-h2">Stratégie de dépôt <em>internationale</em></h2>
+    <div class="gold-line"></div>
+    <div class="three-col">
+      <div style="background:var(--warm);border:1px solid var(--border);border-radius:4px;padding:22px;">
+        <div style="font-size:28px;margin-bottom:10px;">🇫🇷</div>
+        <div class="nc-title">Phase 1 — France</div>
+        <div style="font-family:var(--ff-mono);font-size:11px;color:var(--gold);margin:6px 0;">INPI · Mois 1</div>
+        <div class="nc-desc">Dépôt national INPI. Priorité d'antériorité française. 10 ans renouvelable. Base du droit de priorité pour l'international.</div>
+        <div style="margin-top:12px;font-size:12px;font-weight:700;color:var(--em);">→ Dépôt J+30</div>
+      </div>
+      <div style="background:var(--gold-bg);border:1px solid var(--gold-pale);border-radius:4px;padding:22px;">
+        <div style="font-size:28px;margin-bottom:10px;">🇪🇺</div>
+        <div class="nc-title">Phase 2 — Union Européenne</div>
+        <div style="font-family:var(--ff-mono);font-size:11px;color:var(--gold);margin:6px 0;">EUIPO · Mois 6</div>
+        <div class="nc-desc">Marque de l'UE (EUTM) valable dans 27 pays. Un seul dépôt pour toute l'Europe. FR, UK séparé, BE, NL, DE, IT...</div>
+        <div style="margin-top:12px;font-size:12px;font-weight:700;color:var(--em);">→ Dépôt M+6</div>
+      </div>
+      <div style="background:var(--warm);border:1px solid var(--border);border-radius:4px;padding:22px;">
+        <div style="font-size:28px;margin-bottom:10px;">🌍</div>
+        <div class="nc-title">Phase 3 — Afrique</div>
+        <div style="font-family:var(--ff-mono);font-size:11px;color:var(--gold);margin:6px 0;">OAPI · Mois 12</div>
+        <div class="nc-desc">17 pays africains francophones via l'OAPI (Accord de Bangui). SN, CI, CM, ML, BJ, TG, GN, NE, BF, CG, GA...</div>
+        <div style="margin-top:12px;font-size:12px;font-weight:700;color:var(--em);">→ Dépôt M+12</div>
+      </div>
+    </div>
+    <div class="info-box blue" style="margin-top:20px;"><div class="info-box-title">OAPI — Protection en Afrique francophone</div><p>L'<strong>OAPI</strong> (Organisation Africaine de la Propriété Intellectuelle, Accord de Bangui) permet de protéger la marque dans 17 pays africains francophones avec un seul dépôt. Siège à Yaoundé. Coût : <strong>€ 1 500 - 3 000</strong> selon les classes.</p></div>
+    <div class="info-box em" style="margin-top:14px;"><div class="info-box-title">Droit de priorité — Convention de Paris</div><p>Le dépôt INPI crée un <strong>droit de priorité de 6 mois</strong> (art. 4 Convention de Paris). Tout dépôt à l'EUIPO dans les 6 mois est réputé avoir la même date que le dépôt français. Avantage stratégique majeur.</p></div>
+  </div>
+  <div class="s-header" style="border-top:1px solid var(--border);border-bottom:none;"><div class="pg"><div class="pg-dot"></div>Page 6 / 12</div><div class="s-num">NEO-SUSU SAS · INPI 2026</div></div>
+</div>
+<!-- SLIDE 7 PROCEDURE -->
+<div class="slide" id="s7">
+  <div class="s-header"><div class="s-num">SECTION 06</div><div class="s-section">Procédure de Dépôt</div></div>
+  <div class="s-body">
+    <div class="t-eyebrow">Guide pratique</div>
+    <h2 class="t-h2">Procédure INPI <em>étape par étape</em></h2>
+    <div class="gold-line"></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-circle" style="background:var(--gold-bg);color:var(--gold);border:2px solid var(--gold-pale);">1</div>
+        <div class="tl-body">
+          <div class="tl-date">SEMAINE 1 — Préparation</div>
+          <div class="tl-title">Recherche d'antériorités obligatoire</div>
+          <div class="tl-sub">Via Eurekali (inpi.fr) : rechercher "NEO-SUSU", "NEOSUSU", "SUSU" dans les classes 36, 38, 42. Budget : €50-300 autonome ou €400-800 cabinet PI. Obtenir un rapport écrit. Si antériorité similaire → consulter un avocat avant dépôt.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-circle" style="background:var(--blue-bg);color:var(--blue);border:2px solid rgba(13,59,110,.2);">2</div>
+        <div class="tl-body">
+          <div class="tl-date">SEMAINE 2 — Constitution du dossier</div>
+          <div class="tl-title">Préparer les pièces du dépôt</div>
+          <div class="tl-sub">Logotype NEO-SUSU en haute définition (PNG 72dpi min. + SVG vectoriel) · Liste précise des services dans chaque classe Nice · Extrait K-bis moins de 3 mois · Choix : dépôt en noir et blanc (protège toutes les couleurs) ou avec couleurs revendiquées.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-circle" style="background:var(--em-bg);color:var(--em);border:2px solid rgba(11,107,72,.2);">3</div>
+        <div class="tl-body">
+          <div class="tl-date">SEMAINE 3 — Dépôt en ligne</div>
+          <div class="tl-title">Déposer sur inpi.fr</div>
+          <div class="tl-sub">Aller sur <strong>inpi.fr → Marques → Déposer une marque</strong> · Créer un compte INPI · Remplir le formulaire en ligne (~45 min) · Uploader les fichiers · Régler les taxes · Obtenir l'accusé de réception avec numéro de dossier. Ce numéro = date de priorité officielle.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-circle" style="background:var(--gold-bg);color:var(--gold);border:2px solid var(--gold-pale);">4</div>
+        <div class="tl-body">
+          <div class="tl-date">MOIS 1-2 — Examen INPI</div>
+          <div class="tl-title">Examen de la demande par l'INPI</div>
+          <div class="tl-sub">L'INPI examine sous 6-8 semaines (forme, distinctivité, conformité). Si conforme → publication au Bulletin Officiel de la Propriété Industrielle (BOPI). Si objection → notification et 2 mois pour répondre.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-circle" style="background:var(--red-bg);color:var(--red);border:2px solid rgba(139,26,26,.15);">5</div>
+        <div class="tl-body">
+          <div class="tl-date">MOIS 2-3 — Publication & Opposition</div>
+          <div class="tl-title">Période d'opposition (2 mois)</div>
+          <div class="tl-sub">Après publication au BOPI, tout tiers peut former opposition dans un délai de <strong>2 mois</strong> (art. L.712-4 CPI). Surveiller les alertes INPI. Si opposition → procédure contradictoire avec possibilité de négociation ou d'assistance d'un avocat PI.</div>
+        </div>
+      </div>
+      <div class="tl-item" style="padding-bottom:0;">
+        <div class="tl-circle" style="background:var(--em-bg);color:var(--em);border:2px solid rgba(11,107,72,.2);">✓</div>
+        <div class="tl-body">
+          <div class="tl-date">MOIS 4-6 — Enregistrement</div>
+          <div class="tl-title">Certificat d'enregistrement INPI</div>
+          <div class="tl-sub">Si aucune opposition ou opposition rejetée → l'INPI délivre le certificat. La marque est protégée pour <strong>10 ans renouvelables</strong> à compter de la date de dépôt. Vous pouvez apposer le symbole ® sur tous vos supports.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="s-header" style="border-top:1px solid var(--border);border-bottom:none;"><div class="pg"><div class="pg-dot"></div>Page 7 / 12</div><div class="s-num">NEO-SUSU SAS · INPI 2026</div></div>
+</div>
+
+<!-- SLIDE 8 BUDGET -->
+<div class="slide" id="s8">
+  <div class="s-header"><div class="s-num">SECTION 07</div><div class="s-section">Budget & Coûts</div></div>
+  <div class="s-body">
+    <div class="t-eyebrow">Estimation financière</div>
+    <h2 class="t-h2">Budget de <em>protection</em> complète</h2>
+    <div class="gold-line"></div>
+    <div class="t-h3" style="margin-bottom:14px;">🇫🇷 Dépôt INPI — France</div>
+    <table class="inpi-table">
+      <thead><tr><th>Poste</th><th>Détail</th><th>Coût</th></tr></thead>
+      <tbody>
+        <tr><td>Taxe de dépôt (1ère classe)</td><td>Dépôt en ligne inpi.fr · Classe Nice 36</td><td class="td-gold">€ 190</td></tr>
+        <tr><td>Classes supplémentaires (x3)</td><td>Classes 38, 42, 35 · €40 / classe supp.</td><td class="td-gold">€ 120</td></tr>
+        <tr><td>Recherche d'antériorités</td><td>Eurekali INPI (autonome) ou cabinet PI</td><td class="td-gold">€ 50 – 800</td></tr>
+        <tr><td>Conseil en propriété intellectuelle</td><td>Cabinet PI pour rédaction, dépôt, suivi (optionnel)</td><td class="td-gold">€ 500 – 1 500</td></tr>
+        <tr><td><strong>TOTAL France</strong></td><td>4 classes + recherche + conseil</td><td class="td-gold"><strong>€ 860 – 2 610</strong></td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:24px;">
+      <div class="t-h3" style="margin-bottom:14px;">🇪🇺 Dépôt EUIPO — Union Européenne</div>
+      <table class="inpi-table">
+        <thead><tr><th>Poste</th><th>Détail</th><th>Coût</th></tr></thead>
+        <tbody>
+          <tr><td>Taxe de base EUTM (1 classe)</td><td>Marque UE — 27 pays — 10 ans</td><td class="td-gold">€ 1 000</td></tr>
+          <tr><td>2e classe</td><td>Taxe supplémentaire EUIPO</td><td class="td-gold">€ 50</td></tr>
+          <tr><td>3e classe et plus</td><td>€ 150 / classe supp.</td><td class="td-gold">€ 300</td></tr>
+          <tr><td>Conseil mandataire</td><td>Recommandé — mandataire agréé EUIPO</td><td class="td-gold">€ 500 – 2 000</td></tr>
+          <tr><td><strong>TOTAL EUIPO</strong></td><td>4 classes + conseil</td><td class="td-gold"><strong>€ 1 850 – 3 300</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="costs-grid" style="margin-top:24px;">
+      <div class="cost-card"><div class="cost-label">Budget total Phase 1+2</div><div class="cost-val">≈ € 5 000</div><div class="cost-sub">France + UE · 4 classes · Avec conseil PI</div></div>
+      <div class="cost-card" style="background:var(--gold-bg);border-color:var(--gold-pale);"><div class="cost-label">Protection obtenue</div><div class="cost-val">28 pays</div><div class="cost-sub">France + 27 États membres UE · 10 ans</div></div>
+    </div>
+    <div class="info-box em" style="margin-top:16px;"><div class="info-box-title">Astuce budget</div><p>Commencez par l'INPI France (<strong>€ 310</strong> de taxes officielles pour 4 classes) — cela crée le droit de priorité de 6 mois. Puis déposez à l'EUIPO. <strong>Ne pas dépasser 6 mois entre INPI et EUIPO pour bénéficier du droit de priorité.</strong></p></div>
+  </div>
+  <div class="s-header" style="border-top:1px solid var(--border);border-bottom:none;"><div class="pg"><div class="pg-dot"></div>Page 8 / 12</div><div class="s-num">NEO-SUSU SAS · INPI 2026</div></div>
+</div>
+
+<!-- SLIDE 9 CALENDRIER -->
+<div class="slide" id="s9">
+  <div class="s-header"><div class="s-num">SECTION 08</div><div class="s-section">Calendrier de Dépôt</div></div>
+  <div class="s-body">
+    <div class="t-eyebrow">Planning stratégique</div>
+    <h2 class="t-h2">Calendrier de <em>protection</em></h2>
+    <div class="gold-line"></div>
+    <table class="inpi-table">
+      <thead><tr><th>Période</th><th>Action</th><th>Organisme</th><th>Coût</th><th>Résultat</th></tr></thead>
+      <tbody>
+        <tr><td class="td-code">Mois 1 — S1</td><td>Recherche d'antériorités INPI + EUIPO</td><td>Eurekali / eSearch</td><td class="td-gold">€ 50-800</td><td>Rapport de disponibilité</td></tr>
+        <tr><td class="td-code">Mois 1 — S2</td><td>Préparation dossier graphique + liste services</td><td>Interne + graphiste</td><td class="td-gold">€ 0-300</td><td>Fichiers prêts au dépôt</td></tr>
+        <tr><td class="td-code">Mois 1 — S3</td><td>🔴 DÉPÔT INPI France (4 classes)</td><td>inpi.fr</td><td class="td-gold">€ 310</td><td>N° dossier = date priorité</td></tr>
+        <tr><td class="td-code">Mois 2-3</td><td>Examen INPI + publication BOPI</td><td>INPI</td><td class="td-gold">€ 0</td><td>Publication officielle</td></tr>
+        <tr><td class="td-code">Mois 3-4</td><td>Surveillance période d'opposition (2 mois)</td><td>INPI / Cabinet PI</td><td class="td-gold">€ 0-200</td><td>Veille + réaction si besoin</td></tr>
+        <tr><td class="td-code">Mois 5-6</td><td>🔴 DÉPÔT EUIPO (marque UE — 4 classes)</td><td>euipo.europa.eu</td><td class="td-gold">€ 1 350</td><td>Protection 27 pays UE</td></tr>
+        <tr><td class="td-code">Mois 6</td><td>Certificat d'enregistrement INPI</td><td>INPI</td><td class="td-gold">€ 0</td><td>® France officiel</td></tr>
+        <tr><td class="td-code">Mois 12-18</td><td>Dépôt OAPI (Afrique francophone · 17 pays)</td><td>oapi.int</td><td class="td-gold">€ 1 500-3 000</td><td>Protection Afrique</td></tr>
+        <tr><td class="td-code">An 10</td><td>Renouvellement France + UE + OAPI</td><td>INPI / EUIPO / OAPI</td><td class="td-gold">~€ 2 000</td><td>+10 ans de protection</td></tr>
+      </tbody>
+    </table>
+    <div class="info-box red" style="margin-top:20px;"><div class="info-box-title">Obligation d'exploitation — Art. L.714-5 CPI</div><p>La marque doit faire l'objet d'une <strong>exploitation sérieuse dans les 5 ans</strong> suivant l'enregistrement. À défaut, elle peut être déclarée déchue. L'exploitation de l'app NEO-SUSU dès le lancement constitue la preuve d'usage. Conservez toutes les preuves (captures, factures, communications).</p></div>
+  </div>
+  <div class="s-header" style="border-top:1px solid var(--border);border-bottom:none;"><div class="pg"><div class="pg-dot"></div>Page 9 / 12</div><div class="s-num">NEO-SUSU SAS · INPI 2026</div></div>
+</div>
+
+<!-- SLIDE 10 PI ELARGIE -->
+<div class="slide" id="s10">
+  <div class="s-header"><div class="s-num">SECTION 09</div><div class="s-section">Propriété Intellectuelle Élargie</div></div>
+  <div class="s-body">
+    <div class="t-eyebrow">Au-delà de la marque</div>
+    <h2 class="t-h2">Stratégie PI <em>complète</em></h2>
+    <div class="gold-line"></div>
+    <table class="inpi-table">
+      <thead><tr><th>Actif PI</th><th>Protection</th><th>Base légale</th><th>Coût</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Marque NEO-SUSU (nom + logo)</td><td>Dépôt INPI + EUIPO + OAPI</td><td class="td-code">Art. L.711-1 CPI</td><td class="td-gold">€ 5 000</td><td class="td-em">✓ Ce dossier</td></tr>
+        <tr><td>Code source de l'application</td><td>Droit d'auteur automatique dès création</td><td class="td-code">Art. L.111-1 CPI</td><td class="td-gold">€ 0</td><td class="td-em">✓ Automatique</td></tr>
+        <tr><td>Algorithme de score fiabilité</td><td>Brevet logiciel (si effet technique)</td><td class="td-code">CBE art. 52 / OEB</td><td class="td-gold">€ 5 000-15 000</td><td>→ À étudier M+6</td></tr>
+        <tr><td>Base de données utilisateurs</td><td>Droit sui generis BDD</td><td class="td-code">Art. L.341-1 CPI</td><td class="td-gold">€ 0</td><td class="td-em">✓ Automatique</td></tr>
+        <tr><td>Nom de domaine neo-susu.com</td><td>Enregistrement registrar accrédité</td><td class="td-code">Droit ICANN</td><td class="td-gold">€ 15/an</td><td class="td-em">✓ Déjà fait</td></tr>
+        <tr><td>Secrets commerciaux (process IA)</td><td>Directive secrets d'affaires + NDA</td><td class="td-code">Dir. UE 2016/943</td><td class="td-gold">€ 500-1 000</td><td>→ NDA systématiques</td></tr>
+        <tr><td>Design interface (UI/UX)</td><td>Dessin ou modèle déposé + droit d'auteur</td><td class="td-code">Art. L.511-1 CPI</td><td class="td-gold">€ 0-200</td><td>→ Optionnel</td></tr>
+      </tbody>
+    </table>
+    <div class="two-col" style="margin-top:20px;">
+      <div class="info-box em"><div class="info-box-title">Ce qui est déjà protégé automatiquement</div><p>• <strong>Code source</strong> de l'app — droit d'auteur automatique dès création (art. L.111-1 CPI) — 70 ans<br>• <strong>Base de données</strong> utilisateurs — droit sui generis<br>• <strong>Créations originales</strong> (textes, visuels, UI) — protection automatique</p></div>
+      <div class="info-box gold"><div class="info-box-title">Priorité absolue</div><p>1. <strong>Dépôt marque INPI</strong> (ce dossier)<br>2. <strong>NDA systématiques</strong> → tout prestataire et investisseur<br>3. <strong>Clause cession droits d'auteur</strong> dans contrats développeurs<br>4. <strong>Étude brevetabilité</strong> de l'algorithme (M+6)</p></div>
+    </div>
+  </div>
+  <div class="s-header" style="border-top:1px solid var(--border);border-bottom:none;"><div class="pg"><div class="pg-dot"></div>Page 10 / 12</div><div class="s-num">NEO-SUSU SAS · INPI 2026</div></div>
+</div>
+
+<!-- SLIDE 11 CONTACTS & SIGNATURE -->
+<div class="slide" id="s11">
+  <div class="s-header"><div class="s-num">SECTIONS 10-12</div><div class="s-section">Surveillance · Contacts · Signature</div></div>
+  <div class="s-body">
+    <div class="t-eyebrow">Pour aller plus loin</div>
+    <h2 class="t-h2">Actions immédiates & <em>signature</em></h2>
+    <div class="gold-line"></div>
+    <div class="two-col">
+      <div>
+        <div class="t-h3" style="margin-bottom:12px;">Contacts officiels</div>
+        <table class="inpi-table">
+          <tbody>
+            <tr><td>INPI France</td><td class="td-code">inpi.fr · 01 56 65 89 98</td></tr>
+            <tr><td>EUIPO</td><td class="td-code">euipo.europa.eu</td></tr>
+            <tr><td>OAPI</td><td class="td-code">oapi.int · Yaoundé</td></tr>
+            <tr><td>OMPI/WIPO</td><td class="td-code">wipo.int · Genève</td></tr>
+            <tr><td>Eurekali (recherche)</td><td class="td-code">data.inpi.fr/eurekali</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:20px;">
+          <div class="t-h3" style="margin-bottom:12px;">Surveillance de marque</div>
+          <ul class="checklist cl-check">
+            <li>Configurer les alertes INPI (gratuit) — nouvelles demandes similaires</li>
+            <li>Alertes EUIPO (gratuit sur euipo.europa.eu)</li>
+            <li>Surveiller Google Alerts "NEO-SUSU" + "NEOSUSU"</li>
+            <li>Vérifier annuellement les nouvelles marques en classes 36/38/42</li>
+            <li>Renouveler avant expiration (10 ans)</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="info-box gold"><div class="info-box-title">Récapitulatif des actions immédiates</div>
+          <ul class="checklist cl-num">
+            <li><strong>Recherche d'antériorités</strong> — Eurekali INPI (semaine 1)</li>
+            <li><strong>Préparer le logotype</strong> en PNG haute définition + SVG vectoriel</li>
+            <li><strong>Rédiger la liste des services</strong> pour classes 36, 38, 42, 35</li>
+            <li><strong>Créer le compte inpi.fr</strong> et remplir le formulaire</li>
+            <li><strong>Déposer et payer</strong> les taxes officielles (€ 310 pour 4 classes)</li>
+            <li><strong>Surveiller la publication</strong> au BOPI et la période d'opposition</li>
+            <li><strong>Préparer le dépôt EUIPO</strong> dans les 6 mois</li>
+          </ul>
+        </div>
+        <div style="margin-top:20px;background:var(--ink);border-radius:4px;padding:28px;">
+          <div style="font-family:var(--ff-mono);font-size:11px;color:rgba(255,255,255,.3);letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Déposant</div>
+          <div style="font-family:var(--ff-serif);font-size:22px;font-weight:700;color:var(--gold-pale);margin-bottom:4px;">NEO-SUSU SAS</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px;">Paris, France · Fondateur & Président</div>
+          <div style="height:1px;background:rgba(255,255,255,.08);margin-bottom:20px;"></div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="font-family:var(--ff-mono);font-size:11px;color:rgba(255,255,255,.3);">Signature : ________________________________</div>
+            <div style="font-family:var(--ff-mono);font-size:11px;color:rgba(255,255,255,.3);">Date : ____________________________________</div>
+            <div style="font-family:var(--ff-mono);font-size:11px;color:rgba(255,255,255,.3);">Lieu : ____________________________________</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="info-box red"><div class="info-box-title">Avertissement légal</div><p>Ce dossier est un document de préparation informatif. Il ne remplace pas les conseils d'un <strong>avocat spécialisé en propriété intellectuelle</strong> ou d'un <strong>conseil en brevets et marques agréé</strong>. Pour les dépôts à enjeu important (EUIPO, brevet, opposition), il est fortement recommandé de faire appel à un professionnel agréé.</p></div>
+  </div>
+  <div class="s-header" style="border-top:1px solid var(--border);border-bottom:none;background:var(--ink);">
+    <div class="pg"><div class="pg-dot"></div><span style="color:rgba(255,255,255,.3);">Page 11 / 12 · © 2026 NEO-SUSU SAS · Document confidentiel</span></div>
+    <span style="font-family:var(--ff-mono);font-size:11px;color:rgba(255,255,255,.2);">Dossier INPI v1.0</span>
+  </div>
+</div>
+
+</div>
+<script>
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:.05});
+document.querySelectorAll('.slide').forEach(s=>io.observe(s));
+const ioNav=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const id=x.target.id;document.querySelectorAll('.tn-link').forEach(l=>{l.classList.remove('on');if(l.getAttribute('href')==='#'+id)l.classList.add('on');});}});},{threshold:.3});
+document.querySelectorAll('.slide').forEach(s=>ioNav.observe(s));
+</script>
+</body>
+</html>

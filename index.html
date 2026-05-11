@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ═══ PWA META TAGS ═══ -->
+<meta name="theme-color" content="#D4A820">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NEO-SUSU">
+<meta name="application-name" content="NEO-SUSU">
+<meta name="description" content="L'épargne communautaire intelligente — Digitalisez votre tontine avec sécurité bancaire, IA vocale 5 langues et agents cash certifiés.">
+<meta name="msapplication-TileColor" content="#D4A820">
+<meta name="msapplication-TileImage" content="icons/icon-144.png">
+<!-- Apple Touch Icons -->
+<link rel="apple-touch-icon" href="icons/icon-152.png">
+<link rel="apple-touch-icon" sizes="72x72"  href="icons/icon-72.png">
+<link rel="apple-touch-icon" sizes="96x96"  href="icons/icon-96.png">
+<link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128.png">
+<link rel="apple-touch-icon" sizes="144x144" href="icons/icon-144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png">
+<link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+<title>NEO-SUSU — Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & TOKENS ─────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --void:#060810;
+  --deep:#0C0F1C;
+  --surface:#111526;
+  --card:#181D31;
+  --raised:#1E2440;
+  --gold:#D4A820;
+  --gold2:#A67C00;
+  --gold-pale:#F5E09A;
+  --gold-glow:rgba(212,168,32,.14);
+  --em:#1CC88C;
+  --em2:#0FA870;
+  --sky:#4AADFF;
+  --violet:#9B72F8;
+  --red:#E8445A;
+  --text:#EDF1FF;
+  --text2:#8892BB;
+  --text3:#3E4A6A;
+  --stroke:#1A2040;
+  --stroke2:#232C4A;
+  --ff-d:'Cormorant Garamond',Georgia,serif;
+  --ff-b:'Syne',system-ui,sans-serif;
+}
+html{font-size:16px;scroll-behavior:smooth;}
+body{
+  background:var(--void);
+  color:var(--text);
+  font-family:var(--ff-b);
+  min-height:100vh;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* ── CURSOR ── */
+#cur{position:fixed;width:9px;height:9px;border-radius:50%;background:var(--gold);pointer-events:none;z-index:9999;mix-blend-mode:difference;transition:transform .12s;}
+#ring{position:fixed;width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(212,168,32,.4);pointer-events:none;z-index:9998;transition:all .2s;}
+
+/* ── CANVAS BACKGROUND ── */
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* ── GRAIN OVERLAY ── */
+body::after{
+  content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;opacity:.45;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* ── LAYOUT ── */
+.wrap{
+  position:relative;z-index:1;
+  max-width:1140px;margin:0 auto;
+  padding:0 32px 80px;
+}
+
+/* ── HEADER ── */
+header{
+  padding:60px 0 0;
+  text-align:center;
+  position:relative;
+}
+.hdr-overline{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(212,168,32,.08);border:1px solid rgba(212,168,32,.2);
+  border-radius:40px;padding:6px 18px;margin-bottom:28px;
+  font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;
+  animation:fadeUp .7s .1s both;
+}
+.hdr-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.hdr-logo{
+  display:inline-flex;align-items:center;gap:18px;
+  margin-bottom:24px;
+  animation:fadeUp .7s .2s both;
+}
+.logo-gem{
+  width:72px;height:72px;border-radius:22px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--ff-d);font-size:40px;font-weight:700;color:var(--void);
+  box-shadow:0 12px 40px rgba(212,168,32,.38);
+}
+.logo-name{
+  font-family:var(--ff-d);font-size:52px;font-weight:700;
+  background:linear-gradient(135deg,var(--gold-pale),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:-1px;line-height:1;
+}
+
+.hdr-tagline{
+  font-family:var(--ff-d);font-style:italic;
+  font-size:22px;color:var(--text2);margin-bottom:16px;
+  animation:fadeUp .7s .3s both;
+}
+.hdr-desc{
+  font-size:15px;color:var(--text3);max-width:520px;
+  margin:0 auto 48px;line-height:1.7;
+  animation:fadeUp .7s .35s both;
+}
+
+/* ── VERSION BADGE ── */
+.version-strip{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin-bottom:64px;flex-wrap:wrap;
+  animation:fadeUp .6s .4s both;
+}
+.vbadge{
+  display:flex;align-items:center;gap:7px;
+  background:var(--card);border:1px solid var(--stroke2);
+  border-radius:30px;padding:7px 16px;
+  font-size:12px;font-weight:700;color:var(--text2);
+}
+.vbadge-dot{width:7px;height:7px;border-radius:50%;}
+
+/* ── DIVIDER ── */
+.divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--stroke2),transparent);
+  margin:0 0 64px;
+}
+
+/* ── SECTION TITLES ── */
+.sec-eyebrow{
+  font-size:11px;font-weight:700;color:var(--gold);
+  letter-spacing:2px;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;margin-bottom:14px;
+}
+.sec-eyebrow::before{content:'✦';font-size:9px;}
+.sec-title{
+  font-family:var(--ff-d);font-size:clamp(32px,3.5vw,52px);
+  font-weight:700;color:var(--text);
+  letter-spacing:-.5px;line-height:1.1;margin-bottom:10px;
+}
+.sec-title em{font-style:italic;color:var(--gold);}
+.sec-sub{font-size:15px;color:var(--text2);line-height:1.7;max-width:540px;}
+
+/* ── APPS GRID ── */
+.apps-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  margin-top:44px;
+}
+
+/* ── APP CARD ── */
+.app-card{
+  position:relative;
+  background:var(--card);
+  border:1px solid var(--stroke);
+  border-radius:28px;
+  padding:0;
+  overflow:hidden;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),
+              box-shadow .3s,
+              border-color .3s;
+  text-decoration:none;
+  display:flex;flex-direction:column;
+}
+.app-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 32px 80px rgba(0,0,0,.5),0 0 0 1px rgba(212,168,32,.15);
+  border-color:rgba(212,168,32,.25);
+}
+.app-card:hover .card-arrow{transform:translate(3px,-3px);}
+
+/* Card glow on hover */
+.app-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,var(--card-glow,rgba(212,168,32,.05)),transparent 65%);
+  opacity:0;transition:opacity .4s;pointer-events:none;
+}
+.app-card:hover::before{opacity:1;}
+
+/* Top accent line */
+.app-card::after{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--card-accent, linear-gradient(90deg,var(--gold),var(--gold2)));
+}
+
+/* Card hero area */
+.card-hero{
+  padding:32px 32px 24px;
+  background:linear-gradient(160deg,var(--card-bg-top,rgba(212,168,32,.04)) 0%,transparent 60%);
+  flex:1;
+}
+.card-ico-wrap{
+  width:60px;height:60px;border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:30px;margin-bottom:20px;
+  box-shadow:0 6px 20px rgba(0,0,0,.3);
+}
+.card-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  border-radius:30px;padding:4px 13px;margin-bottom:14px;
+  font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+}
+.card-title{
+  font-family:var(--ff-d);font-size:28px;font-weight:700;
+  color:var(--text);line-height:1.15;margin-bottom:10px;
+}
+.card-title em{font-style:italic;}
+.card-desc{font-size:14px;color:var(--text2);line-height:1.65;}
+
+/* Features list */
+.card-feats{
+  display:flex;flex-wrap:wrap;gap:6px;
+  padding:0 32px 20px;
+}
+.feat-chip{
+  font-size:11px;font-weight:600;color:var(--text3);
+  background:var(--raised);border-radius:20px;
+  padding:4px 11px;border:1px solid var(--stroke);
+}
+
+/* Card footer */
+.card-footer{
+  border-top:1px solid var(--stroke);
+  padding:18px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.card-cta{
+  font-size:14px;font-weight:700;
+  display:flex;align-items:center;gap:8px;
+}
+.card-arrow{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;transition:transform .25s;
+}
+
+/* ── CARD THEMES ── */
+/* Website */
+.c-web{
+  --card-accent:linear-gradient(90deg,#D4A820,#A67C00);
+  --card-glow:rgba(212,168,32,.07);
+  --card-bg-top:rgba(212,168,32,.05);
+}
+.c-web .card-tag{background:rgba(212,168,32,.1);color:var(--gold);}
+.c-web .card-ico-wrap{background:rgba(212,168,32,.1);}
+.c-web .card-cta{color:var(--gold);}
+.c-web .card-arrow{background:rgba(212,168,32,.12);color:var(--gold);}
+
+/* App Mobile */
+.c-app{
+  --card-accent:linear-gradient(90deg,#1CC88C,#0FA870);
+  --card-glow:rgba(28,200,140,.07);
+  --card-bg-top:rgba(28,200,140,.05);
+}
+.c-app .card-tag{background:rgba(28,200,140,.1);color:var(--em);}
+.c-app .card-ico-wrap{background:rgba(28,200,140,.1);}
+.c-app .card-cta{color:var(--em);}
+.c-app .card-arrow{background:rgba(28,200,140,.12);color:var(--em);}
+
+/* Présentation */
+.c-pres{
+  --card-accent:linear-gradient(90deg,#9B72F8,#7A4FD6);
+  --card-glow:rgba(155,114,248,.07);
+  --card-bg-top:rgba(155,114,248,.05);
+}
+.c-pres .card-tag{background:rgba(155,114,248,.1);color:var(--violet);}
+.c-pres .card-ico-wrap{background:rgba(155,114,248,.1);}
+.c-pres .card-cta{color:var(--violet);}
+.c-pres .card-arrow{background:rgba(155,114,248,.12);color:var(--violet);}
+
+/* App détaillée */
+.c-detail{
+  --card-accent:linear-gradient(90deg,#4AADFF,#2680CC);
+  --card-glow:rgba(74,173,255,.07);
+  --card-bg-top:rgba(74,173,255,.05);
+}
+.c-detail .card-tag{background:rgba(74,173,255,.1);color:var(--sky);}
+.c-detail .card-ico-wrap{background:rgba(74,173,255,.1);}
+.c-detail .card-cta{color:var(--sky);}
+.c-detail .card-arrow{background:rgba(74,173,255,.12);color:var(--sky);}
+
+/* ── FEATURED CARD (full width) ── */
+.app-card.featured{
+  grid-column:span 2;
+  flex-direction:row;
+  align-items:stretch;
+}
+.app-card.featured .card-hero{flex:1;padding:40px;}
+.app-card.featured .card-side{
+  width:260px;flex-shrink:0;
+  background:rgba(255,255,255,.02);
+  border-left:1px solid var(--stroke);
+  padding:40px 28px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.app-card.featured .card-feats{padding:0;flex-direction:column;gap:8px;}
+.app-card.featured .feat-chip{width:100%;text-align:center;}
+.app-card.featured .card-footer{
+  border-top:none;border-left:none;
+  padding:0;grid-column:auto;
+}
+
+/* ── STATS ROW ── */
+.stats-row{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  margin:80px 0 0;
+}
+.stat-card{
+  background:var(--card);border:1px solid var(--stroke);
+  border-radius:22px;padding:28px 20px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.stat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+}
+.stat-val{
+  font-family:var(--ff-d);font-size:40px;font-weight:700;
+  background:linear-gradient(135deg,var(--gold-pale),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;margin-bottom:8px;
+}
+.stat-lbl{font-size:12px;color:var(--text3);font-weight:600;}
+
+/* ── FOOTER ── */
+footer{
+  position:relative;z-index:1;
+  border-top:1px solid var(--stroke);
+  padding:40px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:20px;
+  max-width:1140px;margin:0 auto;
+}
+.foot-logo{
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--ff-d);font-size:22px;font-weight:700;
+}
+.foot-gem{
+  width:38px;height:38px;border-radius:12px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;color:var(--void);font-family:var(--ff-d);font-weight:700;
+}
+.foot-text{
+  font-size:13px;color:var(--text3);
+}
+.foot-links{display:flex;gap:8px;flex-wrap:wrap;}
+.foot-link{
+  font-size:12px;font-weight:700;color:var(--text3);
+  text-decoration:none;
+  background:var(--raised);border:1px solid var(--stroke);
+  border-radius:20px;padding:6px 14px;
+  transition:all .2s;
+}
+.foot-link:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(22px);}
+  to{opacity:1;transform:none;}
+}
+.sr{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+.sr.on{opacity:1;transform:none;}
+.sr.d1{transition-delay:.08s;}.sr.d2{transition-delay:.16s;}.sr.d3{transition-delay:.24s;}.sr.d4{transition-delay:.32s;}
+
+/* ── TICKER ── */
+.ticker-wrap{
+  overflow:hidden;padding:10px 0;
+  background:rgba(212,168,32,.04);
+  border-top:1px solid rgba(212,168,32,.08);
+  border-bottom:1px solid rgba(212,168,32,.08);
+  margin-bottom:72px;
+}
+.ticker-inner{display:flex;white-space:nowrap;animation:ticker 22s linear infinite;width:max-content;}
+.ticker-item{padding:0 32px;font-size:12px;font-weight:700;color:rgba(212,168,32,.5);letter-spacing:.5px;}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Responsive */
+@media(max-width:780px){
+  .apps-grid{grid-template-columns:1fr;}
+  .app-card.featured{flex-direction:column;grid-column:span 1;}
+  .app-card.featured .card-side{width:100%;border-left:none;border-top:1px solid var(--stroke);}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  footer{flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:480px){
+  .hdr-logo{flex-direction:column;gap:12px;}
+  .logo-name{font-size:38px;}
+  .stats-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+<div id="cur"></div>
+<div id="ring"></div>
+
+<div class="wrap">
+
+  <!-- ══ HEADER ══ -->
+  <header>
+    <div class="hdr-overline">
+      <span class="hdr-dot"></span>
+      Plateforme Fintech · Diaspora Africaine · Europe & Afrique
+    </div>
+    <div class="hdr-logo">
+      <div class="logo-gem">N</div>
+      <div class="logo-name">NEO-SUSU</div>
+    </div>
+    <div class="hdr-tagline">L'épargne communautaire <em>intelligente</em></div>
+    <p class="hdr-desc">
+      Plateforme de tontines digitales sécurisées pour la diaspora africaine en Europe et les communautés sur le continent. IA vocale · Agents cash certifiés · DSP2 Compliant.
+    </p>
+
+    <div class="version-strip">
+      <div class="vbadge"><span class="vbadge-dot" style="background:var(--em);box-shadow:0 0 6px var(--em);"></span> Version 1.0 — Bêta</div>
+      <div class="vbadge">🔒 DSP2 · RGPD · ACPR</div>
+      <div class="vbadge">🌍 EU + Afrique</div>
+      <div class="vbadge">🤖 IA Vocale · 5 Langues</div>
+      <div class="vbadge">🔑 Mangopay · Stripe</div>
+    </div>
+  </header>
+
+  <!-- ══ TICKER ══ -->
+  <div class="ticker-wrap">
+    <div class="ticker-inner">
+      <span class="ticker-item">✦ PSP Agréé · Sécurité Bancaire</span>
+      <span class="ticker-item">✦ IA Vocale · Français · Wolof · Yorùbá · Lingala · English</span>
+      <span class="ticker-item">✦ Agents Cash Certifiés · Réseau Afrique</span>
+      <span class="ticker-item">✦ Score Fiabilité 0-100 · Recouvrement 94.7%</span>
+      <span class="ticker-item">✦ 🏠 Tontine Appartement · Immobilier Afrique</span>
+      <span class="ticker-item">✦ 🛡️ Assurance Diaspora · Bi-nationale EU+Afrique</span>
+      <span class="ticker-item">✦ PSP Agréé · Sécurité Bancaire</span>
+      <span class="ticker-item">✦ IA Vocale · Français · Wolof · Yorùbá · Lingala · English</span>
+      <span class="ticker-item">✦ Agents Cash Certifiés · Réseau Afrique</span>
+      <span class="ticker-item">✦ Score Fiabilité 0-100 · Recouvrement 94.7%</span>
+      <span class="ticker-item">✦ 🏠 Tontine Appartement · Immobilier Afrique</span>
+      <span class="ticker-item">✦ 🛡️ Assurance Diaspora · Bi-nationale EU+Afrique</span>
+    </div>
+  </div>
+
+  <!-- ══ APPS SECTION ══ -->
+  <div class="sr">
+    <div class="sec-eyebrow">Navigation</div>
+    <h2 class="sec-title">Tous nos <em>outils</em></h2>
+    <p class="sec-sub">Accédez à toutes les applications, présentations et interfaces NEO-SUSU en un seul endroit.</p>
+  </div>
+
+  <div class="apps-grid" style="margin-top:44px;">
+
+    <!-- ── CARD 1 : SITE WEB (featured) ── -->
+    <a href="neo-susu-website.html" class="app-card c-web featured sr d1">
+      <div class="card-hero">
+        <div class="card-ico-wrap">🌐</div>
+        <span class="card-tag">Site Web Principal</span>
+        <div class="card-title">Site Web <em>Officiel</em><br>NEO-SUSU</div>
+        <div class="card-desc">
+          Le site web complet NEO-SUSU avec toutes les sections : Hero, Fonctionnalités, Témoignages, Tarifs, Partenaires (Tontine Appartement + Assurance Diaspora), et le Copilot IA intégré alimenté par Claude.
+        </div>
+      </div>
+      <div class="card-side">
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">Inclus dans ce site</div>
+          <div class="card-feats">
+            <span class="feat-chip">🤖 Copilot IA Claude</span>
+            <span class="feat-chip">🏠 Tontine Appartement</span>
+            <span class="feat-chip">🛡️ Assurance Diaspora</span>
+            <span class="feat-chip">💳 Tarifs complets</span>
+            <span class="feat-chip">📊 Chiffres clés</span>
+            <span class="feat-chip">✨ Animations premium</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-cta">Ouvrir le site <span class="card-arrow">→</span></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- ── CARD 2 : APP MOBILE ── -->
+    <a href="NEO-SUSU-App-Premium.html" class="app-card c-app sr d1">
+      <div class="card-hero">
+        <div class="card-ico-wrap">📱</div>
+        <span class="card-tag">Application Mobile</span>
+        <div class="card-title">App <em>Mobile</em><br>& Admin Panel</div>
+        <div class="card-desc">
+          Prototype interactif complet : 5 écrans mobiles (Splash, Dashboard, Groupes, Paiement, Profil) + Dashboard Admin avec KPIs, tableau utilisateurs, timeline recouvrement et gestion agents.
+        </div>
+      </div>
+      <div class="card-feats">
+        <span class="feat-chip">📊 Dashboard Admin</span>
+        <span class="feat-chip">🎙️ IA Vocale</span>
+        <span class="feat-chip">💳 Flow paiement</span>
+        <span class="feat-chip">👥 Gestion membres</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-cta">Lancer l'app</span>
+        <div class="card-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- ── CARD 3 : PRÉSENTATION ORALE ── -->
+    <a href="NEO-SUSU_Presentation.html" class="app-card c-pres sr d2">
+      <div class="card-hero">
+        <div class="card-ico-wrap">🎤</div>
+        <span class="card-tag">Pitch · Communication</span>
+        <div class="card-title">Présentation <em>Orale</em><br>Marketing</div>
+        <div class="card-desc">
+          15 slides immersives pour présenter NEO-SUSU en public, aux investisseurs ou en événement. Notes orateur intégrées, navigation clavier, mode plein écran, animations cinématiques.
+        </div>
+      </div>
+      <div class="card-feats">
+        <span class="feat-chip">15 slides</span>
+        <span class="feat-chip">📝 Notes orateur</span>
+        <span class="feat-chip">⌨️ Navigation clavier</span>
+        <span class="feat-chip">📺 Mode plein écran</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-cta">Ouvrir la présentation</span>
+        <div class="card-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- ── CARD 4 : PRÉSENTATION APP ── -->
+    <a href="NEO-SUSU_App_Presentation.html" class="app-card c-detail sr d2">
+      <div class="card-hero">
+        <div class="card-ico-wrap">📋</div>
+        <span class="card-tag">Documentation · Détail</span>
+        <div class="card-title">Présentation <em>Détaillée</em><br>de l'Application</div>
+        <div class="card-desc">
+          Page de présentation complète de toutes les fonctionnalités : paiements, retrait cash OTP, IA vocale, score fiabilité, recouvrement, partenaires, tarifs et architecture technique.
+        </div>
+      </div>
+      <div class="card-feats">
+        <span class="feat-chip">🔄 Processus complet</span>
+        <span class="feat-chip">⚙️ Stack technique</span>
+        <span class="feat-chip">🔐 Sécurité DSP2</span>
+        <span class="feat-chip">💰 Modèle économique</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-cta">Voir la présentation</span>
+        <div class="card-arrow">→</div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ══ STATS ══ -->
+  <div class="stats-row" style="margin-top:80px;">
+    <div class="stat-card sr d1">
+      <div class="stat-val">$50<span style="font-size:22px;">Mds</span></div>
+      <div class="stat-lbl">Marché mondial tontines / an</div>
+    </div>
+    <div class="stat-card sr d2">
+      <div class="stat-val">9M<span style="font-size:22px;">+</span></div>
+      <div class="stat-lbl">Diaspora africaine en Europe</div>
+    </div>
+    <div class="stat-card sr d3">
+      <div class="stat-val">94.7<span style="font-size:22px;">%</span></div>
+      <div class="stat-lbl">Taux de récupération IA</div>
+    </div>
+    <div class="stat-card sr d4">
+      <div class="stat-val">5</div>
+      <div class="stat-lbl">Langues vocales supportées</div>
+    </div>
+  </div>
+
+  <!-- ══ QUICK LINKS ══ -->
+  <div style="margin-top:80px;" class="sr">
+    <div class="sec-eyebrow">Documents</div>
+    <h2 class="sec-title" style="font-size:32px;">Accès <em>rapide</em></h2>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px;" class="sr d1">
+
+    <div style="background:var(--card);border:1px solid var(--stroke);border-radius:20px;padding:22px;display:flex;align-items:center;gap:14px;">
+      <div style="width:44px;height:44px;border-radius:14px;background:rgba(212,168,32,.1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🔒</div>
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Sécurité & Conformité</div>
+        <div style="font-size:12px;color:var(--text3);">DSP2 · ACPR · RGPD · KYC</div>
+      </div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--stroke);border-radius:20px;padding:22px;display:flex;align-items:center;gap:14px;">
+      <div style="width:44px;height:44px;border-radius:14px;background:rgba(28,200,140,.1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🌍</div>
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Marchés couverts</div>
+        <div style="font-size:12px;color:var(--text3);">FR · UK · BE · NL · SN · CI · NG</div>
+      </div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--stroke);border-radius:20px;padding:22px;display:flex;align-items:center;gap:14px;">
+      <div style="width:44px;height:44px;border-radius:14px;background:rgba(74,173,255,.1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">💳</div>
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">PSP Partenaires</div>
+        <div style="font-size:12px;color:var(--text3);">Mangopay · Stripe · CinetPay</div>
+      </div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--stroke);border-radius:20px;padding:22px;display:flex;align-items:center;gap:14px;">
+      <div style="width:44px;height:44px;border-radius:14px;background:rgba(155,114,248,.1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🤖</div>
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">IA & Technologies</div>
+        <div style="font-size:12px;color:var(--text3);">GPT-4o · Whisper · Azure TTS</div>
+      </div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--stroke);border-radius:20px;padding:22px;display:flex;align-items:center;gap:14px;">
+      <div style="width:44px;height:44px;border-radius:14px;background:rgba(212,168,32,.1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🏠</div>
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Tontine Appartement</div>
+        <div style="font-size:12px;color:var(--text3);">SN · CI · CM · MA · 8 pays</div>
+      </div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--stroke);border-radius:20px;padding:22px;display:flex;align-items:center;gap:14px;">
+      <div style="width:44px;height:44px;border-radius:14px;background:rgba(28,200,140,.1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🛡️</div>
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Assurance Diaspora</div>
+        <div style="font-size:12px;color:var(--text3);">€8/mois · Bi-nationale EU+AFR</div>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /wrap -->
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="foot-logo">
+    <div class="foot-gem">N</div>
+    <div>
+      <div style="background:linear-gradient(135deg,var(--gold-pale),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">NEO-SUSU</div>
+      <div class="foot-text" style="font-size:11px;margin-top:2px;">L'épargne communautaire intelligente</div>
+    </div>
+  </div>
+  <div class="foot-text">
+    🇫🇷 🇬🇧 🇸🇳 🇳🇬 🇨🇩 🇨🇮 🇨🇲 🇬🇭 &nbsp;·&nbsp; © 2026 NEO-SUSU SAS &nbsp;·&nbsp; Paris, France
+  </div>
+  <div class="foot-links">
+    <a class="foot-link" href="neo-susu-website.html">🌐 Site Web</a>
+    <a class="foot-link" href="NEO-SUSU-App-Premium.html">📱 App</a>
+    <a class="foot-link" href="NEO-SUSU_Presentation.html">🎤 Pitch</a>
+    <a class="foot-link" href="NEO-SUSU_App_Presentation.html">📋 Détail</a>
+  </div>
+</footer>
+
+<script>
+/* ── CURSOR ── */
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=window.innerWidth/2, my=window.innerHeight/2;
+let rx=mx, ry=my;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+(function anim(){
+  cur.style.cssText = `left:${mx-4.5}px;top:${my-4.5}px;`;
+  rx += (mx-rx)*.1; ry += (my-ry)*.1;
+  ring.style.cssText = `left:${rx-18}px;top:${ry-18}px;`;
+  requestAnimationFrame(anim);
+})();
+document.querySelectorAll('a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.transform='scale(1.9)';ring.style.borderColor='var(--gold)';});
+  el.addEventListener('mouseleave',()=>{ring.style.transform='scale(1)';ring.style.borderColor='rgba(212,168,32,.4)';});
+});
+
+/* ── CANVAS PARTICLES ── */
+const cv = document.getElementById('bg');
+const ctx = cv.getContext('2d');
+let pts = [];
+function resize(){
+  cv.width=window.innerWidth; cv.height=window.innerHeight;
+  pts = Array.from({length:60},()=>({
+    x:Math.random()*cv.width, y:Math.random()*cv.height,
+    vx:(Math.random()-.5)*.25, vy:(Math.random()-.5)*.25,
+    r:Math.random()*1.5+.3, a:Math.random()*Math.PI*2
+  }));
+}
+resize(); window.addEventListener('resize',resize);
+function draw(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  pts.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy; p.a+=.008;
+    if(p.x<0||p.x>cv.width) p.vx*=-1;
+    if(p.y<0||p.y>cv.height) p.vy*=-1;
+    const alpha = .04+Math.sin(p.a)*.025;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(212,168,32,${alpha})`; ctx.fill();
+  });
+  for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
+    const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);
+    if(d<120){
+      ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);
+      ctx.strokeStyle=`rgba(212,168,32,${.018*(1-d/120)})`;ctx.lineWidth=.6;ctx.stroke();
+    }
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+
+/* ── SCROLL REVEAL ── */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('on'); });
+},{threshold:.1});
+document.querySelectorAll('.sr').forEach(el=>io.observe(el));
+
+/* ── CARD MOUSE GLOW ── */
+document.querySelectorAll('.app-card').forEach(card=>{
+  card.addEventListener('mousemove', e=>{
+    const r=card.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width*100).toFixed(1);
+    const y=((e.clientY-r.top)/r.height*100).toFixed(1);
+    card.style.setProperty('--mx',x+'%');
+    card.style.setProperty('--my',y+'%');
+  });
+});
+</script>
+<!-- ═══ PWA INSTALL BANNER ═══ -->
+<div id="pwa-banner" style="
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;
+  background:rgba(7,8,15,.97);backdrop-filter:blur(20px);
+  border-top:2px solid rgba(212,168,32,.4);
+  padding:16px 24px;
+  display:none;align-items:center;gap:16px;
+  animation:slideUp .4s ease;
+">
+  <div style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#D4A820,#8B6500);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;font-family:'Cormorant Garamond',serif;font-weight:700;color:#030407;">N</div>
+  <div style="flex:1;">
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#F0F2FF;margin-bottom:2px;">Installer NEO-SUSU</div>
+    <div style="font-family:'Syne',sans-serif;font-size:12px;color:rgba(255,255,255,.45);">Accès rapide · Fonctionne hors ligne · Aucun App Store requis</div>
+  </div>
+  <button id="pwa-install-btn" style="
+    background:linear-gradient(135deg,#D4A820,#8B6500);color:#030407;
+    border:none;border-radius:24px;padding:10px 22px;
+    font-family:'Syne',sans-serif;font-size:13px;font-weight:800;
+    cursor:pointer;white-space:nowrap;flex-shrink:0;
+    box-shadow:0 4px 18px rgba(212,168,32,.35);
+  ">📲 Installer</button>
+  <button id="pwa-dismiss-btn" style="
+    background:none;border:none;color:rgba(255,255,255,.35);
+    font-size:22px;cursor:pointer;padding:4px;line-height:1;flex-shrink:0;
+  ">✕</button>
+</div>
+@keyframes slideUp{from{transform:translateY(100%);opacity:0;}to{transform:none;opacity:1;}}
+
+<!-- ═══ iOS INSTALL TOOLTIP ═══ -->
+<div id="ios-tip" style="
+  display:none;position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:9999;
+  background:rgba(7,8,15,.97);backdrop-filter:blur(16px);
+  border:1px solid rgba(212,168,32,.35);border-radius:20px;
+  padding:16px 22px;max-width:320px;text-align:center;
+  box-shadow:0 8px 40px rgba(0,0,0,.6);
+">
+  <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#F0F2FF;margin-bottom:8px;">📲 Installer sur iPhone</div>
+  <div style="font-family:'Syne',sans-serif;font-size:12px;color:rgba(255,255,255,.55);line-height:1.65;">
+    Appuyez sur <strong style="color:#D4A820;">⎋ Partager</strong> en bas de Safari,<br>
+    puis <strong style="color:#D4A820;">"Sur l'écran d'accueil"</strong>
+  </div>
+  <div style="margin-top:10px;font-size:24px;">⬇️</div>
+  <button onclick="document.getElementById('ios-tip').style.display='none'" style="
+    margin-top:10px;background:rgba(255,255,255,.08);border:none;
+    color:rgba(255,255,255,.5);border-radius:12px;padding:6px 16px;
+    font-family:'Syne',sans-serif;font-size:12px;cursor:pointer;
+  ">Compris</button>
+</div>
+
+<script>
+/* ═══ SERVICE WORKER REGISTRATION ═══ */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => {
+        console.log('✅ NEO-SUSU Service Worker enregistré:', reg.scope);
+        // Vérifier les mises à jour
+        reg.addEventListener('updatefound', () => {
+          const newWorker = reg.installing;
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              console.log('🔄 Nouvelle version disponible');
+              newWorker.postMessage('skipWaiting');
+            }
+          });
+        });
+      })
+      .catch(err => console.warn('SW non enregistré:', err));
+  });
+}
+
+/* ═══ PWA INSTALL PROMPT ═══ */
+let deferredPrompt = null;
+const banner = document.getElementById('pwa-banner');
+const installBtn = document.getElementById('pwa-install-btn');
+const dismissBtn = document.getElementById('pwa-dismiss-btn');
+
+// Détecter iOS Safari
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches
+                        || window.navigator.standalone === true;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // Afficher le banner après 3 secondes
+  setTimeout(() => {
+    if (!isInStandaloneMode && !localStorage.getItem('pwa-dismissed')) {
+      banner.style.display = 'flex';
+    }
+  }, 3000);
+});
+
+installBtn?.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  banner.style.display = 'none';
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  console.log('Installation:', outcome);
+  if (outcome === 'accepted') {
+    showToastPWA('🎉 NEO-SUSU installée avec succès !');
+  }
+  deferredPrompt = null;
+});
+
+dismissBtn?.addEventListener('click', () => {
+  banner.style.display = 'none';
+  localStorage.setItem('pwa-dismissed', '1');
+});
+
+// Afficher le tooltip iOS
+if (isIOS && !isInStandaloneMode && !localStorage.getItem('ios-tip-shown')) {
+  setTimeout(() => {
+    document.getElementById('ios-tip').style.display = 'block';
+    localStorage.setItem('ios-tip-shown', '1');
+  }, 4000);
+}
+
+// App installée
+window.addEventListener('appinstalled', () => {
+  deferredPrompt = null;
+  banner.style.display = 'none';
+  showToastPWA('✅ NEO-SUSU installée ! Retrouvez-la sur votre écran d\'accueil.');
+  console.log('✅ NEO-SUSU PWA installée');
+});
+
+function showToastPWA(msg) {
+  const t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;top:24px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#D4A820,#8B6500);color:#030407;padding:12px 24px;border-radius:40px;font-family:Syne,sans-serif;font-size:14px;font-weight:700;z-index:10000;box-shadow:0 8px 32px rgba(212,168,32,.4);animation:slideUp .3s ease;';
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 4000);
+}
+</script>
+</body>
+</html>
