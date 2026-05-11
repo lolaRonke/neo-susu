@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>NEO-SUSU — Inscription</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-152.png">
+<meta name="theme-color" content="#0a0a1a">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600;700&family=Syne:wght@600;700&display=swap" rel="stylesheet">
+
+<!-- Bibliothèque Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+  :root {
+    --gold: #d4af37;
+    --gold-light: #f4d97a;
+    --void: #0a0a1a;
+    --deep: #1a1a2e;
+    --text: #f5f5f5;
+    --text-dim: rgba(245,245,245,0.6);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(ellipse at top, var(--deep) 0%, var(--void) 70%);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .signup-container {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 24px;
+    padding: 32px 24px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  }
+
+  .logo-section {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .logo-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    border-radius: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--void);
+    margin-bottom: 16px;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+  }
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 12px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: var(--void);
+    border: none;
+    border-radius: 14px;
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 16px;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3); }
+  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .login-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .login-link a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .back-link {
+    display: inline-block;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  @keyframes slideDown {
+    from { transform: translate(-50%, -100%); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="signup-container">
+  <a href="index.html" class="back-link">← Retour</a>
+
+  <div class="logo-section">
+    <div class="logo-icon">N</div>
+    <h1>Créer mon compte</h1>
+    <p class="subtitle">L'épargne communautaire intelligente 🌍</p>
+  </div>
+
+  <form id="signupForm">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Prénom</label>
+        <input type="text" id="firstName" required placeholder="Mamadou">
+      </div>
+      <div class="form-group">
+        <label>Nom</label>
+        <input type="text" id="lastName" required placeholder="Diallo">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Pays</label>
+      <select id="country" required>
+        <option value="">Sélectionner</option>
+        <option value="SEN">🇸🇳 Sénégal</option>
+        <option value="CIV">🇨🇮 Côte d'Ivoire</option>
+        <option value="MLI">🇲🇱 Mali</option>
+        <option value="NGA">🇳🇬 Nigeria</option>
+        <option value="COD">🇨🇩 RD Congo</option>
+        <option value="CMR">🇨🇲 Cameroun</option>
+        <option value="BEN">🇧🇯 Bénin</option>
+        <option value="BFA">🇧🇫 Burkina Faso</option>
+        <option value="GHA">🇬🇭 Ghana</option>
+        <option value="FRA">🇫🇷 France</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Téléphone (Mobile Money)</label>
+      <input type="tel" id="phone" required placeholder="+221 77 123 45 67">
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="email" required placeholder="ton@email.com">
+    </div>
+
+    <div class="form-group">
+      <label>Mot de passe (8 caractères min.)</label>
+      <input type="password" id="password" required minlength="8" placeholder="••••••••">
+    </div>
+
+    <button type="submit" class="btn-primary" id="submitBtn">
+      Créer mon compte ✦
+    </button>
+  </form>
+
+  <div class="login-link">
+    Déjà membre ? <a href="login.html">Se connecter</a>
+  </div>
+</div>
+
+<script src="supabase-config.js"></script>
+<script src="auth.js"></script>
+<script>
+  document.getElementById('signupForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Création en cours...';
+
+    const result = await signUp(
+      document.getElementById('email').value,
+      document.getElementById('password').value,
+      document.getElementById('firstName').value,
+      document.getElementById('lastName').value,
+      document.getElementById('phone').value,
+      document.getElementById('country').value
+    );
+
+    if (result.success) {
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 2000);
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Créer mon compte ✦';
+    }
+  });
+</script>
+</body>
+</html>
