@@ -4,30 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NEO-SUSU — Rejoindre une tontine</title>
-<meta name="theme-color" content="#000000">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#07080F">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./neo-susu.css">
 <style>
-  :root { --void: #000000; --deep: #1a1a2e; --gold: #D4AF37; --gold-light: #F4D03F; --text-light: #F5F5F5; --text-dim: #B0B0B0; --green: #10b981; --blue-accent: #4FC3F7; }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', sans-serif; background: radial-gradient(ellipse at top, var(--deep) 0%, var(--void) 70%); color: var(--text-light); min-height: 100vh; padding: 30px 20px 60px; }
-  .container { max-width: 500px; margin: 0 auto; }
-  .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-dim); text-decoration: none; font-size: 14px; margin-bottom: 24px; }
-  .back-link:hover { color: var(--gold); }
-  .page-title { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: var(--gold); margin-bottom: 8px; }
-  .page-subtitle { color: var(--text-dim); margin-bottom: 30px; font-size: 14px; }
-  .code-input { width: 100%; padding: 24px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 16px; color: var(--gold); font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 700; text-align: center; letter-spacing: 8px; text-transform: uppercase; }
+  .code-input { width: 100%; padding: 24px; background: var(--raised); border: 2px solid rgba(212,168,32,0.3); border-radius: 16px; color: var(--gold); font-family: var(--ff-s); font-size: 32px; font-weight: 700; text-align: center; letter-spacing: 8px; text-transform: uppercase; }
   .code-input:focus { outline: none; border-color: var(--gold); }
-  .btn-submit { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); color: var(--void); border: none; border-radius: 50px; font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 20px; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); }
-  .divider { display: flex; align-items: center; gap: 12px; margin: 30px 0; color: var(--text-dim); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
-  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.1); }
-  .qr-section { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 24px; text-align: center; }
+  .qr-section { background: var(--card); border: 1px solid var(--stroke); border-radius: 16px; padding: 24px; text-align: center; }
   .qr-icon { font-size: 64px; margin-bottom: 12px; }
-  .qr-text { color: var(--text-dim); font-size: 13px; line-height: 1.5; }
-  .btn-secondary { display: inline-block; margin-top: 16px; padding: 12px 24px; background: transparent; border: 1px solid var(--blue-accent); color: var(--blue-accent); border-radius: 50px; text-decoration: none; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; }
-  .success-msg { display: none; background: rgba(16, 185, 129, 0.15); border: 1px solid var(--green); color: var(--green); padding: 16px; border-radius: 14px; text-align: center; margin-top: 16px; }
-  .success-msg.active { display: block; }
-  .info-box { background: rgba(212, 175, 55, 0.08); border-left: 3px solid var(--gold); padding: 12px 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; color: var(--text-dim); }
-  label { display: block; font-size: 13px; color: var(--text-dim); margin-bottom: 10px; font-weight: 500; text-align: center; }
+  .qr-text { color: var(--text2); font-size: 13px; line-height: 1.5; margin-bottom: 16px; }
+  .btn-camera { display: inline-block; padding: 12px 24px; background: transparent; border: 1px solid var(--sky); color: var(--sky); border-radius: 18px; text-decoration: none; font-family: var(--ff-b); font-size: 14px; font-weight: 600; cursor: pointer; }
+  .label-center { text-align: center; }
 </style>
 </head>
 <body>
@@ -42,22 +29,22 @@
   </div>
 
   <form id="joinForm">
-    <label>Code d'invitation</label>
+    <label class="label-center">Code d'invitation</label>
     <input type="text" class="code-input" id="inviteCode" placeholder="XXXXXX" maxlength="8" required>
     <button type="submit" class="btn-submit">Rejoindre ✦</button>
   </form>
 
-  <div class="divider">ou</div>
+  <div class="section-title"><span>Ou scanner un QR Code</span></div>
 
   <div class="qr-section">
     <div class="qr-icon">📷</div>
     <p class="qr-text">Scanne le QR Code de la tontine<br>pour rejoindre directement</p>
-    <a href="#" class="btn-secondary" onclick="alert('Fonction QR Code disponible avec un vrai compte'); return false;">Ouvrir la caméra</a>
+    <a href="#" class="btn-camera" onclick="alert('Fonction QR Code disponible avec un vrai compte'); return false;">Ouvrir la caméra</a>
   </div>
 
   <div class="success-msg" id="successMsg">
     ✅ <strong>Tu as rejoint la tontine !</strong><br>
-    <small>Redirection vers le tableau de bord...</small>
+    <small style="font-weight: 400; opacity: 0.8;">Redirection vers le tableau de bord...</small>
   </div>
 </div>
 

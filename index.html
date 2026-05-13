@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#000000">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#07080F">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>NEO-SUSU — L'épargne communautaire intelligente</title>
@@ -11,34 +11,39 @@
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
-<!-- Polices Google -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --void: #000000;
-    --gold: #D4AF37;
-    --gold-light: #F4D03F;
-    --gold-glow: rgba(212, 175, 55, 0.4);
-    --text-light: #F5F5F5;
-    --text-dim: #B0B0B0;
-    --blue-accent: #4FC3F7;
+    --void: #07080F;
+    --deep: #0C0E1C;
+    --surf: #111526;
+    --card: #181D32;
+    --raised: #1E2440;
+    --gold: #D4A820;
+    --gold2: #B8860B;
+    --gold-pale: #F5E09A;
+    --em: #1CC48A;
+    --red: #E8445A;
+    --sky: #4AA8FF;
+    --text: #EEF1FF;
+    --text2: #8892BB;
+    --text3: #3E4868;
+    --stroke: rgba(255,255,255,0.06);
+    --stroke2: rgba(255,255,255,0.12);
+    --ff-s: "Cormorant Garamond", serif;
+    --ff-b: "Outfit", system-ui, sans-serif;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
   html, body {
     min-height: 100%;
     background: var(--void) !important;
-    color: var(--text-light) !important;
-    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--text) !important;
+    font-family: var(--ff-b);
   }
 
   .splash-container {
@@ -56,18 +61,15 @@
   .splash-container::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(212,168,32,0.25) 0%, transparent 70%);
     filter: blur(60px);
     z-index: 0;
     pointer-events: none;
   }
 
-  /* Boutons du haut Mobile/Admin */
   .top-switcher {
     display: flex;
     gap: 12px;
@@ -80,28 +82,25 @@
     align-items: center;
     gap: 8px;
     padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--card);
+    border: 1px solid var(--stroke2);
     border-radius: 30px;
-    color: var(--text-light) !important;
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
+    color: var(--text) !important;
+    font-family: var(--ff-b);
+    font-weight: 700;
     font-size: 14px;
     cursor: pointer;
     text-decoration: none;
     transition: all 0.3s ease;
   }
 
-  .switch-btn.admin {
-    color: var(--blue-accent) !important;
-  }
+  .switch-btn.admin { color: var(--sky) !important; }
 
   .switch-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--raised);
     transform: translateY(-2px);
   }
 
-  /* Logo central doré */
   .logo-section {
     display: flex;
     flex-direction: column;
@@ -113,51 +112,46 @@
     padding: 20px 0;
   }
 
-  .logo-icon {
+  .splash-logo {
     width: 110px;
     height: 110px;
-    background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 50%, #D4AF37 100%) !important;
     border-radius: 26px;
+    background: linear-gradient(135deg, var(--gold), var(--gold2)) !important;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Syne', sans-serif;
-    font-size: 66px;
-    font-weight: 800;
+    font-family: var(--ff-s);
+    font-size: 64px;
+    font-weight: 700;
     color: var(--void) !important;
-    box-shadow:
-      0 0 40px rgba(212, 175, 55, 0.6),
-      0 0 80px rgba(212, 175, 55, 0.3),
-      inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 16px 48px rgba(212,168,32,0.45);
     margin-bottom: 24px;
     animation: pulse-glow 3s ease-in-out infinite;
   }
 
   @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.6), 0 0 80px rgba(212, 175, 55, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.3); }
-    50% { box-shadow: 0 0 60px rgba(212, 175, 55, 0.8), 0 0 100px rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4); }
+    0%, 100% { box-shadow: 0 16px 48px rgba(212,168,32,0.45); }
+    50% { box-shadow: 0 16px 60px rgba(212,168,32,0.65); }
   }
 
-  .app-title {
-    font-family: 'Syne', sans-serif;
+  .splash-name {
+    font-family: var(--ff-s);
     font-size: 44px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 50%, #D4AF37 100%);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--gold-pale), var(--gold));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    color: #D4AF37 !important;
+    color: var(--gold) !important;
     margin-bottom: 10px;
-    text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+    letter-spacing: 1px;
   }
 
-  .app-subtitle {
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
+  .splash-sub {
+    font-family: var(--ff-b);
+    font-size: 14px;
     font-weight: 400;
-    color: var(--text-light) !important;
-    opacity: 0.9;
+    color: var(--text2) !important;
     margin-bottom: 24px;
     letter-spacing: 0.3px;
   }
@@ -174,11 +168,8 @@
     cursor: pointer;
   }
 
-  .flags-row span:hover {
-    transform: scale(1.2);
-  }
+  .flags-row span:hover { transform: scale(1.2); }
 
-  /* Boutons d'action */
   .actions {
     display: flex;
     flex-direction: column;
@@ -190,34 +181,34 @@
 
   .btn-primary {
     padding: 17px 24px;
-    background: linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 100%) !important;
+    background: linear-gradient(135deg, var(--gold-pale) 0%, var(--gold) 100%) !important;
     color: var(--void) !important;
     border: none;
-    border-radius: 50px;
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
+    border-radius: 18px;
+    font-family: var(--ff-b);
+    font-size: 15px;
     font-weight: 700;
     cursor: pointer;
     text-decoration: none;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4), 0 0 60px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 16px 48px rgba(212,168,32,0.45);
     transition: all 0.3s ease;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
   }
 
   .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5), 0 0 80px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 20px 60px rgba(212,168,32,0.55);
   }
 
   .btn-secondary {
     padding: 17px 24px;
-    background: #FFFFFF !important;
-    color: var(--blue-accent) !important;
-    border: none;
-    border-radius: 50px;
-    font-family: 'Syne', sans-serif;
-    font-size: 15px;
+    background: var(--card) !important;
+    color: var(--sky) !important;
+    border: 1px solid var(--stroke2);
+    border-radius: 18px;
+    font-family: var(--ff-b);
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     text-decoration: none;
@@ -226,18 +217,17 @@
   }
 
   .btn-secondary:hover {
+    background: var(--raised);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(79, 195, 247, 0.3);
   }
 
-  /* NOUVEAU : Bouton mode démo */
   .btn-demo {
     padding: 14px 24px;
     background: transparent !important;
     color: var(--gold) !important;
     border: 1.5px solid var(--gold);
-    border-radius: 50px;
-    font-family: 'Syne', sans-serif;
+    border-radius: 18px;
+    font-family: var(--ff-b);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -252,9 +242,8 @@
   }
 
   .btn-demo:hover {
-    background: rgba(212, 175, 55, 0.1) !important;
+    background: rgba(212,168,32,0.08) !important;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
   }
 
   .btn-demo .badge {
@@ -267,30 +256,29 @@
     letter-spacing: 0.5px;
   }
 
-  /* Séparateur OU */
   .divider {
     display: flex;
     align-items: center;
     gap: 12px;
     margin: 8px 0 4px;
-    color: var(--text-dim);
-    font-size: 12px;
-    font-family: 'Inter', sans-serif;
+    color: var(--text3);
+    font-size: 11px;
+    font-family: var(--ff-b);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
+    font-weight: 700;
   }
 
-  .divider::before,
-  .divider::after {
+  .divider::before, .divider::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--stroke);
   }
 
   @media (max-width: 380px) {
-    .app-title { font-size: 38px; }
-    .logo-icon { width: 95px; height: 95px; font-size: 56px; }
+    .splash-name { font-size: 38px; }
+    .splash-logo { width: 95px; height: 95px; font-size: 56px; }
     .flags-row { gap: 14px; font-size: 26px; }
   }
 
@@ -299,10 +287,15 @@
     animation: fadeInUp 0.8s ease forwards;
   }
 
-  .logo-icon { animation-delay: 0.1s; }
-  .app-title { animation-delay: 0.3s; }
-  .app-subtitle { animation-delay: 0.5s; }
+  .splash-logo { animation: splPop 0.6s cubic-bezier(.34,1.56,.64,1) both, pulse-glow 3s ease-in-out 1s infinite; }
+  .splash-name { animation-delay: 0.3s; }
+  .splash-sub { animation-delay: 0.5s; }
   .flags-row { animation-delay: 0.7s; }
+
+  @keyframes splPop {
+    from { opacity: 0; transform: scale(0.7); }
+    to { opacity: 1; transform: scale(1); }
+  }
 
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(20px); }
@@ -314,17 +307,15 @@
 
 <div class="splash-container">
 
-  <!-- Boutons du haut : Mobile / Admin -->
   <div class="top-switcher">
     <a href="./index.html" class="switch-btn">📱 Mobile</a>
     <a href="./admin.html" class="switch-btn admin">💻 Admin</a>
   </div>
 
-  <!-- Section centrale : logo + titre -->
   <div class="logo-section">
-    <div class="logo-icon">N</div>
-    <h1 class="app-title">NEO-SUSU</h1>
-    <p class="app-subtitle">L'épargne communautaire intelligente 🌍</p>
+    <div class="splash-logo">N</div>
+    <h1 class="splash-name">NEO-SUSU</h1>
+    <p class="splash-sub">L'épargne communautaire intelligente 🌍</p>
 
     <div class="flags-row">
       <span title="France">🇫🇷</span>
@@ -335,7 +326,6 @@
     </div>
   </div>
 
-  <!-- Boutons d'action en bas -->
   <div class="actions">
     <a href="./signup.html" class="btn-primary">
       Commencer — C'est gratuit ✦
@@ -347,7 +337,6 @@
 
     <div class="divider">ou</div>
 
-    <!-- NOUVEAU : Accès direct sans compte -->
     <a href="./dashboard.html?mode=demo" class="btn-demo" id="demoBtn">
       <span>👁️ Découvrir l'app sans compte</span>
       <span class="badge">DÉMO</span>
@@ -357,28 +346,21 @@
 </div>
 
 <script>
-  // Service Worker pour PWA
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('SW enregistré'))
-        .catch(err => console.log('SW erreur:', err));
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
     });
   }
 
-  // Mode démo : crée une session locale sans Supabase
-  document.getElementById('demoBtn').addEventListener('click', function(e) {
+  document.getElementById('demoBtn').addEventListener('click', function() {
     const demoUser = {
       id: 'demo-user-' + Date.now(),
       first_name: 'Visiteur',
       last_name: 'Démo',
       email: 'demo@neo-susu.com',
-      country: '🌍',
-      is_demo: true,
-      created_at: new Date().toISOString()
+      is_demo: true
     };
     sessionStorage.setItem('neo_susu_demo_user', JSON.stringify(demoUser));
-    console.log('Mode démo activé');
   });
 </script>
 

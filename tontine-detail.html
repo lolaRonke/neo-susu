@@ -4,37 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NEO-SUSU — Détail tontine</title>
-<meta name="theme-color" content="#000000">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#07080F">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./neo-susu.css">
 <style>
-  :root { --void: #000000; --deep: #1a1a2e; --gold: #D4AF37; --gold-light: #F4D03F; --text-light: #F5F5F5; --text-dim: #B0B0B0; --green: #10b981; --red: #ef4444; --blue-accent: #4FC3F7; }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', sans-serif; background: radial-gradient(ellipse at top, var(--deep) 0%, var(--void) 70%); color: var(--text-light); min-height: 100vh; padding: 30px 20px 60px; }
-  .container { max-width: 500px; margin: 0 auto; }
-  .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-dim); text-decoration: none; font-size: 14px; margin-bottom: 24px; }
-  .back-link:hover { color: var(--gold); }
-  .tontine-header { background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(26, 26, 46, 0.8) 100%); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 24px; padding: 28px 24px; margin-bottom: 24px; }
-  .tontine-title { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: var(--gold); margin-bottom: 6px; }
-  .tontine-meta { color: var(--text-dim); font-size: 13px; margin-bottom: 16px; }
+  .tontine-header { background: linear-gradient(135deg, rgba(212,168,32,0.12) 0%, var(--card) 100%); border: 1px solid rgba(212,168,32,0.25); border-radius: 24px; padding: 28px 24px; margin-bottom: 24px; }
+  .tontine-title { font-family: var(--ff-s); font-size: 28px; font-weight: 700; background: linear-gradient(135deg, var(--gold-pale), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px; letter-spacing: 0.5px; }
+  .tontine-meta { color: var(--text2); font-size: 13px; margin-bottom: 16px; font-weight: 500; }
   .key-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .key-stat { background: rgba(255, 255, 255, 0.05); padding: 14px; border-radius: 12px; }
-  .key-stat-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; }
-  .key-stat-value { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--text-light); }
-  .section-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; margin: 30px 0 14px; }
-  .member-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 14px; }
-  .member-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); color: var(--void); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 700; flex-shrink: 0; }
+  .key-stat { background: var(--raised); padding: 14px; border-radius: 14px; }
+  .key-stat-label { font-size: 10px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; font-weight: 700; }
+  .key-stat-value { font-family: var(--ff-s); font-size: 20px; font-weight: 700; color: var(--text); }
+  .member-card { background: var(--card); border: 1px solid var(--stroke); border-radius: 14px; padding: 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 14px; }
+  .member-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold2)); color: var(--void); display: flex; align-items: center; justify-content: center; font-family: var(--ff-s); font-size: 20px; font-weight: 700; flex-shrink: 0; }
   .member-info { flex: 1; }
-  .member-name { font-weight: 600; font-size: 15px; margin-bottom: 2px; }
-  .member-detail { font-size: 12px; color: var(--text-dim); }
-  .member-status { font-size: 10px; padding: 4px 10px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
-  .status-paid { background: rgba(16, 185, 129, 0.15); color: var(--green); }
-  .status-pending { background: rgba(212, 175, 55, 0.15); color: var(--gold); }
-  .status-late { background: rgba(239, 68, 68, 0.15); color: var(--red); }
-  .status-received { background: rgba(79, 195, 247, 0.15); color: var(--blue-accent); }
+  .member-name { font-weight: 700; font-size: 15px; margin-bottom: 2px; }
+  .member-detail { font-size: 12px; color: var(--text2); }
+  .member-status { font-size: 10px; padding: 4px 10px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+  .status-paid { background: rgba(28,196,138,0.15); color: var(--em); }
+  .status-pending { background: rgba(212,168,32,0.15); color: var(--gold); }
+  .status-late { background: rgba(232,68,90,0.15); color: var(--red); }
+  .status-received { background: rgba(74,168,255,0.15); color: var(--sky); }
   .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
-  .btn { padding: 14px 20px; border: none; border-radius: 50px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; text-align: center; }
-  .btn-primary { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); color: var(--void); }
-  .btn-secondary { background: rgba(255, 255, 255, 0.06); color: var(--text-light); border: 1px solid rgba(255, 255, 255, 0.1); }
 </style>
 </head>
 <body>
@@ -52,7 +43,7 @@
     </div>
   </div>
 
-  <div class="section-title">Membres et paiements</div>
+  <div class="section-title"><span>Membres et paiements</span></div>
 
   <div class="member-card">
     <div class="member-avatar">A</div>
