@@ -1,128 +1,176 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" id="html-root">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>NEO-SUSU — Mon espace</title>
 <meta name="theme-color" content="#07080F">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+<title>NEO-SUSU — Mon espace</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./neo-susu.css">
 <style>
-  body { padding: 0 0 40px; }
-  .container { padding: 30px 20px; }
-  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-  .welcome { flex: 1; }
-  .welcome-text { font-size: 13px; color: var(--text2); margin-bottom: 4px; font-weight: 500; }
-  .user-name { font-family: var(--ff-s); font-size: 30px; font-weight: 700; background: linear-gradient(135deg, var(--gold-pale), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 0.5px; }
-  .avatar { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold2)); display: flex; align-items: center; justify-content: center; color: var(--void); font-family: var(--ff-s); font-size: 24px; font-weight: 700; cursor: pointer; text-decoration: none; box-shadow: 0 8px 24px rgba(212,168,32,0.35); }
-  .kyc-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; margin-top: 6px; background: rgba(74,168,255,0.15); color: var(--sky); font-family: var(--ff-b); }
-  .balance-card { background: linear-gradient(135deg, rgba(212,168,32,0.12) 0%, var(--card) 100%); border: 1px solid rgba(212,168,32,0.25); border-radius: 24px; padding: 28px 24px; margin-bottom: 24px; position: relative; overflow: hidden; }
-  .balance-card::before { content: ''; position: absolute; top: -50%; right: -30%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(212,168,32,0.3) 0%, transparent 70%); filter: blur(40px); }
-  .balance-label { font-size: 11px; color: var(--text2); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; position: relative; z-index: 1; }
-  .balance-amount { font-family: var(--ff-s); font-size: 44px; font-weight: 700; background: linear-gradient(135deg, var(--gold-pale), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; position: relative; z-index: 1; letter-spacing: 0.5px; }
-  .balance-currency { font-size: 13px; color: var(--text2); font-weight: 500; position: relative; z-index: 1; }
-  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
-  .stat-card { background: var(--card); border: 1px solid var(--stroke); border-radius: 16px; padding: 16px 12px; text-align: center; }
-  .stat-value { font-family: var(--ff-s); font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
-  .stat-label { font-size: 10px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
-  .tontine-card { background: var(--card); border: 1px solid var(--stroke); border-radius: 16px; padding: 18px; margin-bottom: 12px; cursor: pointer; transition: all 0.3s; text-decoration: none; display: block; color: inherit; }
-  .tontine-card:hover { transform: translateY(-2px); border-color: rgba(212,168,32,0.3); background: var(--raised); }
-  .tontine-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; }
-  .tontine-name { font-family: var(--ff-b); font-size: 16px; font-weight: 700; color: var(--text); }
-  .tontine-status { font-size: 10px; padding: 3px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
-  .status-active { background: rgba(28,196,138,0.15); color: var(--em); }
-  .status-waiting { background: rgba(212,168,32,0.15); color: var(--gold); }
-  .tontine-info { display: flex; justify-content: space-between; font-size: 12px; color: var(--text2); margin-bottom: 10px; }
-  .tontine-info strong { font-family: var(--ff-s); color: var(--gold); font-weight: 700; font-size: 14px; }
-  .tontine-progress { height: 6px; background: var(--raised); border-radius: 10px; overflow: hidden; }
-  .tontine-progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--em)); border-radius: 10px; }
-  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+  body{padding:0 0 40px;}
+  .container{padding:30px 20px;}
+  .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
+  .welcome-text{font-size:13px;color:var(--text2);margin-bottom:4px;font-weight:500;}
+  .user-name{font-family:var(--ff-s);font-size:30px;font-weight:700;background:linear-gradient(135deg,var(--gold-pale),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.5px;}
+  .avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;color:var(--void);font-family:var(--ff-s);font-size:24px;font-weight:700;cursor:pointer;text-decoration:none;box-shadow:0 8px 24px rgba(212,168,32,.35);}
+  .kyc-badge{display:inline-block;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;margin-top:6px;background:rgba(74,168,255,.15);color:var(--sky);}
+  .balance-card{background:linear-gradient(135deg,rgba(212,168,32,.12),var(--card));border:1px solid rgba(212,168,32,.25);border-radius:24px;padding:28px 24px;margin-bottom:24px;position:relative;overflow:hidden;}
+  .balance-card::before{content:"";position:absolute;top:-50%;right:-30%;width:200px;height:200px;background:radial-gradient(circle,rgba(212,168,32,.3),transparent 70%);filter:blur(40px);}
+  .balance-label{font-size:11px;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:1.2px;font-weight:700;position:relative;z-index:1;}
+  .balance-amount{font-family:var(--ff-s);font-size:44px;font-weight:700;background:linear-gradient(135deg,var(--gold-pale),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px;position:relative;z-index:1;letter-spacing:.5px;}
+  .balance-currency{font-size:13px;color:var(--text2);font-weight:500;position:relative;z-index:1;}
+  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;}
+  .stat-card{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:16px 12px;text-align:center;}
+  .stat-value{font-family:var(--ff-s);font-size:26px;font-weight:700;color:var(--text);margin-bottom:2px;}
+  .stat-label{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;}
+  .tontine-card{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:18px;margin-bottom:12px;cursor:pointer;transition:all .3s;text-decoration:none;display:block;color:inherit;}
+  .tontine-card:hover{transform:translateY(-2px);border-color:rgba(212,168,32,.3);background:var(--raised);}
+  .tontine-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px;}
+  .tontine-name{font-size:16px;font-weight:700;color:var(--text);}
+  .tontine-status{font-size:10px;padding:3px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
+  .status-active{background:rgba(28,196,138,.15);color:var(--em);}
+  .status-waiting{background:rgba(212,168,32,.15);color:var(--gold);}
+  .tontine-info{display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin-bottom:10px;}
+  .tontine-info strong{font-family:var(--ff-s);color:var(--gold);font-weight:700;font-size:14px;}
+  .tontine-progress{height:6px;background:var(--raised);border-radius:10px;overflow:hidden;}
+  .tontine-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--em));border-radius:10px;}
+  .actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+  /* lang switcher */
+  .lang-bar{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--stroke2);border-radius:40px;padding:5px 10px;position:fixed;top:16px;right:16px;z-index:200;}
+  .lang-flag{font-size:22px;cursor:pointer;border-radius:50%;padding:3px 5px;transition:all .25s;border:2px solid transparent;line-height:1;}
+  .lang-flag.active{border-color:var(--gold);background:rgba(212,168,32,.12);transform:scale(1.12);}
+  .lang-sep{width:1px;height:16px;background:var(--stroke2);}
 </style>
 </head>
 <body>
 
+<!-- Language switcher -->
+<div class="lang-bar">
+  <span class="lang-flag active" id="flag-fr" onclick="setLang('fr')" title="Francais">🇫🇷</span>
+  <div class="lang-sep"></div>
+  <span class="lang-flag" id="flag-en" onclick="setLang('en')" title="English">🇬🇧</span>
+</div>
+
 <div class="demo-banner" id="demoBanner">
-  <span>👁️ MODE DÉMO — Les données sont fictives</span>
-  <a href="./signup.html" class="cta-signup">Créer mon vrai compte →</a>
+  <span data-fr="MODE DEMO — Les donnees sont fictives" data-en="DEMO MODE — Data is fictitious">MODE DEMO — Les donnees sont fictives</span>
+  <a href="./signup.html" class="cta-signup" data-fr="Creer mon vrai compte" data-en="Create my real account">Creer mon vrai compte →</a>
 </div>
 
 <div class="container">
   <div class="header">
     <div class="welcome">
-      <div class="welcome-text">Bonjour 👋</div>
-      <div class="user-name">Aïcha Diallo</div>
-      <span class="kyc-badge">👁️ Mode démo</span>
+      <div class="welcome-text" data-fr="Bonjour" data-en="Hello">Bonjour 👋</div>
+      <div class="user-name">Aicha Diallo</div>
+      <span class="kyc-badge" data-fr="Mode demo" data-en="Demo mode">👁️ Mode demo</span>
     </div>
     <a href="./profile.html" class="avatar">A</a>
   </div>
 
   <div class="balance-card">
-    <div class="balance-label">Solde total épargné</div>
+    <div class="balance-label" data-fr="Solde total epargne" data-en="Total savings balance">Solde total epargne</div>
     <div class="balance-amount">245 000</div>
     <div class="balance-currency">FCFA</div>
   </div>
 
   <div class="stats-grid">
-    <div class="stat-card"><div class="stat-value">3</div><div class="stat-label">Tontines</div></div>
-    <div class="stat-card"><div class="stat-value">24</div><div class="stat-label">Membres</div></div>
-    <div class="stat-card"><div class="stat-value">4/10</div><div class="stat-label">Mon tour</div></div>
+    <div class="stat-card"><div class="stat-value">3</div><div class="stat-label" data-fr="Tontines" data-en="Tontines">Tontines</div></div>
+    <div class="stat-card"><div class="stat-value">24</div><div class="stat-label" data-fr="Membres" data-en="Members">Membres</div></div>
+    <div class="stat-card"><div class="stat-value">4/10</div><div class="stat-label" data-fr="Mon tour" data-en="My turn">Mon tour</div></div>
   </div>
 
   <div class="section-title">
-    <span>Mes tontines</span>
+    <span data-fr="Mes tontines" data-en="My tontines">Mes tontines</span>
     <span class="badge-demo">EXEMPLES</span>
   </div>
 
   <a href="./tontine-detail.html?id=1" class="tontine-card">
     <div class="tontine-header">
-      <div class="tontine-name">🌟 Tontine Famille Diallo</div>
-      <span class="tontine-status status-active">Active</span>
+      <div class="tontine-name" data-fr="Tontine Famille Diallo" data-en="Diallo Family Tontine">🌟 Tontine Famille Diallo</div>
+      <span class="tontine-status status-active" data-fr="Active" data-en="Active">Active</span>
     </div>
-    <div class="tontine-info"><span>Cotisation : <strong>25 000 FCFA</strong></span><span>8/10 membres</span></div>
-    <div class="tontine-info"><span>Mensuelle</span><span><strong>80%</strong></span></div>
-    <div class="tontine-progress"><div class="tontine-progress-fill" style="width: 80%"></div></div>
+    <div class="tontine-info">
+      <span><span data-fr="Cotisation" data-en="Contribution">Cotisation</span> : <strong>25 000 FCFA</strong></span>
+      <span>8/10 <span data-fr="membres" data-en="members">membres</span></span>
+    </div>
+    <div class="tontine-info">
+      <span data-fr="Mensuelle" data-en="Monthly">Mensuelle</span>
+      <span><strong>80%</strong></span>
+    </div>
+    <div class="tontine-progress"><div class="tontine-progress-fill" style="width:80%"></div></div>
   </a>
 
   <a href="./tontine-detail.html?id=2" class="tontine-card">
     <div class="tontine-header">
-      <div class="tontine-name">💼 Collègues du bureau</div>
-      <span class="tontine-status status-active">Active</span>
+      <div class="tontine-name" data-fr="Collegues du bureau" data-en="Office colleagues">💼 Collegues du bureau</div>
+      <span class="tontine-status status-active" data-fr="Active" data-en="Active">Active</span>
     </div>
-    <div class="tontine-info"><span>Cotisation : <strong>50 000 FCFA</strong></span><span>6/6 membres</span></div>
-    <div class="tontine-info"><span>Hebdomadaire</span><span><strong>100%</strong></span></div>
-    <div class="tontine-progress"><div class="tontine-progress-fill" style="width: 100%"></div></div>
+    <div class="tontine-info">
+      <span><span data-fr="Cotisation" data-en="Contribution">Cotisation</span> : <strong>50 000 FCFA</strong></span>
+      <span>6/6 <span data-fr="membres" data-en="members">membres</span></span>
+    </div>
+    <div class="tontine-info">
+      <span data-fr="Hebdomadaire" data-en="Weekly">Hebdomadaire</span>
+      <span><strong>100%</strong></span>
+    </div>
+    <div class="tontine-progress"><div class="tontine-progress-fill" style="width:100%"></div></div>
   </a>
 
   <a href="./tontine-detail.html?id=3" class="tontine-card">
     <div class="tontine-header">
-      <div class="tontine-name">🎓 Projet scolarité</div>
-      <span class="tontine-status status-waiting">En attente</span>
+      <div class="tontine-name" data-fr="Projet scolarite" data-en="Education project">🎓 Projet scolarite</div>
+      <span class="tontine-status status-waiting" data-fr="En attente" data-en="Pending">En attente</span>
     </div>
-    <div class="tontine-info"><span>Cotisation : <strong>10 000 FCFA</strong></span><span>4/8 membres</span></div>
-    <div class="tontine-info"><span>Bimensuelle</span><span><strong>50%</strong></span></div>
-    <div class="tontine-progress"><div class="tontine-progress-fill" style="width: 50%"></div></div>
+    <div class="tontine-info">
+      <span><span data-fr="Cotisation" data-en="Contribution">Cotisation</span> : <strong>10 000 FCFA</strong></span>
+      <span>4/8 <span data-fr="membres" data-en="members">membres</span></span>
+    </div>
+    <div class="tontine-info">
+      <span data-fr="Bimensuelle" data-en="Biweekly">Bimensuelle</span>
+      <span><strong>50%</strong></span>
+    </div>
+    <div class="tontine-progress"><div class="tontine-progress-fill" style="width:50%"></div></div>
   </a>
 
   <div class="actions">
-    <a href="./create-tontine.html" class="btn btn-primary">+ Créer une tontine</a>
-    <a href="./join-tontine.html" class="btn btn-secondary">Rejoindre</a>
+    <a href="./create-tontine.html" class="btn btn-primary" data-fr="+ Creer une tontine" data-en="+ Create a tontine">+ Creer une tontine</a>
+    <a href="./join-tontine.html" class="btn btn-secondary" data-fr="Rejoindre" data-en="Join">Rejoindre</a>
   </div>
 
-  <button class="logout-btn" onclick="handleLogout()">Se déconnecter</button>
+  <button class="logout-btn" onclick="handleLogout()" data-fr="Se deconnecter" data-en="Sign out">Se deconnecter</button>
 </div>
 
 <script>
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('mode') === 'demo' || sessionStorage.getItem('neo_susu_demo_user')) {
-    document.getElementById('demoBanner').classList.add('active');
-  }
+let currentLang = localStorage.getItem("ns_lang") || "fr";
 
-  function handleLogout() {
-    if (confirm('Voulez-vous vraiment vous déconnecter ?')) {
-      sessionStorage.removeItem('neo_susu_demo_user');
-      window.location.href = './index.html';
-    }
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem("ns_lang", lang);
+  document.getElementById("html-root").lang = lang;
+  document.title = lang === "en" ? "NEO-SUSU — My Space" : "NEO-SUSU — Mon espace";
+  document.querySelectorAll("[data-fr]").forEach(el => {
+    const val = el.getAttribute("data-" + lang);
+    if (val) el.textContent = val;
+  });
+  document.getElementById("flag-fr").classList.toggle("active", lang === "fr");
+  document.getElementById("flag-en").classList.toggle("active", lang === "en");
+}
+setLang(currentLang);
+
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get("mode") === "demo" || sessionStorage.getItem("neo_susu_demo_user")) {
+  document.getElementById("demoBanner").classList.add("active");
+}
+function handleLogout() {
+  const msg = currentLang === "en" ? "Are you sure you want to sign out?" : "Voulez-vous vraiment vous deconnecter ?";
+  if (confirm(msg)) {
+    sessionStorage.removeItem("neo_susu_demo_user");
+    window.location.href = "./index.html";
   }
+}
 </script>
 </body>
 </html>

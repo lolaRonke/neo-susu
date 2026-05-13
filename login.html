@@ -1,60 +1,86 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" id="html-root">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEO-SUSU — Connexion</title>
 <meta name="theme-color" content="#07080F">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+<title>NEO-SUSU — Connexion</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./neo-susu.css">
+<style>.container{max-width:420px;}.logo-section{text-align:center;margin-bottom:30px;}.forgot{text-align:right;margin-top:-8px;margin-bottom:16px;}.forgot a{color:var(--sky);font-size:12px;text-decoration:none;font-weight:500;}</style>
+
 <style>
-  .container { max-width: 420px; }
-  .logo-section { text-align: center; margin-bottom: 30px; }
-  .forgot { text-align: right; margin-top: -8px; margin-bottom: 16px; }
-  .forgot a { color: var(--sky); font-size: 12px; text-decoration: none; font-weight: 500; }
+.lang-bar{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--stroke2);border-radius:40px;padding:5px 10px;position:fixed;top:16px;right:16px;z-index:200;}
+.lang-flag{font-size:22px;cursor:pointer;border-radius:50%;padding:3px 5px;transition:all .25s;border:2px solid transparent;line-height:1;}
+.lang-flag.active{border-color:var(--gold);background:rgba(212,168,32,.12);transform:scale(1.12);}
+.lang-sep{width:1px;height:16px;background:var(--stroke2);}
 </style>
 </head>
 <body>
-<div class="container">
-  <a href="./index.html" class="back-link">← Retour</a>
 
+<div class="lang-bar">
+  <span class="lang-flag active" id="flag-fr" onclick="setLang('fr')" title="Francais">🇫🇷</span>
+  <div class="lang-sep"></div>
+  <span class="lang-flag" id="flag-en" onclick="setLang('en')" title="English">🇬🇧</span>
+</div>
+<div class="container">
+  <a href="./index.html" class="back-link" data-fr="← Retour" data-en="← Back">← Retour</a>
   <div class="logo-section">
     <div class="logo-icon">N</div>
-    <h1 class="page-title">Connexion</h1>
-    <p class="page-subtitle">Heureux de te revoir 👋</p>
+    <h1 class="page-title" data-fr="Connexion" data-en="Sign In">Connexion</h1>
+    <p class="page-subtitle" data-fr="Heureux de te revoir" data-en="Welcome back">Heureux de te revoir 👋</p>
   </div>
-
   <div class="info-box">
-    🔧 <strong>Configuration en cours</strong> — La connexion sera bientôt connectée à la base de données.
+    🔧 <strong data-fr="Configuration en cours" data-en="Setup in progress">Configuration en cours</strong> —
+    <span data-fr="La connexion sera bientot connectee a la base de donnees." data-en="Login will be connected to the database soon.">La connexion sera bientot connectee a la base de donnees.</span>
   </div>
-
   <form id="loginForm">
     <div class="form-group">
-      <label>Email</label>
-      <input type="email" id="email" placeholder="ton@email.com" required>
+      <label data-fr="Email" data-en="Email">Email</label>
+      <input type="email" id="email" placeholder="you@email.com" required>
     </div>
-
     <div class="form-group">
-      <label>Mot de passe</label>
+      <label data-fr="Mot de passe" data-en="Password">Mot de passe</label>
       <input type="password" id="password" placeholder="••••••••" required>
     </div>
-
-    <div class="forgot"><a href="#" onclick="alert('Réinitialisation bientôt disponible'); return false;">Mot de passe oublié ?</a></div>
-
-    <button type="submit" class="btn-submit">Se connecter ✦</button>
+    <div class="forgot"><a href="#" onclick="return false;" data-fr="Mot de passe oublie ?" data-en="Forgot password?">Mot de passe oublie ?</a></div>
+    <button type="submit" class="btn-submit" data-fr="Se connecter" data-en="Sign in">Se connecter ✦</button>
   </form>
-
   <div class="signup-link">
-    Pas encore de compte ? <a href="./signup.html">Créer un compte</a>
+    <span data-fr="Pas encore de compte ?" data-en="No account yet?">Pas encore de compte ?</span>
+    <a href="./signup.html" data-fr="Creer un compte" data-en="Create account">Creer un compte</a>
   </div>
 </div>
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const msg = currentLang === "en"
+    ? "Login will be activated once Supabase is configured.\nUse demo mode from the home page."
+    : "La connexion sera activee une fois Supabase configure.\nUtilise le mode demo depuis l\'accueil.";
+  alert("🔧 " + msg);
+  window.location.href = "./index.html";
+});
+</script>
 
 <script>
-  document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('🔧 La connexion sera activée une fois Supabase configuré.\n\nEn attendant, tu peux utiliser le mode démo depuis l\'accueil.');
-    window.location.href = './index.html';
+let currentLang = localStorage.getItem("ns_lang") || "fr";
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem("ns_lang", lang);
+  document.getElementById("html-root").lang = lang;
+  document.querySelectorAll("[data-fr]").forEach(el => {
+    const val = el.getAttribute("data-" + lang);
+    if (val) el.textContent = val;
   });
+  const fFr = document.getElementById("flag-fr");
+  const fEn = document.getElementById("flag-en");
+  if(fFr) fFr.classList.toggle("active", lang === "fr");
+  if(fEn) fEn.classList.toggle("active", lang === "en");
+}
+setLang(currentLang);
 </script>
 </body>
 </html>
