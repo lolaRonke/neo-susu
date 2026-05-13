@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEO-SUSU — Détail tontine</title>
+<meta name="theme-color" content="#000000">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --void: #000000; --deep: #1a1a2e; --gold: #D4AF37; --gold-light: #F4D03F; --text-light: #F5F5F5; --text-dim: #B0B0B0; --green: #10b981; --red: #ef4444; --blue-accent: #4FC3F7; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: radial-gradient(ellipse at top, var(--deep) 0%, var(--void) 70%); color: var(--text-light); min-height: 100vh; padding: 30px 20px 60px; }
+  .container { max-width: 500px; margin: 0 auto; }
+  .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-dim); text-decoration: none; font-size: 14px; margin-bottom: 24px; }
+  .back-link:hover { color: var(--gold); }
+  .tontine-header { background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(26, 26, 46, 0.8) 100%); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 24px; padding: 28px 24px; margin-bottom: 24px; }
+  .tontine-title { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: var(--gold); margin-bottom: 6px; }
+  .tontine-meta { color: var(--text-dim); font-size: 13px; margin-bottom: 16px; }
+  .key-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .key-stat { background: rgba(255, 255, 255, 0.05); padding: 14px; border-radius: 12px; }
+  .key-stat-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; }
+  .key-stat-value { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--text-light); }
+  .section-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; margin: 30px 0 14px; }
+  .member-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 14px; }
+  .member-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); color: var(--void); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 700; flex-shrink: 0; }
+  .member-info { flex: 1; }
+  .member-name { font-weight: 600; font-size: 15px; margin-bottom: 2px; }
+  .member-detail { font-size: 12px; color: var(--text-dim); }
+  .member-status { font-size: 10px; padding: 4px 10px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+  .status-paid { background: rgba(16, 185, 129, 0.15); color: var(--green); }
+  .status-pending { background: rgba(212, 175, 55, 0.15); color: var(--gold); }
+  .status-late { background: rgba(239, 68, 68, 0.15); color: var(--red); }
+  .status-received { background: rgba(79, 195, 247, 0.15); color: var(--blue-accent); }
+  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+  .btn { padding: 14px 20px; border: none; border-radius: 50px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; text-align: center; }
+  .btn-primary { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); color: var(--void); }
+  .btn-secondary { background: rgba(255, 255, 255, 0.06); color: var(--text-light); border: 1px solid rgba(255, 255, 255, 0.1); }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="./dashboard.html" class="back-link">← Retour au tableau de bord</a>
+
+  <div class="tontine-header">
+    <div class="tontine-title">🌟 Tontine Famille Diallo</div>
+    <div class="tontine-meta">Créée le 15 janvier 2026 · Mensuelle</div>
+    <div class="key-stats">
+      <div class="key-stat"><div class="key-stat-label">Cotisation</div><div class="key-stat-value">25 000 FCFA</div></div>
+      <div class="key-stat"><div class="key-stat-label">Pot total</div><div class="key-stat-value">250 000 FCFA</div></div>
+      <div class="key-stat"><div class="key-stat-label">Membres</div><div class="key-stat-value">8 / 10</div></div>
+      <div class="key-stat"><div class="key-stat-label">Tour actuel</div><div class="key-stat-value">4 / 10</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">Membres et paiements</div>
+
+  <div class="member-card">
+    <div class="member-avatar">A</div>
+    <div class="member-info"><div class="member-name">Aïcha Diallo (Toi)</div><div class="member-detail">Tour 4 · A reçu son pot</div></div>
+    <span class="member-status status-received">Reçu</span>
+  </div>
+  <div class="member-card">
+    <div class="member-avatar">M</div>
+    <div class="member-info"><div class="member-name">Mamadou Diallo</div><div class="member-detail">Tour 5 · Prochain bénéficiaire</div></div>
+    <span class="member-status status-paid">Payé</span>
+  </div>
+  <div class="member-card">
+    <div class="member-avatar">F</div>
+    <div class="member-info"><div class="member-name">Fatou Sow</div><div class="member-detail">Tour 6</div></div>
+    <span class="member-status status-paid">Payé</span>
+  </div>
+  <div class="member-card">
+    <div class="member-avatar">I</div>
+    <div class="member-info"><div class="member-name">Ibrahim Koné</div><div class="member-detail">Tour 7</div></div>
+    <span class="member-status status-pending">En attente</span>
+  </div>
+  <div class="member-card">
+    <div class="member-avatar">K</div>
+    <div class="member-info"><div class="member-name">Kadiatou Bah</div><div class="member-detail">Tour 8</div></div>
+    <span class="member-status status-late">En retard</span>
+  </div>
+  <div class="member-card">
+    <div class="member-avatar">S</div>
+    <div class="member-info"><div class="member-name">Seydou Traoré</div><div class="member-detail">Tour 9</div></div>
+    <span class="member-status status-paid">Payé</span>
+  </div>
+  <div class="member-card">
+    <div class="member-avatar">B</div>
+    <div class="member-info"><div class="member-name">Binta Camara</div><div class="member-detail">Tour 10</div></div>
+    <span class="member-status status-paid">Payé</span>
+  </div>
+  <div class="member-card">
+    <div class="member-avatar">O</div>
+    <div class="member-info"><div class="member-name">Ousmane Ndiaye</div><div class="member-detail">Tour 3 · A reçu son pot</div></div>
+    <span class="member-status status-received">Reçu</span>
+  </div>
+
+  <div class="actions">
+    <a href="#" class="btn btn-primary" onclick="alert('Paiement disponible avec un vrai compte'); return false;">💳 Payer ma part</a>
+    <a href="#" class="btn btn-secondary" onclick="alert('Invitation disponible avec un vrai compte'); return false;">📤 Inviter</a>
+  </div>
+</div>
+</body>
+</html>

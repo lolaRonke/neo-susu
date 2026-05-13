@@ -4,725 +4,145 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>NEO-SUSU — Mon espace</title>
-
 <link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" href="./icons/icon-152.png">
 <meta name="theme-color" content="#000000">
-
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<!-- Supabase pour les vrais utilisateurs -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
   :root {
-    --void: #000000;
-    --deep: #1a1a2e;
-    --gold: #D4AF37;
-    --gold-light: #F4D03F;
-    --gold-glow: rgba(212, 175, 55, 0.4);
-    --text-light: #F5F5F5;
-    --text-dim: #B0B0B0;
-    --blue-accent: #4FC3F7;
-    --green: #10b981;
-    --red: #ef4444;
+    --void: #000000; --deep: #1a1a2e; --gold: #D4AF37; --gold-light: #F4D03F;
+    --gold-glow: rgba(212, 175, 55, 0.4); --text-light: #F5F5F5; --text-dim: #B0B0B0;
+    --blue-accent: #4FC3F7; --green: #10b981; --red: #ef4444;
   }
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: radial-gradient(ellipse at top, var(--deep) 0%, var(--void) 70%);
-    color: var(--text-light);
-    min-height: 100vh;
-    padding-bottom: 40px;
-  }
-
-  /* =========================================================
-     BANDEAU MODE DÉMO (visible uniquement en mode démo)
-     ========================================================= */
-  .demo-banner {
-    display: none; /* caché par défaut, activé par JS si mode démo */
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-    color: var(--void);
-    padding: 12px 20px;
-    text-align: center;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 0.5px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
-  }
-
-  .demo-banner.active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .demo-banner .cta-signup {
-    background: var(--void);
-    color: var(--gold);
-    padding: 6px 14px;
-    border-radius: 20px;
-    text-decoration: none;
-    font-size: 12px;
-    transition: transform 0.2s;
-  }
-
-  .demo-banner .cta-signup:hover {
-    transform: scale(1.05);
-  }
-
-  /* =========================================================
-     CONTENEUR PRINCIPAL
-     ========================================================= */
-  .container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 30px 20px;
-  }
-
-  /* =========================================================
-     EN-TÊTE DE BIENVENUE
-     ========================================================= */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-  }
-
-  .welcome {
-    flex: 1;
-  }
-
-  .welcome-text {
-    font-size: 14px;
-    color: var(--text-dim);
-    margin-bottom: 4px;
-  }
-
-  .user-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--gold);
-    letter-spacing: 0.5px;
-  }
-
-  .avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--void);
-    font-family: 'Syne', sans-serif;
-    font-size: 22px;
-    font-weight: 800;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-  }
-
-  /* =========================================================
-     BADGE KYC
-     ========================================================= */
-  .kyc-badge {
-    display: inline-block;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 600;
-    margin-top: 6px;
-    background: rgba(212, 175, 55, 0.15);
-    color: var(--gold);
-  }
-
-  .kyc-badge.verified {
-    background: rgba(16, 185, 129, 0.15);
-    color: var(--green);
-  }
-
-  .kyc-badge.demo {
-    background: rgba(79, 195, 247, 0.15);
-    color: var(--blue-accent);
-  }
-
-  /* =========================================================
-     CARTE SOLDE PRINCIPAL
-     ========================================================= */
-  .balance-card {
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(26, 26, 46, 0.8) 100%);
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 24px;
-    padding: 28px 24px;
-    margin-bottom: 24px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .balance-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -30%;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
-    filter: blur(40px);
-  }
-
-  .balance-label {
-    font-size: 13px;
-    color: var(--text-dim);
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .balance-amount {
-    font-family: 'Syne', sans-serif;
-    font-size: 38px;
-    font-weight: 800;
-    color: var(--gold);
-    margin-bottom: 4px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .balance-currency {
-    font-size: 14px;
-    color: var(--text-dim);
-    position: relative;
-    z-index: 1;
-  }
-
-  /* =========================================================
-     GRILLE DES STATS
-     ========================================================= */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 30px;
-  }
-
-  .stat-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 16px 12px;
-    text-align: center;
-  }
-
-  .stat-value {
-    font-family: 'Syne', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--text-light);
-    margin-bottom: 4px;
-  }
-
-  .stat-label {
-    font-size: 11px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  /* =========================================================
-     SECTION "MES TONTINES"
-     ========================================================= */
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text-light);
-    margin-bottom: 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .section-title .badge-demo {
-    font-size: 10px;
-    background: var(--gold);
-    color: var(--void);
-    padding: 3px 8px;
-    border-radius: 10px;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: 0.5px;
-  }
-
-  .tontine-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 18px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .tontine-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(212, 175, 55, 0.3);
-    background: rgba(255, 255, 255, 0.06);
-  }
-
-  .tontine-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    margin-bottom: 10px;
-  }
-
-  .tontine-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-light);
-  }
-
-  .tontine-status {
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: radial-gradient(ellipse at top, var(--deep) 0%, var(--void) 70%); color: var(--text-light); min-height: 100vh; padding-bottom: 40px; }
+  .demo-banner { display: none; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); color: var(--void); padding: 12px 20px; text-align: center; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3); }
+  .demo-banner.active { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .demo-banner .cta-signup { background: var(--void); color: var(--gold); padding: 6px 14px; border-radius: 20px; text-decoration: none; font-size: 12px; }
+  .container { max-width: 500px; margin: 0 auto; padding: 30px 20px; }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+  .welcome { flex: 1; }
+  .welcome-text { font-size: 14px; color: var(--text-dim); margin-bottom: 4px; }
+  .user-name { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; color: var(--gold); }
+  .avatar { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); display: flex; align-items: center; justify-content: center; color: var(--void); font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; cursor: pointer; text-decoration: none; }
+  .kyc-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; margin-top: 6px; background: rgba(212, 175, 55, 0.15); color: var(--gold); }
+  .kyc-badge.demo { background: rgba(79, 195, 247, 0.15); color: var(--blue-accent); }
+  .balance-card { background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(26, 26, 46, 0.8) 100%); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 24px; padding: 28px 24px; margin-bottom: 24px; position: relative; overflow: hidden; }
+  .balance-card::before { content: ''; position: absolute; top: -50%; right: -30%; width: 200px; height: 200px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); filter: blur(40px); }
+  .balance-label { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; position: relative; z-index: 1; }
+  .balance-amount { font-family: 'Syne', sans-serif; font-size: 38px; font-weight: 800; color: var(--gold); margin-bottom: 4px; position: relative; z-index: 1; }
+  .balance-currency { font-size: 14px; color: var(--text-dim); position: relative; z-index: 1; }
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
+  .stat-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 16px 12px; text-align: center; }
+  .stat-value { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: var(--text-light); margin-bottom: 4px; }
+  .stat-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--text-light); margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+  .section-title .badge-demo { font-size: 10px; background: var(--gold); color: var(--void); padding: 3px 8px; border-radius: 10px; font-family: 'Inter', sans-serif; }
+  .tontine-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 18px; margin-bottom: 12px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: block; color: inherit; }
+  .tontine-card:hover { transform: translateY(-2px); border-color: rgba(212, 175, 55, 0.3); background: rgba(255, 255, 255, 0.06); }
+  .tontine-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; }
+  .tontine-name { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-light); }
+  .tontine-status { font-size: 10px; padding: 3px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
   .status-active { background: rgba(16, 185, 129, 0.15); color: var(--green); }
   .status-waiting { background: rgba(212, 175, 55, 0.15); color: var(--gold); }
-
-  .tontine-info {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: var(--text-dim);
-    margin-bottom: 10px;
-  }
-
-  .tontine-info strong {
-    color: var(--gold);
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-  }
-
-  .tontine-progress {
-    height: 6px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .tontine-progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%);
-    border-radius: 10px;
-    transition: width 0.6s ease;
-  }
-
-  /* =========================================================
-     BOUTONS D'ACTIONS
-     ========================================================= */
-  .actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 24px;
-  }
-
-  .btn {
-    padding: 16px 20px;
-    border: none;
-    border-radius: 50px;
-    font-family: 'Syne', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    transition: all 0.3s ease;
-    letter-spacing: 0.5px;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-    color: var(--void);
-    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(212, 175, 55, 0.4);
-  }
-
-  .btn-secondary {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--text-light);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
-  }
-
-  /* Bouton de déconnexion */
-  .logout-btn {
-    width: 100%;
-    margin-top: 20px;
-    padding: 12px;
-    background: transparent;
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    color: var(--red);
-    border-radius: 50px;
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .logout-btn:hover {
-    background: rgba(239, 68, 68, 0.1);
-  }
-
-  /* =========================================================
-     LOADER
-     ========================================================= */
-  .loader {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--text-dim);
-  }
-
-  .loader-spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(212, 175, 55, 0.2);
-    border-top-color: var(--gold);
-    border-radius: 50%;
-    margin: 0 auto 16px;
-    animation: spin 0.8s linear infinite;
-  }
-
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-
-  /* Caché par défaut, JS affiche */
-  #dashboardContent {
-    display: none;
-  }
+  .tontine-info { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-dim); margin-bottom: 10px; }
+  .tontine-info strong { color: var(--gold); font-family: 'Syne', sans-serif; font-weight: 600; }
+  .tontine-progress { height: 6px; background: rgba(255, 255, 255, 0.05); border-radius: 10px; overflow: hidden; }
+  .tontine-progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%); border-radius: 10px; }
+  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+  .btn { padding: 16px 20px; border: none; border-radius: 50px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; text-align: center; transition: all 0.3s ease; letter-spacing: 0.5px; display: block; }
+  .btn-primary { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); color: var(--void); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(212, 175, 55, 0.4); }
+  .btn-secondary { background: rgba(255, 255, 255, 0.06); color: var(--text-light); border: 1px solid rgba(255, 255, 255, 0.1); }
+  .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
+  .logout-btn { width: 100%; margin-top: 20px; padding: 12px; background: transparent; border: 1px solid rgba(239, 68, 68, 0.3); color: var(--red); border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 13px; cursor: pointer; }
+  .logout-btn:hover { background: rgba(239, 68, 68, 0.1); }
 </style>
 </head>
 <body>
 
-<!-- BANDEAU DÉMO (affiché seulement en mode démo) -->
 <div class="demo-banner" id="demoBanner">
   <span>👁️ MODE DÉMO — Les données sont fictives</span>
   <a href="./signup.html" class="cta-signup">Créer mon vrai compte →</a>
 </div>
 
-<!-- LOADER pendant le chargement -->
-<div class="loader" id="loadingState">
-  <div class="loader-spinner"></div>
-  <p>Chargement de votre espace...</p>
-</div>
-
-<!-- DASHBOARD PRINCIPAL -->
-<div class="container" id="dashboardContent">
-
-  <!-- En-tête : bienvenue + avatar -->
+<div class="container">
   <div class="header">
     <div class="welcome">
       <div class="welcome-text">Bonjour 👋</div>
-      <div class="user-name" id="userName">—</div>
-      <span class="kyc-badge" id="kycBadge">En attente de vérification</span>
+      <div class="user-name" id="userName">Aïcha Diallo</div>
+      <span class="kyc-badge demo" id="kycBadge">👁️ Mode démo</span>
     </div>
-    <div class="avatar" id="userAvatar">?</div>
+    <a href="./profile.html" class="avatar" id="userAvatar">A</a>
   </div>
 
-  <!-- Carte solde principal -->
   <div class="balance-card">
     <div class="balance-label">Solde total épargné</div>
-    <div class="balance-amount" id="totalBalance">0</div>
+    <div class="balance-amount">245 000</div>
     <div class="balance-currency">FCFA</div>
   </div>
 
-  <!-- Stats rapides -->
   <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-value" id="statTontines">0</div>
-      <div class="stat-label">Tontines</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value" id="statMembers">0</div>
-      <div class="stat-label">Membres</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value" id="statTour">—</div>
-      <div class="stat-label">Mon tour</div>
-    </div>
+    <div class="stat-card"><div class="stat-value">3</div><div class="stat-label">Tontines</div></div>
+    <div class="stat-card"><div class="stat-value">24</div><div class="stat-label">Membres</div></div>
+    <div class="stat-card"><div class="stat-value">4/10</div><div class="stat-label">Mon tour</div></div>
   </div>
 
-  <!-- Section tontines -->
   <div class="section-title">
     <span>Mes tontines</span>
-    <span class="badge-demo" id="badgeDemoTontines" style="display:none;">EXEMPLES</span>
+    <span class="badge-demo">EXEMPLES</span>
   </div>
 
-  <div id="tontinesList">
-    <!-- Tontines générées par JS -->
-  </div>
+  <a href="./tontine-detail.html?id=1" class="tontine-card">
+    <div class="tontine-header">
+      <div class="tontine-name">🌟 Tontine Famille Diallo</div>
+      <span class="tontine-status status-active">Active</span>
+    </div>
+    <div class="tontine-info"><span>Cotisation : <strong>25 000 FCFA</strong></span><span>8/10 membres</span></div>
+    <div class="tontine-info"><span>Mensuelle</span><span><strong>80%</strong></span></div>
+    <div class="tontine-progress"><div class="tontine-progress-fill" style="width: 80%"></div></div>
+  </a>
 
-  <!-- Boutons d'action -->
+  <a href="./tontine-detail.html?id=2" class="tontine-card">
+    <div class="tontine-header">
+      <div class="tontine-name">💼 Collègues du bureau</div>
+      <span class="tontine-status status-active">Active</span>
+    </div>
+    <div class="tontine-info"><span>Cotisation : <strong>50 000 FCFA</strong></span><span>6/6 membres</span></div>
+    <div class="tontine-info"><span>Hebdomadaire</span><span><strong>100%</strong></span></div>
+    <div class="tontine-progress"><div class="tontine-progress-fill" style="width: 100%"></div></div>
+  </a>
+
+  <a href="./tontine-detail.html?id=3" class="tontine-card">
+    <div class="tontine-header">
+      <div class="tontine-name">🎓 Projet scolarité</div>
+      <span class="tontine-status status-waiting">En attente</span>
+    </div>
+    <div class="tontine-info"><span>Cotisation : <strong>10 000 FCFA</strong></span><span>4/8 membres</span></div>
+    <div class="tontine-info"><span>Bimensuelle</span><span><strong>50%</strong></span></div>
+    <div class="tontine-progress"><div class="tontine-progress-fill" style="width: 50%"></div></div>
+  </a>
+
   <div class="actions">
     <a href="./create-tontine.html" class="btn btn-primary">+ Créer une tontine</a>
     <a href="./join-tontine.html" class="btn btn-secondary">Rejoindre</a>
   </div>
 
-  <!-- Bouton déconnexion -->
-  <button class="logout-btn" onclick="handleLogout()">
-    Se déconnecter
-  </button>
-
+  <button class="logout-btn" onclick="handleLogout()">Se déconnecter</button>
 </div>
 
 <script>
-// ============================================================
-// CONFIGURATION
-// ============================================================
-// Mets ici tes vraies clés Supabase (déjà configurées dans supabase-config.js sinon)
-const SUPABASE_URL = 'https://ton-projet.supabase.co';
-const SUPABASE_KEY = 'ta-cle-anon-publique';
-
-// ============================================================
-// DONNÉES FICTIVES POUR LE MODE DÉMO
-// ============================================================
-const DEMO_DATA = {
-  user: {
-    first_name: 'Aïcha',
-    last_name: 'Diallo',
-    email: 'demo@neo-susu.com',
-    kyc_status: 'demo'
-  },
-  balance: 245000,
-  stats: {
-    tontines: 3,
-    members: 24,
-    tour: '4/10'
-  },
-  tontines: [
-    {
-      name: '🌟 Tontine Famille Diallo',
-      status: 'active',
-      contribution: '25 000',
-      members: '8/10',
-      progress: 80,
-      frequency: 'Mensuelle'
-    },
-    {
-      name: '💼 Collègues du bureau',
-      status: 'active',
-      contribution: '50 000',
-      members: '6/6',
-      progress: 100,
-      frequency: 'Hebdomadaire'
-    },
-    {
-      name: '🎓 Projet scolarité',
-      status: 'waiting',
-      contribution: '10 000',
-      members: '4/8',
-      progress: 50,
-      frequency: 'Bimensuelle'
-    }
-  ]
-};
-
-// ============================================================
-// DÉTECTION DU MODE (DÉMO ou RÉEL)
-// ============================================================
-function isDemoMode() {
-  // Mode démo si paramètre URL ?mode=demo OU session démo dans le navigateur
+  // Activer le bandeau démo
   const urlParams = new URLSearchParams(window.location.search);
-  const urlDemo = urlParams.get('mode') === 'demo';
-  const sessionDemo = sessionStorage.getItem('neo_susu_demo_user');
-  return urlDemo || sessionDemo;
-}
+  if (urlParams.get('mode') === 'demo' || sessionStorage.getItem('neo_susu_demo_user')) {
+    document.getElementById('demoBanner').classList.add('active');
+  }
 
-// ============================================================
-// CHARGER LE DASHBOARD
-// ============================================================
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    if (isDemoMode()) {
-      // MODE DÉMO : charger les données fictives
-      loadDemoMode();
-    } else {
-      // MODE RÉEL : charger depuis Supabase
-      await loadRealMode();
-    }
-  } catch (error) {
-    console.error('Erreur de chargement:', error);
-    // Si erreur en mode réel, rediriger vers login
-    if (!isDemoMode()) {
-      window.location.href = './login.html';
+  function handleLogout() {
+    if (confirm('Voulez-vous vraiment vous déconnecter ?')) {
+      sessionStorage.removeItem('neo_susu_demo_user');
+      window.location.href = './index.html';
     }
   }
-});
-
-// ============================================================
-// MODE DÉMO : afficher les données fictives
-// ============================================================
-function loadDemoMode() {
-  console.log('🎭 Mode démo activé');
-
-  // Activer le bandeau démo en haut
-  document.getElementById('demoBanner').classList.add('active');
-
-  // Afficher le badge "EXEMPLES" sur les tontines
-  document.getElementById('badgeDemoTontines').style.display = 'inline-block';
-
-  // Remplir avec les données fictives
-  const user = DEMO_DATA.user;
-  document.getElementById('userName').textContent = user.first_name + ' ' + user.last_name;
-  document.getElementById('userAvatar').textContent = user.first_name.charAt(0);
-
-  // Badge KYC en mode démo
-  const kycBadge = document.getElementById('kycBadge');
-  kycBadge.textContent = '👁️ Mode démo';
-  kycBadge.classList.add('demo');
-
-  // Solde et stats
-  document.getElementById('totalBalance').textContent = DEMO_DATA.balance.toLocaleString('fr-FR');
-  document.getElementById('statTontines').textContent = DEMO_DATA.stats.tontines;
-  document.getElementById('statMembers').textContent = DEMO_DATA.stats.members;
-  document.getElementById('statTour').textContent = DEMO_DATA.stats.tour;
-
-  // Afficher les tontines fictives
-  displayTontines(DEMO_DATA.tontines);
-
-  // Afficher le dashboard
-  document.getElementById('loadingState').style.display = 'none';
-  document.getElementById('dashboardContent').style.display = 'block';
-}
-
-// ============================================================
-// MODE RÉEL : charger depuis Supabase
-// ============================================================
-async function loadRealMode() {
-  console.log('🔐 Mode réel — chargement Supabase');
-
-  // Initialiser Supabase
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-  // Vérifier la session
-  const { data: { user }, error } = await supabase.auth.getUser();
-
-  if (error || !user) {
-    // Pas connecté → vers login
-    window.location.href = './login.html';
-    return;
-  }
-
-  // Récupérer le profil utilisateur
-  const { data: profile } = await supabase
-    .from('users')
-    .select('*')
-    .eq('id', user.id)
-    .single();
-
-  const firstName = profile?.first_name || 'Utilisateur';
-  const lastName = profile?.last_name || '';
-
-  document.getElementById('userName').textContent = firstName + ' ' + lastName;
-  document.getElementById('userAvatar').textContent = firstName.charAt(0).toUpperCase();
-
-  // Statut KYC
-  if (profile && profile.kyc_status === 'verified') {
-    const badge = document.getElementById('kycBadge');
-    badge.textContent = '✓ KYC Vérifié';
-    badge.classList.add('verified');
-  }
-
-  // TODO : récupérer les vraies tontines depuis Supabase
-  // Pour l'instant, on affiche un message vide
-  document.getElementById('tontinesList').innerHTML = `
-    <div style="text-align:center; padding: 30px; color: var(--text-dim);">
-      <p>Vous n'avez pas encore de tontine.</p>
-      <p style="font-size:13px; margin-top:8px;">Créez ou rejoignez une tontine pour commencer !</p>
-    </div>
-  `;
-
-  // Afficher le dashboard
-  document.getElementById('loadingState').style.display = 'none';
-  document.getElementById('dashboardContent').style.display = 'block';
-}
-
-// ============================================================
-// AFFICHER LA LISTE DES TONTINES (HTML)
-// ============================================================
-function displayTontines(tontines) {
-  const container = document.getElementById('tontinesList');
-  container.innerHTML = tontines.map(t => `
-    <div class="tontine-card">
-      <div class="tontine-header">
-        <div class="tontine-name">${t.name}</div>
-        <span class="tontine-status status-${t.status}">
-          ${t.status === 'active' ? 'Active' : 'En attente'}
-        </span>
-      </div>
-      <div class="tontine-info">
-        <span>Cotisation : <strong>${t.contribution} FCFA</strong></span>
-        <span>${t.members} membres</span>
-      </div>
-      <div class="tontine-info">
-        <span>${t.frequency}</span>
-        <span><strong>${t.progress}%</strong></span>
-      </div>
-      <div class="tontine-progress">
-        <div class="tontine-progress-fill" style="width: ${t.progress}%"></div>
-      </div>
-    </div>
-  `).join('');
-}
-
-// ============================================================
-// DÉCONNEXION
-// ============================================================
-async function handleLogout() {
-  if (!confirm('Voulez-vous vraiment vous déconnecter ?')) return;
-
-  if (isDemoMode()) {
-    // Mode démo : juste effacer la session locale
-    sessionStorage.removeItem('neo_susu_demo_user');
-    window.location.href = './index.html';
-  } else {
-    // Mode réel : déconnexion Supabase
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    await supabase.auth.signOut();
-    window.location.href = './index.html';
-  }
-}
 </script>
-
 </body>
 </html>

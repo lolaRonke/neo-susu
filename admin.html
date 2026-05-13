@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEO-SUSU — Espace Admin</title>
+<meta name="theme-color" content="#000000">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --void: #000000; --deep: #1a1a2e; --gold: #D4AF37; --gold-light: #F4D03F; --text-light: #F5F5F5; --text-dim: #B0B0B0; --blue-accent: #4FC3F7; --green: #10b981; --red: #ef4444; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: radial-gradient(ellipse at top, #1a2e3a 0%, var(--void) 70%); color: var(--text-light); min-height: 100vh; padding: 30px 20px 60px; }
+  .container { max-width: 600px; margin: 0 auto; }
+  .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-dim); text-decoration: none; font-size: 14px; margin-bottom: 24px; }
+  .admin-header { background: linear-gradient(135deg, rgba(79, 195, 247, 0.15) 0%, rgba(26, 26, 46, 0.8) 100%); border: 1px solid rgba(79, 195, 247, 0.3); border-radius: 24px; padding: 24px; margin-bottom: 24px; }
+  .admin-icon { font-size: 36px; margin-bottom: 8px; }
+  .admin-title { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: var(--blue-accent); margin-bottom: 4px; }
+  .admin-subtitle { color: var(--text-dim); font-size: 13px; }
+  .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 20px; }
+  .stat-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .stat-value { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: var(--text-light); margin-bottom: 4px; }
+  .stat-change { font-size: 12px; color: var(--green); }
+  .section-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin: 24px 0 12px; }
+  .menu-item { display: flex; align-items: center; gap: 14px; padding: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; margin-bottom: 8px; text-decoration: none; color: var(--text-light); cursor: pointer; transition: all 0.3s; }
+  .menu-item:hover { background: rgba(79, 195, 247, 0.08); border-color: rgba(79, 195, 247, 0.3); }
+  .menu-icon { font-size: 22px; }
+  .menu-text { flex: 1; }
+  .menu-label { font-weight: 600; font-size: 15px; margin-bottom: 2px; }
+  .menu-detail { font-size: 12px; color: var(--text-dim); }
+  .menu-arrow { color: var(--text-dim); }
+  .badge { background: var(--red); color: white; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 700; }
+  .info-box { background: rgba(79, 195, 247, 0.08); border-left: 3px solid var(--blue-accent); padding: 12px 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; color: var(--text-dim); }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="./index.html" class="back-link">← Retour à l'accueil</a>
+
+  <div class="admin-header">
+    <div class="admin-icon">💻</div>
+    <div class="admin-title">Espace Administrateur</div>
+    <div class="admin-subtitle">Gestion et supervision de la plateforme</div>
+  </div>
+
+  <div class="info-box">
+    🔧 <strong>Mode démo</strong> — Les données affichées sont fictives. L'espace admin sera activé après configuration de la base de données.
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Utilisateurs actifs</div>
+      <div class="stat-value">1 247</div>
+      <div class="stat-change">↑ +12% ce mois</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Tontines en cours</div>
+      <div class="stat-value">328</div>
+      <div class="stat-change">↑ +8% ce mois</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Volume mensuel</div>
+      <div class="stat-value">24M</div>
+      <div class="stat-change">FCFA</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Taux de paiement</div>
+      <div class="stat-value">94%</div>
+      <div class="stat-change">↑ Excellent</div>
+    </div>
+  </div>
+
+  <div class="section-title">Gestion</div>
+  <a href="#" class="menu-item" onclick="alert('Module utilisateurs disponible après configuration'); return false;">
+    <span class="menu-icon">👥</span>
+    <div class="menu-text"><div class="menu-label">Utilisateurs</div><div class="menu-detail">1 247 comptes</div></div>
+    <span class="menu-arrow">›</span>
+  </a>
+  <a href="#" class="menu-item" onclick="alert('Module tontines disponible après configuration'); return false;">
+    <span class="menu-icon">💰</span>
+    <div class="menu-text"><div class="menu-label">Tontines</div><div class="menu-detail">328 actives, 42 en attente</div></div>
+    <span class="menu-arrow">›</span>
+  </a>
+  <a href="#" class="menu-item" onclick="alert('Module transactions disponible après configuration'); return false;">
+    <span class="menu-icon">💳</span>
+    <div class="menu-text"><div class="menu-label">Transactions</div><div class="menu-detail">2 845 ce mois</div></div>
+    <span class="menu-arrow">›</span>
+  </a>
+  <a href="#" class="menu-item" onclick="alert('Module KYC disponible après configuration'); return false;">
+    <span class="menu-icon">🔐</span>
+    <div class="menu-text"><div class="menu-label">Vérifications KYC</div><div class="menu-detail">À traiter</div></div>
+    <span class="badge">18</span>
+    <span class="menu-arrow">›</span>
+  </a>
+
+  <div class="section-title">Modération</div>
+  <a href="#" class="menu-item" onclick="alert('Module modération disponible après configuration'); return false;">
+    <span class="menu-icon">🚨</span>
+    <div class="menu-text"><div class="menu-label">Signalements</div><div class="menu-detail">Problèmes remontés</div></div>
+    <span class="badge">3</span>
+    <span class="menu-arrow">›</span>
+  </a>
+  <a href="#" class="menu-item" onclick="alert('Module litiges disponible après configuration'); return false;">
+    <span class="menu-icon">⚖️</span>
+    <div class="menu-text"><div class="menu-label">Litiges</div><div class="menu-detail">Médiation entre membres</div></div>
+    <span class="menu-arrow">›</span>
+  </a>
+
+  <div class="section-title">Configuration</div>
+  <a href="#" class="menu-item" onclick="alert('Paramètres généraux'); return false;">
+    <span class="menu-icon">⚙️</span>
+    <div class="menu-text"><div class="menu-label">Paramètres généraux</div><div class="menu-detail">Frais, plafonds, devises</div></div>
+    <span class="menu-arrow">›</span>
+  </a>
+  <a href="#" class="menu-item" onclick="alert('Module rapports disponible après configuration'); return false;">
+    <span class="menu-icon">📊</span>
+    <div class="menu-text"><div class="menu-label">Rapports et analytics</div><div class="menu-detail">Export, statistiques</div></div>
+    <span class="menu-arrow">›</span>
+  </a>
+</div>
+</body>
+</html>
