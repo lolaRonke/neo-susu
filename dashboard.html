@@ -10,7 +10,7 @@
 <title>NEO-SUSU — Mon espace</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./neo-susu.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- Supabase SDK (charge uniquement si configure) -->
 <style>
 body{padding:0 0 40px;}.container{padding:30px 20px;}
 .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
@@ -95,23 +95,48 @@ body{padding:0 0 40px;}.container{padding:30px 20px;}
   </div>
   <button class="logout-btn" onclick="handleLogout()" data-fr="Se deconnecter" data-en="Sign out">Se deconnecter</button>
 </div>
-<script src="./supabase.js"></script>
+<script>
+// ── STUB SUPABASE (evite les erreurs si pas configure) ──
+const SUPABASE_URL = (typeof window._SB_URL !== "undefined") ? window._SB_URL : "https://TON-PROJECT-ID.supabase.co";
+const SUPABASE_ANON_KEY = "TON-ANON-PUBLIC-KEY";
+const APP_URL = "https://lolaronke.github.io/neo-susu";
+// Fonctions stub - remplacees par supabase.js quand configure
+async function getCurrentUser(){return null;}
+async function requireAuth(){return null;}
+async function getUserProfile(){return null;}
+async function getMyTontines(){return [];}
+async function signOut(){sessionStorage.clear();window.location.href="./index.html";}
+</script>
 <script>
 let currentLang=localStorage.getItem("ns_lang")||"fr";
 function setLang(lang){currentLang=lang;localStorage.setItem("ns_lang",lang);document.getElementById("html-root").lang=lang;document.querySelectorAll("[data-fr]").forEach(el=>{const v=el.getAttribute("data-"+lang);if(v)el.textContent=v;});document.getElementById("flag-fr").classList.toggle("active",lang==="fr");document.getElementById("flag-en").classList.toggle("active",lang==="en");}
 setLang(currentLang);
 
 async function loadDashboard(){
-  // Demo mode check
-  const urlParams=new URLSearchParams(window.location.search);
-  const isDemo=urlParams.get("mode")==="demo"||sessionStorage.getItem("neo_susu_demo_user");
+  // ── DEMO MODE : verifie EN PREMIER avant tout appel Supabase ──
+  const urlParams = new URLSearchParams(window.location.search);
+  const demoSession = sessionStorage.getItem("neo_susu_demo_user");
+  const isDemo = urlParams.get("mode") === "demo" || !!demoSession;
 
-  if(isDemo){
+  if (isDemo) {
     document.getElementById("demoBanner").classList.add("active");
-    loadDemoData();return;
+    loadDemoData();
+    return; // stop ici, aucun appel Supabase
   }
 
-  // Real Supabase data
+  // ── SUPABASE PAS ENCORE CONFIGURE → demo automatique ──
+  const supabaseReady = (
+    typeof SUPABASE_URL !== "undefined" &&
+    SUPABASE_URL !== "https://TON-PROJECT-ID.supabase.co" &&
+    SUPABASE_URL.includes("supabase.co")
+  );
+
+  if (!supabaseReady) {
+    loadDemoData();
+    return;
+  }
+
+  // ── DONNEES REELLES SUPABASE ──
   try{
     const user=await requireAuth();
     if(!user)return;
