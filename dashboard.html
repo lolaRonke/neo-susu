@@ -1,226 +1,128 @@
 <!DOCTYPE html>
-<html lang="fr" id="html-root">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#07080F">
-<link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
-<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
 <title>NEO-SUSU — Mon espace</title>
+<meta name="theme-color" content="#1A1612">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./neo-susu.css">
-<!-- Supabase SDK (charge uniquement si configure) -->
 <style>
-body{padding:0 0 40px;}.container{padding:30px 20px;}
-.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
-.welcome-text{font-size:13px;color:var(--text2);margin-bottom:4px;font-weight:500;}
-.user-name{font-family:var(--ff-s);font-size:30px;font-weight:700;background:linear-gradient(135deg,var(--gold-pale),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.5px;}
-.avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;color:var(--void);font-family:var(--ff-s);font-size:24px;font-weight:700;cursor:pointer;text-decoration:none;box-shadow:0 8px 24px rgba(212,168,32,.35);}
-.kyc-badge{display:inline-block;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;margin-top:6px;background:rgba(74,168,255,.15);color:var(--sky);}
-.kyc-badge.verified{background:rgba(28,196,138,.15);color:#1CC48A;}
-.balance-card{background:linear-gradient(135deg,rgba(212,168,32,.12),var(--card));border:1px solid rgba(212,168,32,.25);border-radius:24px;padding:28px 24px;margin-bottom:24px;position:relative;overflow:hidden;}
-.balance-card::before{content:"";position:absolute;top:-50%;right:-30%;width:200px;height:200px;background:radial-gradient(circle,rgba(212,168,32,.3),transparent 70%);filter:blur(40px);}
-.balance-label{font-size:11px;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:1.2px;font-weight:700;position:relative;z-index:1;}
-.balance-amount{font-family:var(--ff-s);font-size:44px;font-weight:700;background:linear-gradient(135deg,var(--gold-pale),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px;position:relative;z-index:1;letter-spacing:.5px;}
-.balance-currency{font-size:13px;color:var(--text2);font-weight:500;position:relative;z-index:1;}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;}
-.stat-card{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:16px 12px;text-align:center;}
-.stat-value{font-family:var(--ff-s);font-size:26px;font-weight:700;color:var(--text);margin-bottom:2px;}
-.stat-label{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;}
-.tontine-card{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:18px;margin-bottom:12px;cursor:pointer;transition:all .3s;text-decoration:none;display:block;color:inherit;}
-.tontine-card:hover{transform:translateY(-2px);border-color:rgba(212,168,32,.3);background:var(--raised);}
-.tontine-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px;}
-.tontine-name{font-size:16px;font-weight:700;color:var(--text);}
-.tontine-status{font-size:10px;padding:3px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
-.status-active{background:rgba(28,196,138,.15);color:#1CC48A;}
-.status-waiting{background:rgba(212,168,32,.15);color:var(--gold);}
-.tontine-info{display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin-bottom:10px;}
-.tontine-info strong{font-family:var(--ff-s);color:var(--gold);font-weight:700;font-size:14px;}
-.tontine-progress{height:6px;background:var(--raised);border-radius:10px;overflow:hidden;}
-.tontine-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),#1CC48A);border-radius:10px;}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
-/* Skeleton loading */
-.skel{background:linear-gradient(90deg,var(--card) 25%,var(--raised) 50%,var(--card) 75%);background-size:200% 100%;animation:skelAnim 1.5s infinite;border-radius:12px;}
-@keyframes skelAnim{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
-/* Lang bar */
-.lang-bar{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--stroke2);border-radius:40px;padding:5px 10px;position:fixed;top:16px;right:16px;z-index:200;}
-.lang-flag{font-size:22px;cursor:pointer;border-radius:50%;padding:3px 5px;transition:all .25s;border:2px solid transparent;line-height:1;}
-.lang-flag.active{border-color:var(--gold);background:rgba(212,168,32,.12);transform:scale(1.12);}
-.lang-sep{width:1px;height:16px;background:var(--stroke2);}
-.score-bar{height:5px;background:var(--stroke);border-radius:3px;overflow:hidden;margin:8px 0 4px;}
-.score-fill{height:100%;background:linear-gradient(90deg,#1CC48A,var(--gold));border-radius:3px;transition:width 1s ease;}
+  body { padding: 0 0 40px; }
+  .container { padding: 30px 20px; }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+  .welcome { flex: 1; }
+  .welcome-text { font-size: 13px; color: var(--text2); margin-bottom: 4px; font-weight: 500; }
+  .user-name { font-family: var(--ff-s); font-size: 30px; font-weight: 700; background: linear-gradient(135deg, var(--gold-pale), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 0.5px; }
+  .avatar { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold2)); display: flex; align-items: center; justify-content: center; color: var(--void); font-family: var(--ff-s); font-size: 24px; font-weight: 700; cursor: pointer; text-decoration: none; box-shadow: 0 8px 24px rgba(200,146,10,0.35); }
+  .kyc-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; margin-top: 6px; background: rgba(176,168,152,0.15); color: var(--sky); font-family: var(--ff-b); }
+  .balance-card { background: linear-gradient(135deg, rgba(200,146,10,0.12) 0%, var(--card) 100%); border: 1px solid rgba(200,146,10,0.25); border-radius: 24px; padding: 28px 24px; margin-bottom: 24px; position: relative; overflow: hidden; }
+  .balance-card::before { content: ''; position: absolute; top: -50%; right: -30%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(200,146,10,0.3) 0%, transparent 70%); filter: blur(40px); }
+  .balance-label { font-size: 11px; color: var(--text2); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; position: relative; z-index: 1; }
+  .balance-amount { font-family: var(--ff-s); font-size: 44px; font-weight: 700; background: linear-gradient(135deg, var(--gold-pale), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; position: relative; z-index: 1; letter-spacing: 0.5px; }
+  .balance-currency { font-size: 13px; color: var(--text2); font-weight: 500; position: relative; z-index: 1; }
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat-card { background: var(--card); border: 1px solid var(--stroke); border-radius: 16px; padding: 16px 12px; text-align: center; }
+  .stat-value { font-family: var(--ff-s); font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+  .stat-label { font-size: 10px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+  .tontine-card { background: var(--card); border: 1px solid var(--stroke); border-radius: 16px; padding: 18px; margin-bottom: 12px; cursor: pointer; transition: all 0.3s; text-decoration: none; display: block; color: inherit; }
+  .tontine-card:hover { transform: translateY(-2px); border-color: rgba(200,146,10,0.3); background: var(--raised); }
+  .tontine-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; }
+  .tontine-name { font-family: var(--ff-b); font-size: 16px; font-weight: 700; color: var(--text); }
+  .tontine-status { font-size: 10px; padding: 3px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+  .status-active { background: rgba(196,149,106,0.15); color: var(--em); }
+  .status-waiting { background: rgba(200,146,10,0.15); color: var(--gold); }
+  .tontine-info { display: flex; justify-content: space-between; font-size: 12px; color: var(--text2); margin-bottom: 10px; }
+  .tontine-info strong { font-family: var(--ff-s); color: var(--gold); font-weight: 700; font-size: 14px; }
+  .tontine-progress { height: 6px; background: var(--raised); border-radius: 10px; overflow: hidden; }
+  .tontine-progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--em)); border-radius: 10px; }
+  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
 </style>
 </head>
 <body>
-<div class="lang-bar">
-  <span class="lang-flag active" id="flag-fr" onclick="setLang('fr')">🇫🇷</span>
-  <div class="lang-sep"></div>
-  <span class="lang-flag" id="flag-en" onclick="setLang('en')">🇬🇧</span>
-</div>
+
 <div class="demo-banner" id="demoBanner">
-  <span data-fr="MODE DEMO — Les donnees sont fictives" data-en="DEMO MODE — Data is fictitious">MODE DEMO</span>
-  <a href="./signup.html" class="cta-signup" data-fr="Creer mon vrai compte" data-en="Create my real account">Creer mon vrai compte →</a>
+  <span>👁️ MODE DÉMO — Les données sont fictives</span>
+  <a href="./signup.html" class="cta-signup">Créer mon vrai compte →</a>
 </div>
+
 <div class="container">
   <div class="header">
     <div class="welcome">
-      <div class="welcome-text" data-fr="Bonjour" data-en="Hello">Bonjour 👋</div>
-      <div class="user-name" id="userName">...</div>
-      <span class="kyc-badge" id="kycBadge">Chargement...</span>
+      <div class="welcome-text">Bonjour 👋</div>
+      <div class="user-name">Aïcha Diallo</div>
+      <span class="kyc-badge">👁️ Mode démo</span>
     </div>
-    <a href="./profile.html" class="avatar" id="avatarEl">?</a>
+    <a href="./profile.html" class="avatar">A</a>
   </div>
+
   <div class="balance-card">
-    <div class="balance-label" data-fr="Solde total epargne" data-en="Total savings">Solde total epargne</div>
-    <div class="balance-amount" id="walletAmt">0</div>
+    <div class="balance-label">Solde total épargné</div>
+    <div class="balance-amount">245 000</div>
     <div class="balance-currency">FCFA</div>
-    <div class="score-bar"><div class="score-fill" id="scoreBar" style="width:50%"></div></div>
-    <div style="font-size:11px;color:rgba(255,255,255,.35);" data-fr="Score de fiabilite" data-en="Reliability score">Score de fiabilite : <span id="scoreVal">50</span>/100</div>
   </div>
+
   <div class="stats-grid">
-    <div class="stat-card"><div class="stat-value" id="tontineCount">0</div><div class="stat-label" data-fr="Tontines" data-en="Tontines">Tontines</div></div>
-    <div class="stat-card"><div class="stat-value" id="memberCount">0</div><div class="stat-label" data-fr="Membres" data-en="Members">Membres</div></div>
-    <div class="stat-card"><div class="stat-value" id="nextTurn">—</div><div class="stat-label" data-fr="Mon tour" data-en="My turn">Mon tour</div></div>
+    <div class="stat-card"><div class="stat-value">3</div><div class="stat-label">Tontines</div></div>
+    <div class="stat-card"><div class="stat-value">24</div><div class="stat-label">Membres</div></div>
+    <div class="stat-card"><div class="stat-value">4/10</div><div class="stat-label">Mon tour</div></div>
   </div>
-  <div class="section-title"><span data-fr="Mes tontines" data-en="My tontines">Mes tontines</span></div>
-  <div id="tontinesList">
-    <!-- Skeleton -->
-    <div class="skel" style="height:90px;margin-bottom:12px;"></div>
-    <div class="skel" style="height:90px;margin-bottom:12px;"></div>
+
+  <div class="section-title">
+    <span>Mes tontines</span>
+    <span class="badge-demo">EXEMPLES</span>
   </div>
+
+  <a href="./tontine-detail.html?id=1" class="tontine-card">
+    <div class="tontine-header">
+      <div class="tontine-name">🌟 Tontine Famille Diallo</div>
+      <span class="tontine-status status-active">Active</span>
+    </div>
+    <div class="tontine-info"><span>Cotisation : <strong>25 000 FCFA</strong></span><span>8/10 membres</span></div>
+    <div class="tontine-info"><span>Mensuelle</span><span><strong>80%</strong></span></div>
+    <div class="tontine-progress"><div class="tontine-progress-fill" style="width: 80%"></div></div>
+  </a>
+
+  <a href="./tontine-detail.html?id=2" class="tontine-card">
+    <div class="tontine-header">
+      <div class="tontine-name">💼 Collègues du bureau</div>
+      <span class="tontine-status status-active">Active</span>
+    </div>
+    <div class="tontine-info"><span>Cotisation : <strong>50 000 FCFA</strong></span><span>6/6 membres</span></div>
+    <div class="tontine-info"><span>Hebdomadaire</span><span><strong>100%</strong></span></div>
+    <div class="tontine-progress"><div class="tontine-progress-fill" style="width: 100%"></div></div>
+  </a>
+
+  <a href="./tontine-detail.html?id=3" class="tontine-card">
+    <div class="tontine-header">
+      <div class="tontine-name">🎓 Projet scolarité</div>
+      <span class="tontine-status status-waiting">En attente</span>
+    </div>
+    <div class="tontine-info"><span>Cotisation : <strong>10 000 FCFA</strong></span><span>4/8 membres</span></div>
+    <div class="tontine-info"><span>Bimensuelle</span><span><strong>50%</strong></span></div>
+    <div class="tontine-progress"><div class="tontine-progress-fill" style="width: 50%"></div></div>
+  </a>
+
   <div class="actions">
-    <a href="./create-tontine.html" class="btn btn-primary" data-fr="+ Creer une tontine" data-en="+ Create a tontine">+ Creer une tontine</a>
-    <a href="./join-tontine.html" class="btn btn-secondary" data-fr="Rejoindre" data-en="Join">Rejoindre</a>
+    <a href="./create-tontine.html" class="btn btn-primary">+ Créer une tontine</a>
+    <a href="./join-tontine.html" class="btn btn-secondary">Rejoindre</a>
   </div>
-  <button class="logout-btn" onclick="handleLogout()" data-fr="Se deconnecter" data-en="Sign out">Se deconnecter</button>
+
+  <button class="logout-btn" onclick="handleLogout()">Se déconnecter</button>
 </div>
-<script>
-// ── STUB SUPABASE (evite les erreurs si pas configure) ──
-const SUPABASE_URL = (typeof window._SB_URL !== "undefined") ? window._SB_URL : "https://TON-PROJECT-ID.supabase.co";
-const SUPABASE_ANON_KEY = "TON-ANON-PUBLIC-KEY";
-const APP_URL = "https://lolaronke.github.io/neo-susu";
-// Fonctions stub - remplacees par supabase.js quand configure
-async function getCurrentUser(){return null;}
-async function requireAuth(){return null;}
-async function getUserProfile(){return null;}
-async function getMyTontines(){return [];}
-async function signOut(){sessionStorage.clear();window.location.href="./index.html";}
-</script>
-<script>
-let currentLang=localStorage.getItem("ns_lang")||"fr";
-function setLang(lang){currentLang=lang;localStorage.setItem("ns_lang",lang);document.getElementById("html-root").lang=lang;document.querySelectorAll("[data-fr]").forEach(el=>{const v=el.getAttribute("data-"+lang);if(v)el.textContent=v;});document.getElementById("flag-fr").classList.toggle("active",lang==="fr");document.getElementById("flag-en").classList.toggle("active",lang==="en");}
-setLang(currentLang);
 
-async function loadDashboard(){
-  // ── DEMO MODE : verifie EN PREMIER avant tout appel Supabase ──
+<script>
   const urlParams = new URLSearchParams(window.location.search);
-  const demoSession = sessionStorage.getItem("neo_susu_demo_user");
-  const isDemo = urlParams.get("mode") === "demo" || !!demoSession;
-
-  if (isDemo) {
-    document.getElementById("demoBanner").classList.add("active");
-    loadDemoData();
-    return; // stop ici, aucun appel Supabase
+  if (urlParams.get('mode') === 'demo' || sessionStorage.getItem('neo_susu_demo_user')) {
+    document.getElementById('demoBanner').classList.add('active');
   }
 
-  // ── SUPABASE PAS ENCORE CONFIGURE → demo automatique ──
-  const supabaseReady = (
-    typeof SUPABASE_URL !== "undefined" &&
-    SUPABASE_URL !== "https://TON-PROJECT-ID.supabase.co" &&
-    SUPABASE_URL.includes("supabase.co")
-  );
-
-  if (!supabaseReady) {
-    loadDemoData();
-    return;
+  function handleLogout() {
+    if (confirm('Voulez-vous vraiment vous déconnecter ?')) {
+      sessionStorage.removeItem('neo_susu_demo_user');
+      window.location.href = './index.html';
+    }
   }
-
-  // ── DONNEES REELLES SUPABASE ──
-  try{
-    const user=await requireAuth();
-    if(!user)return;
-    const profile=await getUserProfile(user.id);
-
-    // Update UI with real data
-    document.getElementById("userName").textContent=profile.first_name+" "+profile.last_name;
-    document.getElementById("avatarEl").textContent=profile.first_name[0].toUpperCase();
-    document.getElementById("walletAmt").textContent=profile.wallet.toLocaleString("fr-FR");
-
-    const score=profile.score||50;
-    document.getElementById("scoreVal").textContent=score;
-    document.getElementById("scoreBar").style.width=score+"%";
-
-    const kycEl=document.getElementById("kycBadge");
-    if(profile.kyc_status==="verified"){kycEl.textContent="✓ KYC Verifie";kycEl.classList.add("verified");}
-    else{kycEl.textContent="⏳ KYC en attente";}
-
-    // Load tontines
-    const tontineData=await getMyTontines();
-    document.getElementById("tontineCount").textContent=tontineData.length;
-    let totalMembers=0;
-    tontineData.forEach(m=>{totalMembers+=(m.tontines?.tontine_members?.[0]?.count||0);});
-    document.getElementById("memberCount").textContent=totalMembers;
-
-    // Render tontines
-    renderTontines(tontineData,false);
-  }catch(err){
-    console.warn("Supabase not configured, using demo:",err.message);
-    loadDemoData();
-  }
-}
-
-function loadDemoData(){
-  document.getElementById("userName").textContent="Aicha Diallo";
-  document.getElementById("avatarEl").textContent="A";
-  document.getElementById("walletAmt").textContent="245 000";
-  document.getElementById("scoreVal").textContent="82";
-  document.getElementById("scoreBar").style.width="82%";
-  document.getElementById("tontineCount").textContent="3";
-  document.getElementById("memberCount").textContent="24";
-  document.getElementById("nextTurn").textContent="T4";
-  const kycEl=document.getElementById("kycBadge");
-  kycEl.textContent="👁️ Mode demo";
-  const demoTontines=[
-    {name:"Tontine Famille Diallo",amount:25000,currency:"FCFA",members:8,max:10,progress:80,freq:"Mensuelle",status:"active",id:"1"},
-    {name:"Collegues du bureau",amount:50000,currency:"FCFA",members:6,max:6,progress:100,freq:"Hebdomadaire",status:"active",id:"2"},
-    {name:"Projet scolarite",amount:10000,currency:"FCFA",members:4,max:8,progress:50,freq:"Bimensuelle",status:"waiting",id:"3"}
-  ];
-  renderDemoTontines(demoTontines);
-}
-
-function renderTontines(data,real){
-  const list=document.getElementById("tontinesList");
-  if(!data||!data.length){list.innerHTML='<div style="text-align:center;padding:24px;color:var(--text3);">'+(currentLang==="en"?"No tontines yet":"Aucune tontine pour l'instant")+'</div>';return;}
-  list.innerHTML=data.map(m=>{
-    const t=m.tontines||{};
-    const count=t.tontine_members?.[0]?.count||0;
-    const pct=Math.round((count/(t.max_members||10))*100);
-    return `<a href="./tontine-detail.html?id=${t.id}" class="tontine-card">
-      <div class="tontine-header"><div class="tontine-name">🌟 ${t.name}</div><span class="tontine-status status-active" data-fr="Active" data-en="Active">Active</span></div>
-      <div class="tontine-info"><span>${t.amount?.toLocaleString("fr-FR")} ${t.currency}</span><span>${count}/${t.max_members} <span data-fr="membres" data-en="members">membres</span></span></div>
-      <div class="tontine-progress"><div class="tontine-progress-fill" style="width:${pct}%"></div></div>
-    </a>`;
-  }).join("");
-}
-
-function renderDemoTontines(data){
-  const list=document.getElementById("tontinesList");
-  list.innerHTML=data.map(t=>`<a href="./tontine-detail.html?id=${t.id}" class="tontine-card">
-    <div class="tontine-header"><div class="tontine-name">🌟 ${t.name}</div><span class="tontine-status status-${t.status}" data-fr="${t.status==="active"?"Active":"En attente"}" data-en="${t.status==="active"?"Active":"Pending"}">${t.status==="active"?"Active":"En attente"}</span></div>
-    <div class="tontine-info"><span><span data-fr="Cotisation" data-en="Contribution">Cotisation</span> : <strong>${t.amount.toLocaleString("fr-FR")} ${t.currency}</strong></span><span>${t.members}/${t.max} <span data-fr="membres" data-en="members">membres</span></span></div>
-    <div class="tontine-info"><span data-fr="${t.freq}" data-en="${t.freq}">${t.freq}</span><span><strong>${t.progress}%</strong></span></div>
-    <div class="tontine-progress"><div class="tontine-progress-fill" style="width:${t.progress}%"></div></div>
-  </a>`).join("");
-}
-
-async function handleLogout(){
-  const msg=currentLang==="en"?"Are you sure you want to sign out?":"Voulez-vous vraiment vous deconnecter ?";
-  if(!confirm(msg))return;
-  try{await signOut();}catch(e){sessionStorage.removeItem("neo_susu_demo_user");window.location.href="./index.html";}
-}
-
-loadDashboard();
 </script>
 </body>
 </html>

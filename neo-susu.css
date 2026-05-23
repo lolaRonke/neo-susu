@@ -4,24 +4,39 @@
    ===================================================================== */
 
 :root {
-  --void: #07080F;
-  --deep: #0C0E1C;
-  --surf: #111526;
-  --card: #181D32;
-  --raised: #1E2440;
-  --gold: #D4A820;
-  --gold2: #B8860B;
-  --gold-pale: #F5E09A;
-  --em: #1CC48A;
-  --em2: #0FA870;
-  --red: #E8445A;
-  --sky: #4AA8FF;
-  --violet: #9B6EF8;
-  --text: #EEF1FF;
-  --text2: #8892BB;
-  --text3: #3E4868;
-  --stroke: rgba(255,255,255,0.06);
-  --stroke2: rgba(255,255,255,0.12);
+  /* ── Fonds : sombre chaud (au lieu du noir bleuté) ── */
+  --void:  #1A1612;   /* Fond principal — brun très foncé chaud  */
+  --deep:  #221E18;
+  --surf:  #2A2520;
+  --card:  #332E26;   /* Cartes */
+  --raised:#3D372E;   /* Éléments surélevés */
+
+  /* ── Jaune doré chaud ── */
+  --gold:      #C8920A;   /* Couleur principale ★ */
+  --gold2:     #A07208;
+  --gold-pale: #EEC86A;   /* Jaune clair */
+
+  /* ── Marron clair (remplace l'émeraude) ── */
+  --em:        #C4956A;   /* Marron clair ★ */
+  --em2:       #A87848;
+
+  /* ── Gris clair chaud (remplace le bleu ciel) ── */
+  --sky:       #B0A898;   /* Gris sable clair ★ */
+
+  /* ── Autres ── */
+  --red:    #CC4848;
+  --violet: #9B7ECC;
+
+  /* ── Texte chaud ── */
+  --text:  #EDE8E0;   /* Blanc cassé chaud */
+  --text2: #9C9080;   /* Gris brun */
+  --text3: #655E54;   /* Gris foncé chaud */
+
+  /* ── Bordures ── */
+  --stroke:  rgba(237,232,224,0.07);
+  --stroke2: rgba(237,232,224,0.13);
+
+  /* ── Typographie ── */
   --ff-s: "Cormorant Garamond", serif;
   --ff-b: "Outfit", system-ui, sans-serif;
 }
@@ -71,7 +86,7 @@ body {
   font-weight: 700;
   color: var(--void);
   margin: 0 auto 16px;
-  box-shadow: 0 16px 48px rgba(212,168,32,0.45);
+  box-shadow: 0 16px 48px rgba(200,146,10,0.45);
 }
 
 /* ===== Titres ===== */
@@ -137,9 +152,9 @@ body {
 .btn-primary {
   background: linear-gradient(135deg, var(--gold-pale), var(--gold));
   color: var(--void);
-  box-shadow: 0 12px 32px rgba(212,168,32,0.35);
+  box-shadow: 0 12px 32px rgba(200,146,10,0.35);
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(212,168,32,0.45); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(200,146,10,0.45); }
 
 .btn-secondary {
   background: var(--card);
@@ -160,7 +175,7 @@ body {
   font-weight: 700;
   cursor: pointer;
   margin-top: 16px;
-  box-shadow: 0 12px 32px rgba(212,168,32,0.35);
+  box-shadow: 0 12px 32px rgba(200,146,10,0.35);
 }
 .btn-submit:hover { transform: translateY(-2px); }
 
@@ -216,7 +231,7 @@ textarea { resize: vertical; min-height: 80px; }
 
 /* ===== Boites d'info ===== */
 .info-box {
-  background: rgba(212,168,32,0.08);
+  background: rgba(200,146,10,0.08);
   border-left: 3px solid var(--gold);
   padding: 12px 16px;
   border-radius: 8px;
@@ -227,7 +242,7 @@ textarea { resize: vertical; min-height: 80px; }
 
 .success-msg {
   display: none;
-  background: rgba(28,196,138,0.12);
+  background: rgba(196,149,106,0.12);
   border: 1px solid var(--em);
   color: var(--em);
   padding: 16px;
@@ -252,7 +267,7 @@ textarea { resize: vertical; min-height: 80px; }
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 8px 32px rgba(212,168,32,0.35);
+  box-shadow: 0 8px 32px rgba(200,146,10,0.35);
   margin: -30px -20px 24px;
 }
 
