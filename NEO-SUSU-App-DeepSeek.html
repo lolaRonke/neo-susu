@@ -4,22 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>NEO-SUSU — Tontine intelligente</title>
-    <meta name="theme-color" content="#1A1612">
+    <meta name="theme-color" content="#0D0B1E">
     <link rel="manifest" href="./manifest.json">
     <link rel="apple-touch-icon" href="./icons/icon-192.png">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --void:  #1A1612; --deep:  #221E18; --surf:  #2A2520; --card:  #332E26; --raised:#3D372E;
-            --gold:      #D1D5DB; --gold2:     #9CA3AF; --gold-pale: #F3F4F6;
-            --em:        #FFFFFF; --em2:       #F9FAFB;
-            --sky:       #B0A898; --red:       #CC4848;
-            --text:      #EDE8E0; --text2:     #9C9080; --text3:     #655E54;
-            --stroke:    rgba(237,232,224,0.07); --stroke2:   rgba(237,232,224,0.13);
-            --ff-s: "Cormorant Garamond", serif; --ff-b: "Outfit", system-ui, sans-serif;
+            /* ★ Chocolat au lait — fonds chauds et doux */
+            --void:  #0D0B1E;   /* Chocolat très foncé — fond principal  */
+            --deep:  #131029;   /* Chocolat foncé                        */
+            --surf:  #1A1535;   /* Chocolat moyen                        */
+            --card:  #211B42;   /* Chocolat au lait foncé                */
+            --raised:#2A2254;   /* Chocolat au lait clair                */
+
+            /* ★ Couleurs originales Claude — inchangées */
+            --gold:      #D4A820;   /* Jaune doré Claude                 */
+            --gold2:     #B8860B;   /* Jaune doré foncé                  */
+            --gold-pale: #F5E09A;   /* Jaune pâle                        */
+            --em:        #1CC48A;   /* Émeraude Claude                   */
+            --em2:       #0FA870;   /* Émeraude foncé                    */
+            --sky:       #4AA8FF;   /* Bleu ciel Claude                  */
+            --red:       #E8445A;   /* Rouge Claude                      */
+
+            /* ★ Texte adapté au fond chocolat */
+            --text:      #F0EEFF;   /* Crème chaud — lisible sur chocolat */
+            --text2:     #9B8EC4;   /* Beige doré                         */
+            --text3:     #5A4E8A;   /* Caramel                            */
+
+            /* ★ Bordures chocolat */
+            --stroke:    rgba(245,237,224,0.08);
+            --stroke2:   rgba(245,237,224,0.16);
+
+            --ff-s: "Cormorant Garamond", serif;
+            --ff-b: "Outfit", system-ui, sans-serif;
         }
-        body { font-family: var(--ff-b); background: var(--void); color: var(--text); line-height: 1.5; }
+        body { font-family: var(--ff-b); background: var(--void); color: var(--text); line-height: 1.5; } 
         .app-container { max-width: 560px; margin: 0 auto; background: var(--surf); min-height: 100vh; position: relative; box-shadow: 0 0 30px rgba(0,0,0,0.3); }
         .header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--stroke); background: var(--deep); }
         .logo { font-family: var(--ff-s); font-size: 28px; font-weight: 700; color: var(--gold); }

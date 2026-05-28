@@ -4,42 +4,36 @@
    ===================================================================== */
 
 :root {
-  /* ── Fonds : sombre chaud (au lieu du noir bleuté) ── */
-  --void:  #1A1612;   /* Fond principal — brun très foncé chaud  */
-  --deep:  #221E18;
-  --surf:  #2A2520;
-  --card:  #332E26;   /* Cartes */
-  --raised:#3D372E;   /* Éléments surélevés */
+            /* ★ Palette Violet Indigo — inspirée de l'affiche */
+            --void:  #0D0B1E;   /* Bleu nuit très foncé — fond principal  */
+            --deep:  #131029;   /* Indigo très foncé                       */
+            --surf:  #1A1535;   /* Indigo foncé                            */
+            --card:  #211B42;   /* Violet-indigo                           */
+            --raised:#2A2254;   /* Violet moyen                            */
 
-  /* ── Jaune doré chaud ── */
-  --gold:      #C8920A;   /* Couleur principale ★ */
-  --gold2:     #A07208;
-  --gold-pale: #EEC86A;   /* Jaune clair */
+            /* ★ Couleurs accentuées */
+            --gold:      #D4A820;   /* Jaune doré Claude — inchangé        */
+            --gold2:     #B8860B;
+            --gold-pale: #F5E09A;
+            --em:        #1CC48A;   /* Émeraude Claude — inchangé          */
+            --em2:       #0FA870;
+            --sky:       #4AA8FF;   /* Bleu ciel Claude — inchangé         */
+            --violet:    #9B72F5;   /* Violet clair — couleur de l'affiche */
+            --violet2:   #7C5CE4;   /* Violet moyen                        */
+            --red:       #E8445A;
 
-  /* ── Marron clair (remplace l'émeraude) ── */
-  --em:        #C4956A;   /* Marron clair ★ */
-  --em2:       #A87848;
+            /* ★ Texte clair sur fond sombre */
+            --text:      #F0EEFF;   /* Blanc légèrement violacé            */
+            --text2:     #9B8EC4;   /* Violet clair / gris lilas            */
+            --text3:     #5A4E8A;   /* Violet foncé                        */
 
-  /* ── Gris clair chaud (remplace le bleu ciel) ── */
-  --sky:       #B0A898;   /* Gris sable clair ★ */
+            /* ★ Bordures violettes */
+            --stroke:    rgba(155,114,245,0.12);
+            --stroke2:   rgba(155,114,245,0.22);
 
-  /* ── Autres ── */
-  --red:    #CC4848;
-  --violet: #9B7ECC;
-
-  /* ── Texte chaud ── */
-  --text:  #EDE8E0;   /* Blanc cassé chaud */
-  --text2: #9C9080;   /* Gris brun */
-  --text3: #655E54;   /* Gris foncé chaud */
-
-  /* ── Bordures ── */
-  --stroke:  rgba(237,232,224,0.07);
-  --stroke2: rgba(237,232,224,0.13);
-
-  /* ── Typographie ── */
-  --ff-s: "Cormorant Garamond", serif;
-  --ff-b: "Outfit", system-ui, sans-serif;
-}
+            --ff-s: "Cormorant Garamond", serif;
+            --ff-b: "Outfit", system-ui, sans-serif;
+        }
 
 * {
   margin: 0;
