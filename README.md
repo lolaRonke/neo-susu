@@ -56,7 +56,7 @@ neo-susu/
 | Fonctionnalité | Status |
 |---|---|
 | Installation sur écran d'accueil | ✅ |
-| Icône personnalisée (N doré) | ✅ |
+| Icône personnalisée (N lavande, charte « Nuit violette ») | ✅ |
 | Fonctionne hors ligne | ✅ |
 | Cache automatique | ✅ |
 | Notifications push (préparé) | ✅ |

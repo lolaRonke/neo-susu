@@ -11,32 +11,32 @@
 ════════════════════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --ink:#07080F;
-  --deep:#0C0D1A;
-  --surface:#111326;
-  --panel:#161829;
-  --card:#1B1E32;
-  --gold:#D4A017;
-  --gold2:#B8860B;
-  --gold-pale:#F5DFA0;
-  --gold-glow:rgba(212,160,23,.18);
-  --em:#1DB88A;
-  --em2:#0F9470;
-  --em-bg:rgba(29,184,138,.08);
-  --red:#E8445A;
-  --sky:#4A9EFF;
-  --violet:#9B72F8;
-  --text:#EDF0FF;
-  --muted:#6470A0;
-  --border:#1E2240;
-  --border2:#252A48;
+  --ink:#0E0C1A;
+  --deep:#151328;
+  --surface:#191E31;
+  --panel:#201C3C;
+  --card:#262145;
+  --gold:#B393F4;
+  --gold2:#8B6FD6;
+  --gold-pale:#E5DAFE;
+  --gold-glow:rgba(179,147,244,.18);
+  --em:#2BAD7A;
+  --em2:#1F8A60;
+  --em-bg:rgba(43,173,122,.08);
+  --red:#D4524A;
+  --sky:#A2AFD8;
+  --violet:#B890FD;
+  --text:#F4F2FB;
+  --muted:#A39FBE;
+  --border:#2A2548;
+  --border2:#403965;
   --font-display:'Cormorant Garamond',Georgia,serif;
   --font-body:'Outfit',sans-serif;
   scroll-behavior:smooth;
 }
 html{font-size:16px;}
 body{
-  background:var(--ink);
+  background:var(--ink) linear-gradient(160deg,#231D43 0%,#191E31 45%,#0E0C1A 100%) fixed;
   color:var(--text);
   font-family:var(--font-body);
   overflow-x:hidden;
@@ -53,7 +53,7 @@ body{
 }
 #cursor-ring{
   width:38px;height:38px;border-radius:50%;
-  border:1.5px solid rgba(212,160,23,.5);
+  border:1.5px solid rgba(179,147,244,.5);
   position:fixed;pointer-events:none;z-index:9998;
   transition:all .22s ease;
 }
@@ -73,7 +73,7 @@ nav{
   transition:background .4s,backdrop-filter .4s,box-shadow .4s;
 }
 nav.scrolled{
-  background:rgba(7,8,15,.88);
+  background:rgba(14,12,26,.88);
   backdrop-filter:blur(20px);
   box-shadow:0 1px 0 var(--border);
 }
@@ -86,7 +86,7 @@ nav.scrolled{
   background:linear-gradient(135deg,var(--gold),var(--gold2));
   display:flex;align-items:center;justify-content:center;
   font-family:var(--font-display);font-size:22px;font-weight:700;
-  color:var(--ink);box-shadow:0 4px 16px rgba(212,160,23,.3);
+  color:var(--ink);box-shadow:0 4px 16px rgba(179,147,244,.3);
 }
 .nav-logo-text{
   font-family:var(--font-display);font-size:20px;font-weight:700;
@@ -103,10 +103,10 @@ nav.scrolled{
   background:linear-gradient(135deg,var(--gold),var(--gold2));
   color:var(--ink)!important;font-weight:700!important;
   padding:10px 22px;border-radius:24px;
-  box-shadow:0 4px 16px rgba(212,160,23,.25);
+  box-shadow:0 4px 16px rgba(179,147,244,.25);
   transition:all .2s!important;
 }
-.nav-cta:hover{box-shadow:0 6px 24px rgba(212,160,23,.45)!important;transform:translateY(-1px);}
+.nav-cta:hover{box-shadow:0 6px 24px rgba(179,147,244,.45)!important;transform:translateY(-1px);}
 .nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
 .nav-ham span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px;transition:all .3s;}
 
@@ -117,8 +117,8 @@ nav.scrolled{
   min-height:100vh;
   display:flex;align-items:center;
   position:relative;overflow:hidden;
-  background:radial-gradient(ellipse 80% 60% at 20% 30%,rgba(212,160,23,.07) 0,transparent 60%),
-             radial-gradient(ellipse 60% 50% at 80% 70%,rgba(29,184,138,.05) 0,transparent 55%),
+  background:radial-gradient(ellipse 80% 60% at 20% 30%,rgba(179,147,244,.07) 0,transparent 60%),
+             radial-gradient(ellipse 60% 50% at 80% 70%,rgba(43,173,122,.05) 0,transparent 55%),
              var(--ink);
 }
 .hero-grid{
@@ -137,7 +137,7 @@ nav.scrolled{
 }
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
-  background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.2);
+  background:rgba(179,147,244,.08);border:1px solid rgba(179,147,244,.2);
   border-radius:30px;padding:6px 16px;margin-bottom:28px;
   font-size:12px;font-weight:600;color:var(--gold);letter-spacing:1.5px;
   text-transform:uppercase;
@@ -179,9 +179,9 @@ nav.scrolled{
 .btn-gold{
   background:linear-gradient(135deg,var(--gold),var(--gold2));
   color:var(--ink);
-  box-shadow:0 8px 28px rgba(212,160,23,.3);
+  box-shadow:0 8px 28px rgba(179,147,244,.3);
 }
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(212,160,23,.45);}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(179,147,244,.45);}
 .btn-ghost{
   background:transparent;color:var(--text);
   border:1.5px solid var(--border2);
@@ -197,7 +197,7 @@ nav.scrolled{
   width:260px;margin:0 auto;
   background:var(--panel);
   border-radius:40px;border:2px solid var(--border2);
-  box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 60px rgba(212,160,23,.08);
+  box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 60px rgba(179,147,244,.08);
   overflow:hidden;position:relative;
 }
 .hero-phone-notch{
@@ -209,7 +209,7 @@ nav.scrolled{
 }
 .hero-phone-screen{
   padding:44px 18px 24px;
-  background:linear-gradient(160deg,#0F1226 0%,#080A14 100%);
+  background:linear-gradient(160deg,#231D43 0%,#0E0C1A 100%);
   min-height:480px;
 }
 .phone-header{
@@ -223,14 +223,14 @@ nav.scrolled{
   font-size:18px;
 }
 .phone-balance{
-  background:linear-gradient(135deg,rgba(212,160,23,.08),rgba(29,184,138,.05));
-  border:1px solid rgba(212,160,23,.15);
+  background:linear-gradient(135deg,rgba(179,147,244,.08),rgba(43,173,122,.05));
+  border:1px solid rgba(179,147,244,.15);
   border-radius:18px;padding:18px;margin-bottom:14px;
 }
 .phone-bal-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
 .phone-bal-value{
   font-family:var(--font-display);font-size:34px;font-weight:700;
-  background:linear-gradient(135deg,var(--text),rgba(212,160,23,.8));
+  background:linear-gradient(135deg,var(--text),rgba(179,147,244,.8));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
 .phone-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;}
@@ -246,7 +246,7 @@ nav.scrolled{
 }
 .phone-tontine-icon{
   width:36px;height:36px;border-radius:11px;
-  background:rgba(212,160,23,.1);
+  background:rgba(179,147,244,.1);
   display:flex;align-items:center;justify-content:center;font-size:18px;
   flex-shrink:0;
 }
@@ -270,9 +270,9 @@ nav.scrolled{
 
 /* ── STATS TICKER ── */
 .stats-ticker{
-  background:rgba(212,160,23,.05);
-  border-top:1px solid rgba(212,160,23,.1);
-  border-bottom:1px solid rgba(212,160,23,.1);
+  background:rgba(179,147,244,.05);
+  border-top:1px solid rgba(179,147,244,.1);
+  border-bottom:1px solid rgba(179,147,244,.1);
   padding:14px 0;overflow:hidden;
   position:relative;z-index:2;
 }
@@ -283,7 +283,7 @@ nav.scrolled{
 }
 .ticker-item{
   padding:0 40px;font-size:13px;font-weight:600;
-  color:rgba(212,160,23,.7);letter-spacing:.5px;
+  color:rgba(179,147,244,.7);letter-spacing:.5px;
 }
 .ticker-dot{color:var(--gold);margin-right:40px;}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -343,7 +343,7 @@ section{padding:100px 5vw;}
 .step-num{
   font-family:var(--font-display);
   font-size:60px;font-weight:700;
-  color:rgba(212,160,23,.1);
+  color:rgba(179,147,244,.1);
   line-height:1;margin-bottom:16px;
 }
 .step-icon{font-size:36px;margin-bottom:16px;display:block;}
@@ -365,10 +365,10 @@ section{padding:100px 5vw;}
   border-radius:24px;padding:32px;overflow:hidden;position:relative;
   transition:all .3s;cursor:default;
 }
-.bento-card:hover{border-color:rgba(212,160,23,.25);transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.bento-card:hover{border-color:rgba(179,147,244,.25);transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,.3);}
 .bento-card::after{
   content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(212,160,23,.04) 0,transparent 60%);
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(179,147,244,.04) 0,transparent 60%);
   pointer-events:none;
 }
 .bc-a{grid-column:span 5;grid-row:span 2;}
@@ -379,6 +379,9 @@ section{padding:100px 5vw;}
 .bc-f{grid-column:span 5;}
 .bc-g{grid-column:span 4;grid-row:span 1;}
 .bento-icon{font-size:40px;margin-bottom:18px;}
+.soon{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(179,147,244,.14);color:var(--gold);border:1px solid rgba(179,147,244,.32);white-space:nowrap;vertical-align:middle;}
+.soon-africa{background:rgba(162,175,216,.12);color:var(--sky);border-color:rgba(162,175,216,.32);}
+.soon-row{margin-bottom:10px;}
 .bento-title{font-size:20px;font-weight:700;color:var(--text);margin-bottom:10px;}
 .bento-body{font-size:14px;color:var(--muted);line-height:1.6;}
 .bento-tag{
@@ -386,10 +389,10 @@ section{padding:100px 5vw;}
   font-size:11px;font-weight:700;letter-spacing:1px;
   border-radius:20px;padding:4px 12px;
 }
-.tag-gold{background:rgba(212,160,23,.1);color:var(--gold);}
-.tag-em{background:rgba(29,184,138,.1);color:var(--em);}
-.tag-sky{background:rgba(74,158,255,.1);color:var(--sky);}
-.tag-vi{background:rgba(155,114,248,.1);color:var(--violet);}
+.tag-gold{background:rgba(179,147,244,.1);color:var(--gold);}
+.tag-em{background:rgba(43,173,122,.1);color:var(--em);}
+.tag-sky{background:rgba(162,175,216,.1);color:var(--sky);}
+.tag-vi{background:rgba(184,144,253,.1);color:var(--violet);}
 
 /* Big feature in bento */
 .bc-a .big-number{
@@ -413,13 +416,13 @@ section{padding:100px 5vw;}
    NUMBERS / SOCIAL PROOF
 ──────────────────────────────────────────────── */
 #numbers{
-  background:linear-gradient(135deg,var(--deep) 0%,#080B1A 100%);
+  background:linear-gradient(135deg,var(--deep) 0%,#0E0C1A 100%);
   position:relative;overflow:hidden;
 }
 #numbers::before{
   content:'';position:absolute;
   width:600px;height:600px;border-radius:50%;
-  background:radial-gradient(circle,rgba(212,160,23,.05),transparent 70%);
+  background:radial-gradient(circle,rgba(179,147,244,.05),transparent 70%);
   top:-200px;right:-100px;
 }
 .numbers-grid{
@@ -454,7 +457,7 @@ section{padding:100px 5vw;}
   background:var(--panel);border:1px solid var(--border);
   border-radius:24px;padding:32px;transition:all .3s;
 }
-.testi-card:hover{transform:translateY(-4px);border-color:rgba(212,160,23,.2);}
+.testi-card:hover{transform:translateY(-4px);border-color:rgba(179,147,244,.2);}
 .testi-stars{display:flex;gap:4px;margin-bottom:16px;}
 .star{color:var(--gold);font-size:16px;}
 .testi-text{
@@ -484,9 +487,9 @@ section{padding:100px 5vw;}
 }
 .price-card:hover{transform:translateY(-4px);}
 .price-card.featured{
-  background:linear-gradient(160deg,#1A1E36,#111526);
-  border-color:rgba(212,160,23,.4);
-  box-shadow:0 0 60px rgba(212,160,23,.08);
+  background:linear-gradient(160deg,#201C3C,#191E31);
+  border-color:rgba(179,147,244,.4);
+  box-shadow:0 0 60px rgba(179,147,244,.08);
 }
 .price-badge{
   position:absolute;top:-14px;left:50%;transform:translateX(-50%);
@@ -510,18 +513,25 @@ section{padding:100px 5vw;}
 .price-features li::before{content:'✓';color:var(--em);font-weight:800;flex-shrink:0;}
 .price-features li.off::before{content:'–';color:var(--muted);}
 .price-features li.off{color:var(--muted);}
+.guarantee-band{display:flex;gap:18px;align-items:flex-start;max-width:900px;margin:36px auto 0;padding:24px 28px;border-radius:20px;background:rgba(43,173,122,.06);border:1px solid rgba(43,173,122,.28);}
+.guarantee-ico{font-size:30px;line-height:1;flex-shrink:0;}
+.guarantee-title{font-size:17px;font-weight:700;margin-bottom:6px;}
+.guarantee-title span{color:var(--em);margin-left:6px;}
+.guarantee-band p{font-size:14px;line-height:1.65;color:var(--muted);}
+.pricing-legal{text-align:center;font-size:12px;line-height:1.7;color:var(--muted);margin-top:22px;}
+@media(max-width:600px){.guarantee-band{flex-direction:column;padding:20px;}}
 
 /* ────────────────────────────────────────────────
    CTA SECTION
 ──────────────────────────────────────────────── */
 #cta{
-  background:linear-gradient(135deg,#0D0E1C,#0A0C18);
+  background:linear-gradient(135deg,#151328,#0E0C1A);
   position:relative;overflow:hidden;text-align:center;
 }
 #cta::before{
   content:'';position:absolute;
   width:800px;height:800px;border-radius:50%;
-  background:radial-gradient(circle,rgba(212,160,23,.07),transparent 70%);
+  background:radial-gradient(circle,rgba(179,147,244,.07),transparent 70%);
   top:50%;left:50%;transform:translate(-50%,-50%);
 }
 .cta-content{position:relative;z-index:1;}
@@ -559,20 +569,20 @@ footer{
   width:60px;height:60px;border-radius:50%;border:none;
   background:linear-gradient(135deg,var(--gold),var(--gold2));
   cursor:pointer;
-  box-shadow:0 8px 32px rgba(212,160,23,.4);
+  box-shadow:0 8px 32px rgba(179,147,244,.4);
   display:flex;align-items:center;justify-content:center;
   font-size:26px;transition:all .3s;
   animation:copilotPulse 3s ease infinite;
 }
 @keyframes copilotPulse{
-  0%,100%{box-shadow:0 8px 32px rgba(212,160,23,.4);}
-  50%{box-shadow:0 8px 48px rgba(212,160,23,.65),0 0 0 8px rgba(212,160,23,.08);}
+  0%,100%{box-shadow:0 8px 32px rgba(179,147,244,.4);}
+  50%{box-shadow:0 8px 48px rgba(179,147,244,.65),0 0 0 8px rgba(179,147,244,.08);}
 }
 #copilot-btn:hover{transform:scale(1.1);}
 #copilot-btn.open{
-  background:linear-gradient(135deg,var(--red),#C0392B);
+  background:linear-gradient(135deg,var(--red),#A93F38);
   animation:none;
-  box-shadow:0 8px 32px rgba(232,68,90,.4);
+  box-shadow:0 8px 32px rgba(212,82,74,.4);
 }
 
 #copilot-panel{
@@ -582,7 +592,7 @@ footer{
   background:var(--surface);
   border:1px solid var(--border2);
   border-radius:28px;
-  box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 0 1px rgba(212,160,23,.08);
+  box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 0 1px rgba(179,147,244,.08);
   display:none;flex-direction:column;overflow:hidden;
   animation:panelOpen .4s cubic-bezier(.34,1.56,.64,1);
 }
@@ -600,14 +610,14 @@ footer{
   font-size:22px;
 }
 .cp-title{font-weight:800;font-size:16px;color:var(--ink);}
-.cp-sub{font-size:12px;color:rgba(7,8,15,.65);}
+.cp-sub{font-size:12px;color:rgba(14,12,26,.65);}
 .cp-status{
   margin-left:auto;display:flex;align-items:center;gap:6px;
-  font-size:12px;font-weight:700;color:rgba(7,8,15,.7);
+  font-size:12px;font-weight:700;color:rgba(14,12,26,.7);
 }
 .cp-status-dot{
   width:8px;height:8px;border-radius:50%;
-  background:#1A7A44;animation:pulse 2s infinite;
+  background:#2BAD7A;animation:pulse 2s infinite;
 }
 
 .cp-messages{
@@ -682,7 +692,7 @@ footer{
   transition:border-color .2s;
   line-height:1.4;
 }
-#cp-input:focus{border-color:rgba(212,160,23,.5);}
+#cp-input:focus{border-color:rgba(179,147,244,.5);}
 #cp-input::placeholder{color:var(--muted);}
 #cp-send{
   width:42px;height:42px;border-radius:50%;
@@ -772,9 +782,9 @@ footer{
         intelligente
       </h1>
       <p class="hero-sub">
-        Gérez vos tontines en toute sécurité. Paiements PSP agréés, 
-        assistant IA vocal en 5 langues, réseau d'agents cash. 
-        Pour la diaspora africaine et les communautés sur le continent.
+        Gérez vos tontines en toute sécurité : paiements via PSP agréés,
+        versements automatiques et relances rédigées par l'IA.
+        Pour la diaspora africaine, et bientôt les communautés sur le continent.
       </p>
       <div class="hero-actions">
         <a href="#" class="btn btn-gold">Créer ma tontine ✦</a>
@@ -795,7 +805,7 @@ footer{
           <div class="phone-balance">
             <div class="phone-bal-label">Score fiabilité</div>
             <div class="phone-bal-value">98<span style="font-size:18px;opacity:.5;">/100</span></div>
-            <div style="font-size:11px;color:var(--muted);margin-top:4px;">★★★★★ Premium · KYC vérifié</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px;">★★★★★ Essentiel · KYC vérifié</div>
           </div>
           <div class="phone-actions">
             <div class="phone-action"><span>➕</span>Créer</div>
@@ -815,8 +825,8 @@ footer{
             <div class="phone-tontine-amt">€200</div>
           </div>
           <div style="display:flex;align-items:center;gap:8px;margin-top:10px;background:var(--card);border-radius:12px;padding:10px;">
-            <span style="font-size:18px;">🎙️</span>
-            <span style="font-size:11px;color:var(--muted);">Assistant vocal actif — J+14 avant ton tour</span>
+            <span style="font-size:18px;">🔔</span>
+            <span style="font-size:11px;color:var(--muted);">Ton tour dans 14 jours</span>
           </div>
         </div>
       </div>
@@ -832,20 +842,20 @@ footer{
   <div class="ticker-inner">
     <span class="ticker-item">✦ 100% Sécurisé — PSP Agréé</span>
     <span class="ticker-item">✦ 0 Fonds Détenus — DSP2 Compliant</span>
-    <span class="ticker-item">✦ 5 Langues — IA Vocale</span>
-    <span class="ticker-item">✦ Cash & Digital — Agents Certifiés</span>
-    <span class="ticker-item">✦ 🏠 Tontine Appartement — Accédez à la propriété en Afrique</span>
-    <span class="ticker-item">✦ 🛡️ Assurance Diaspora — Protégez votre famille</span>
+    <span class="ticker-item">✦ IA Vocale 5 langues — Version 3</span>
+    <span class="ticker-item">✦ Cash & Mobile Money — Bientôt en Afrique</span>
+    <span class="ticker-item">✦ 🏠 Tontine Appartement — Bientôt disponible</span>
+    <span class="ticker-item">✦ 🛡️ Assurance Diaspora — Bientôt disponible</span>
     <span class="ticker-item">✦ KYC Intégré — RGPD Conforme</span>
-    <span class="ticker-item">✦ Mangopay · Stripe · Wave · Orange Money</span>
+    <span class="ticker-item">✦ Paiements sécurisés Mangopay · Stripe</span>
     <span class="ticker-item">✦ 100% Sécurisé — PSP Agréé</span>
     <span class="ticker-item">✦ 0 Fonds Détenus — DSP2 Compliant</span>
-    <span class="ticker-item">✦ 5 Langues — IA Vocale</span>
-    <span class="ticker-item">✦ Cash & Digital — Agents Certifiés</span>
-    <span class="ticker-item">✦ 🏠 Tontine Appartement — Accédez à la propriété en Afrique</span>
-    <span class="ticker-item">✦ 🛡️ Assurance Diaspora — Protégez votre famille</span>
+    <span class="ticker-item">✦ IA Vocale 5 langues — Version 3</span>
+    <span class="ticker-item">✦ Cash & Mobile Money — Bientôt en Afrique</span>
+    <span class="ticker-item">✦ 🏠 Tontine Appartement — Bientôt disponible</span>
+    <span class="ticker-item">✦ 🛡️ Assurance Diaspora — Bientôt disponible</span>
     <span class="ticker-item">✦ KYC Intégré — RGPD Conforme</span>
-    <span class="ticker-item">✦ Mangopay · Stripe · Wave · Orange Money</span>
+    <span class="ticker-item">✦ Paiements sécurisés Mangopay · Stripe</span>
   </div>
 </div>
 
@@ -874,13 +884,13 @@ footer{
         <div class="step-num">03</div>
         <span class="step-icon">💳</span>
         <div class="step-title">Cotisez & Distribuez</div>
-        <div class="step-body">Carte, virement SEPA, Mobile Money ou cash via agents certifiés. La distribution est automatique et instantanée.</div>
+        <div class="step-body">Carte bancaire ou virement SEPA. La cagnotte est versée automatiquement dès que tout le groupe a payé. Mobile Money et cash : bientôt en Afrique.</div>
       </div>
       <div class="step">
         <div class="step-num">04</div>
         <span class="step-icon">🤖</span>
         <div class="step-title">L'IA gère le reste</div>
-        <div class="step-body">Relances automatiques, score de fiabilité, recouvrement intelligent. Tout en 5 langues, par vocal ou texte.</div>
+        <div class="step-body">L'IA relance les retardataires par e-mail, du rappel cordial au dernier avertissement. Assistant vocal en 5 langues prévu pour la version 3.</div>
       </div>
     </div>
   </div>
@@ -897,9 +907,10 @@ footer{
 
       <div class="bento-card bc-a">
         <div class="bento-icon">🤖</div>
+        <div class="soon-row"><span class="soon">Version 3</span></div>
         <div class="big-number">5</div>
         <div class="bento-title">Langues. Une seule IA.</div>
-        <div class="bento-body">Notre assistant vocal comprend et répond en français, anglais, yoruba, wolof et lingala. Il gère les relances, négocie les remboursements et résume votre tontine par audio.</div>
+        <div class="bento-body">Avec la version 3, l'assistant vocal comprendra et répondra en français, anglais, yoruba, wolof et lingala. Il gérera les relances, négociera les remboursements et résumera votre tontine par audio.</div>
         <div class="lang-flags">
           <div class="lang-chip">🇫🇷 Français</div>
           <div class="lang-chip">🇬🇧 English</div>
@@ -919,6 +930,7 @@ footer{
 
       <div class="bento-card bc-c">
         <div class="bento-icon">📊</div>
+        <div class="soon-row"><span class="soon">Bientôt disponible</span></div>
         <div class="bento-title">Score de fiabilité</div>
         <div class="bento-body">Chaque membre reçoit un score 0–100 basé sur son historique de paiement. Transparent et motivant.</div>
         <span class="bento-tag tag-em">IA Scoring</span>
@@ -926,13 +938,15 @@ footer{
 
       <div class="bento-card bc-d">
         <div class="bento-icon">💵</div>
+        <div class="soon-row"><span class="soon soon-africa">Bientôt en Afrique</span></div>
         <div class="bento-title">Cash via agents certifiés</div>
-        <div class="bento-body">Retirez en espèces chez nos agents partenaires en Afrique et en Europe. Code OTP sécurisé, paiement instantané.</div>
+        <div class="bento-body">Retrait en espèces chez des agents partenaires, avec un code OTP sécurisé. Prévu pour le lancement en Afrique.</div>
         <span class="bento-tag tag-gold">Réseau Agents 🌍</span>
       </div>
 
       <div class="bento-card bc-e">
         <div class="bento-icon">⚡</div>
+        <div class="soon-row"><span class="soon">Bientôt disponible</span></div>
         <div class="bento-title">Notifications temps réel</div>
         <div class="bento-body">Push, SMS, vocal — chaque événement de votre tontine vous est communiqué instantanément.</div>
         <span class="bento-tag tag-sky">WebSocket Live</span>
@@ -941,14 +955,15 @@ footer{
       <div class="bento-card bc-f">
         <div class="bento-icon">🔄</div>
         <div class="bento-title">Recouvrement automatisé par IA</div>
-        <div class="bento-body">De J-2 (rappel SMS) à J+30 (recouvrement), l'IA adapte son ton, propose des plans de remboursement sur mesure et escalade progressivement. Taux de récupération : 94,7%.</div>
-        <span class="bento-tag tag-em">Relance Adaptative · 6 niveaux</span>
+        <div class="bento-body">L'IA rédige trois relances par e-mail, du rappel cordial au dernier avertissement : le jour du retard, 10 jours après, puis 20 jours après avec la mention d'un possible recours à un commissaire de justice.</div>
+        <span class="bento-tag tag-em">Relances IA · 3 niveaux</span>
       </div>
 
       <div class="bento-card bc-g">
         <div class="bento-icon">🌍</div>
+        <div class="soon-row"><span class="soon soon-africa">Bientôt en Afrique</span></div>
         <div class="bento-title">Europe + Afrique</div>
-        <div class="bento-body">Virement SEPA en Europe. Mobile Money (Orange, MTN, Wave) en Afrique. Un seul produit, deux continents.</div>
+        <div class="bento-body">Carte et virement SEPA en Europe dès aujourd'hui. Mobile Money (Orange, MTN, Wave) au lancement en Afrique. Un seul produit, deux continents.</div>
         <span class="bento-tag tag-sky">Multi-devises</span>
       </div>
 
@@ -970,7 +985,8 @@ footer{
       </div>
       <div class="num-card">
         <div class="num-val">94.7<span style="font-size:28px;">%</span></div>
-        <div class="num-label">Taux de récupération IA</div>
+        <div class="num-label">Objectif de taux de récupération IA</div>
+        <div style="margin-top:10px;"><span class="soon">Bientôt disponible</span></div>
       </div>
       <div class="num-card">
         <div class="num-val">9M<span style="font-size:28px;">+</span></div>
@@ -990,13 +1006,14 @@ footer{
     <div class="reveal">
       <div class="section-eyebrow">Témoignages</div>
       <h2 class="section-title">Ce que dit notre <em>communauté</em></h2>
+      <p class="section-sub" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;"><span class="soon">Bientôt disponible</span> <span>Témoignages illustratifs : les premiers avis de nos membres arrivent bientôt.</span></p>
     </div>
     <div class="testi-grid reveal">
       <div class="testi-card">
         <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
         <p class="testi-text">"Avant NEO-SUSU, notre tontine familiale était gérée sur WhatsApp. Des retards, des oublis, des tensions. Maintenant tout est automatique et transparent. L'IA nous rappelle en français, c'est magique."</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background:rgba(212,160,23,.1);">👩🏾</div>
+          <div class="testi-avatar" style="background:rgba(179,147,244,.1);">👩🏾</div>
           <div><div class="testi-name">Aïcha Konaté</div><div class="testi-role">Paris, France · Tontine 12 membres</div></div>
         </div>
       </div>
@@ -1004,7 +1021,7 @@ footer{
         <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
         <p class="testi-text">"Je retire mon argent cash à Dakar via un agent NEO-SUSU. En 5 minutes, le code OTP, l'agent valide, je récupère mes CFA. Incroyable pour quelqu'un basé à Lyon."</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background:rgba(29,184,138,.1);">👨🏿</div>
+          <div class="testi-avatar" style="background:rgba(43,173,122,.1);">👨🏿</div>
           <div><div class="testi-name">Mamadou Diallo</div><div class="testi-role">Lyon → Dakar · Retrait Cash Agent</div></div>
         </div>
       </div>
@@ -1012,7 +1029,7 @@ footer{
         <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
         <p class="testi-text">"L'assistant vocal en yoruba, c'est ce qui m'a convaincu. Mes parents à Lagos comprennent tout. Le score de fiabilité a réduit nos problèmes de retard de 90%."</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background:rgba(74,158,255,.1);">👩🏽</div>
+          <div class="testi-avatar" style="background:rgba(162,175,216,.1);">👩🏽</div>
           <div><div class="testi-name">Chidinma Okafor</div><div class="testi-role">Londres, UK · Groupe 20 membres</div></div>
         </div>
       </div>
@@ -1026,70 +1043,74 @@ footer{
     <div class="reveal" style="text-align:center;">
       <div class="section-eyebrow" style="justify-content:center;">Tarifs</div>
       <h2 class="section-title">Transparent. <em>Accessible.</em></h2>
-      <p class="section-sub" style="margin:0 auto;">Commencez gratuitement. Passez à Premium quand vous êtes prêt.</p>
+      <p class="section-sub" style="margin:0 auto;">Une tontine de 10 personnes est gratuite. L'abonnement est pris par l'organisateur et réduit la commission prélevée sur la cagnotte : les membres ne paient que leur cotisation.</p>
     </div>
     <div class="pricing-grid reveal">
       <div class="price-card">
-        <div class="price-name">Free</div>
-        <div class="price-amount">€0<span>/mois</span></div>
-        <div class="price-period">Pour commencer</div>
+        <div class="price-name">Gratuit</div>
+        <div class="price-amount">0 €<span>/mois</span></div>
+        <div class="price-period">Pour toujours</div>
         <ul class="price-features">
-          <li>1 groupe de tontine</li>
-          <li>6 membres maximum</li>
-          <li>Paiements carte & virement</li>
-          <li>Notifications push</li>
-          <li class="off">IA Vocale multilingue</li>
-          <li class="off">Agents cash</li>
-          <li class="off">Score de fiabilité avancé</li>
+          <li>1 tontine active</li>
+          <li>Jusqu'à 10 membres</li>
+          <li>Versements automatiques de la cagnotte</li>
+          <li>Relances des retards rédigées par l'IA</li>
+          <li>Commission de 1,5 % sur la cagnotte</li>
         </ul>
         <a href="#" class="btn btn-ghost" style="justify-content:center;">Commencer gratuitement</a>
       </div>
 
       <div class="price-card featured">
-        <div class="price-badge">Le plus populaire ✦</div>
-        <div class="price-name" style="color:var(--gold);">Premium</div>
-        <div class="price-amount" style="color:var(--gold);">€4<span style="font-size:24px;">,99/mois</span></div>
-        <div class="price-period">Pour les groupes actifs</div>
+        <div class="price-badge">Le plus choisi ✦</div>
+        <div class="price-name" style="color:var(--gold);">Essentiel</div>
+        <div class="price-amount" style="color:var(--gold);">4,99 €<span>/mois</span></div>
+        <div class="price-period">ou 49,90 €/an, 2 mois offerts</div>
         <ul class="price-features">
-          <li>Groupes illimités</li>
-          <li>20 membres par groupe</li>
-          <li>Tous modes de paiement</li>
-          <li>🎙️ IA Vocale 5 langues</li>
-          <li>Agents cash prioritaires</li>
-          <li>Score de fiabilité complet</li>
-          <li>Recouvrement IA automatique</li>
+          <li>3 tontines actives</li>
+          <li>Jusqu'à 20 membres par tontine</li>
+          <li>Versements automatiques de la cagnotte</li>
+          <li>Relances des retards rédigées par l'IA</li>
+          <li>Commission réduite à 0,5 %</li>
         </ul>
-        <a href="#" class="btn btn-gold" style="justify-content:center;">Essayer 30 jours gratuit</a>
+        <a href="#" class="btn btn-gold" style="justify-content:center;">Choisir Essentiel</a>
       </div>
 
       <div class="price-card">
-        <div class="price-name">Business</div>
-        <div class="price-amount">€14<span>,99/mois</span></div>
-        <div class="price-period">Pour les organisations</div>
+        <div class="price-name">Pro</div>
+        <div class="price-amount">14,99 €<span>/mois</span></div>
+        <div class="price-period">ou 149,90 €/an, 2 mois offerts</div>
         <ul class="price-features">
-          <li>Groupes illimités</li>
-          <li>50 membres par groupe</li>
-          <li>Accès API complet</li>
-          <li>White-label partiel</li>
-          <li>Dashboard analytique avancé</li>
-          <li>Support prioritaire 24/7</li>
-          <li>Rapports B2B / Banques</li>
+          <li>Tontines illimitées</li>
+          <li>Jusqu'à 50 membres par tontine</li>
+          <li>Versements automatiques de la cagnotte</li>
+          <li>Relances des retards rédigées par l'IA</li>
+          <li>Aucune commission</li>
         </ul>
-        <a href="#" class="btn btn-ghost" style="justify-content:center;">Contacter l'équipe</a>
+        <a href="#" class="btn btn-ghost" style="justify-content:center;">Choisir Pro</a>
       </div>
     </div>
+
+    <div class="guarantee-band reveal">
+      <div class="guarantee-ico">🛡️</div>
+      <div>
+        <div class="guarantee-title">Option garantie de paiement <span>+3 %</span></div>
+        <p>Chaque membre peut la choisir en rejoignant une tontine. Si un membre ne paie pas, la réserve de solidarité du groupe verse sa part au bénéficiaire 20 jours après l'échéance. Les 3 % sont prélevés sur la cagnotte, comme la commission, et ce qui reste dans la réserve en fin de tontine est rendu aux membres.</p>
+      </div>
+    </div>
+    <p class="pricing-legal">Prix TTC. Abonnements sans engagement, résiliables à tout moment.<br>Exemple : 10 membres à 50 € en Gratuit, la cagnotte nette est de 493,25 €.</p>
   </div>
 </section>
 
 <!-- ════════════════ PARTENAIRES ════════════════ -->
 <section id="partenaires" style="background:var(--deep);position:relative;overflow:hidden;">
   <!-- Background glow -->
-  <div style="position:absolute;top:-200px;right:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,.04),transparent 70%);pointer-events:none;"></div>
-  <div style="position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(29,184,138,.04),transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;top:-200px;right:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(179,147,244,.04),transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(43,173,122,.04),transparent 70%);pointer-events:none;"></div>
 
   <div class="section-wrap">
     <div class="reveal" style="text-align:center;">
       <div class="section-eyebrow" style="justify-content:center;">Écosystème partenaires</div>
+      <div style="margin:4px 0 14px;"><span class="soon">Bientôt disponible</span></div>
       <h2 class="section-title" style="text-align:center;">
         Votre épargne devient<br>un <em>projet de vie</em>
       </h2>
@@ -1100,35 +1121,35 @@ footer{
 
     <!-- ── PARTNER INTRO STRIP ── -->
     <div class="reveal" style="display:flex;align-items:center;gap:24px;justify-content:center;margin:28px 0 56px;flex-wrap:wrap;">
-      <div style="display:flex;align-items:center;gap:10px;background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.2);border-radius:50px;padding:10px 22px;">
+      <div style="display:flex;align-items:center;gap:10px;background:rgba(179,147,244,.08);border:1px solid rgba(179,147,244,.2);border-radius:50px;padding:10px 22px;">
         <span style="font-size:20px;">🏠</span>
         <span style="font-size:14px;font-weight:700;color:var(--gold);">Tontine Appartement</span>
-        <span style="font-size:12px;background:rgba(212,160,23,.2);color:var(--gold);border-radius:20px;padding:2px 10px;font-weight:700;">Immobilier</span>
+        <span style="font-size:12px;background:rgba(179,147,244,.2);color:var(--gold);border-radius:20px;padding:2px 10px;font-weight:700;">Immobilier · bientôt</span>
       </div>
       <div style="width:40px;height:1px;background:var(--border);"></div>
-      <div style="display:flex;align-items:center;gap:10px;background:rgba(29,184,138,.08);border:1px solid rgba(29,184,138,.2);border-radius:50px;padding:10px 22px;">
+      <div style="display:flex;align-items:center;gap:10px;background:rgba(43,173,122,.08);border:1px solid rgba(43,173,122,.2);border-radius:50px;padding:10px 22px;">
         <span style="font-size:20px;">🛡️</span>
         <span style="font-size:14px;font-weight:700;color:var(--em);">Assurance Diaspora</span>
-        <span style="font-size:12px;background:rgba(29,184,138,.2);color:var(--em);border-radius:20px;padding:2px 10px;font-weight:700;">Assurance</span>
+        <span style="font-size:12px;background:rgba(43,173,122,.2);color:var(--em);border-radius:20px;padding:2px 10px;font-weight:700;">Assurance · bientôt</span>
       </div>
     </div>
 
     <!-- ══ PARTNER 1 : TONTINE APPARTEMENT ══ -->
-    <div class="reveal" style="background:linear-gradient(135deg,rgba(212,160,23,.06) 0%,rgba(7,8,15,.8) 60%);border:1px solid rgba(212,160,23,.2);border-radius:28px;padding:0;overflow:hidden;margin-bottom:24px;">
+    <div class="reveal" style="background:linear-gradient(135deg,rgba(179,147,244,.06) 0%,rgba(14,12,26,.8) 60%);border:1px solid rgba(179,147,244,.2);border-radius:28px;padding:0;overflow:hidden;margin-bottom:24px;">
       <!-- Header badge -->
-      <div style="background:linear-gradient(90deg,rgba(212,160,23,.15),transparent);border-bottom:1px solid rgba(212,160,23,.1);padding:16px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div style="background:linear-gradient(90deg,rgba(179,147,244,.15),transparent);border-bottom:1px solid rgba(179,147,244,.1);padding:16px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
         <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 16px rgba(212,160,23,.3);">🏠</div>
+          <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 16px rgba(179,147,244,.3);">🏠</div>
           <div>
             <div style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--text);">Tontine Appartement</div>
             <div style="font-size:12px;color:var(--muted);">Partenaire Immobilier Officiel NEO-SUSU</div>
           </div>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <span style="font-size:12px;font-weight:700;background:rgba(212,160,23,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(212,160,23,.2);">🇸🇳 Sénégal</span>
-          <span style="font-size:12px;font-weight:700;background:rgba(212,160,23,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(212,160,23,.2);">🇨🇮 Côte d'Ivoire</span>
-          <span style="font-size:12px;font-weight:700;background:rgba(212,160,23,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(212,160,23,.2);">🇨🇲 Cameroun</span>
-          <span style="font-size:12px;font-weight:700;background:rgba(212,160,23,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(212,160,23,.2);">🇲🇦 Maroc</span>
+          <span style="font-size:12px;font-weight:700;background:rgba(179,147,244,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(179,147,244,.2);">🇸🇳 Sénégal</span>
+          <span style="font-size:12px;font-weight:700;background:rgba(179,147,244,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(179,147,244,.2);">🇨🇮 Côte d'Ivoire</span>
+          <span style="font-size:12px;font-weight:700;background:rgba(179,147,244,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(179,147,244,.2);">🇨🇲 Cameroun</span>
+          <span style="font-size:12px;font-weight:700;background:rgba(179,147,244,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(179,147,244,.2);">🇲🇦 Maroc</span>
         </div>
       </div>
 
@@ -1143,28 +1164,28 @@ footer{
           </p>
           <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:28px;">
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(212,160,23,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">🏡</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(179,147,244,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">🏡</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Appartements & Terrains dès €5 000</div>
                 <div style="font-size:13px;color:var(--muted);">Résidences sécurisées, lotissements viabilisés, programmes neufs dans 8 pays africains</div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(212,160,23,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">🤝</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(179,147,244,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">🤝</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Réservation depuis l'app NEO-SUSU</div>
                 <div style="font-size:13px;color:var(--muted);">Visualisez les biens disponibles, réservez en ligne, financez via votre tontine active</div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(212,160,23,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">💰</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(179,147,244,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">💰</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Tontine dédiée acquisition immobilière</div>
                 <div style="font-size:13px;color:var(--muted);">Créez un groupe NEO-SUSU orienté épargne-logement — jusqu'à 36 mois de capitalisation</div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(212,160,23,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">⚖️</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(179,147,244,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">⚖️</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Titres de propriété légaux garantis</div>
                 <div style="font-size:13px;color:var(--muted);">Actes notariés, certificats fonciers, accompagnement juridique local inclus</div>
@@ -1178,10 +1199,10 @@ footer{
 
         <!-- Right: Property cards -->
         <div style="display:flex;flex-direction:column;gap:14px;">
-          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(212,160,23,.15);border-radius:20px;padding:20px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(212,160,23,.4)'" onmouseout="this.style.borderColor='rgba(212,160,23,.15)'">
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(179,147,244,.15);border-radius:20px;padding:20px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(179,147,244,.4)'" onmouseout="this.style.borderColor='rgba(179,147,244,.15)'">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
               <div style="font-size:13px;font-weight:700;color:var(--gold);">🇸🇳 DAKAR — Almadies</div>
-              <div style="font-size:12px;background:rgba(29,184,138,.1);color:var(--em);border-radius:20px;padding:3px 10px;font-weight:700;">Disponible</div>
+              <div style="font-size:12px;background:rgba(43,173,122,.1);color:var(--em);border-radius:20px;padding:3px 10px;font-weight:700;">Disponible</div>
             </div>
             <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px;">Appartement T3 — 85m²</div>
             <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">Résidence sécurisée · Vue mer · Parking · Gardiennage 24h</div>
@@ -1191,10 +1212,10 @@ footer{
             </div>
           </div>
 
-          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(212,160,23,.15);border-radius:20px;padding:20px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(212,160,23,.4)'" onmouseout="this.style.borderColor='rgba(212,160,23,.15)'">
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(179,147,244,.15);border-radius:20px;padding:20px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(179,147,244,.4)'" onmouseout="this.style.borderColor='rgba(179,147,244,.15)'">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
               <div style="font-size:13px;font-weight:700;color:var(--gold);">🇨🇮 ABIDJAN — Cocody</div>
-              <div style="font-size:12px;background:rgba(212,160,23,.1);color:var(--gold);border-radius:20px;padding:3px 10px;font-weight:700;">3 restants</div>
+              <div style="font-size:12px;background:rgba(179,147,244,.1);color:var(--gold);border-radius:20px;padding:3px 10px;font-weight:700;">3 restants</div>
             </div>
             <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px;">Terrain viabilisé — 300m²</div>
             <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">Lotissement clôturé · Eau · Électricité · Titre foncier inclus</div>
@@ -1204,10 +1225,10 @@ footer{
             </div>
           </div>
 
-          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(212,160,23,.15);border-radius:20px;padding:20px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(212,160,23,.4)'" onmouseout="this.style.borderColor='rgba(212,160,23,.15)'">
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(179,147,244,.15);border-radius:20px;padding:20px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(179,147,244,.4)'" onmouseout="this.style.borderColor='rgba(179,147,244,.15)'">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
               <div style="font-size:13px;font-weight:700;color:var(--gold);">🇨🇲 DOUALA — Bonamoussadi</div>
-              <div style="font-size:12px;background:rgba(74,158,255,.1);color:var(--sky);border-radius:20px;padding:3px 10px;font-weight:700;">Pré-vente</div>
+              <div style="font-size:12px;background:rgba(162,175,216,.1);color:var(--sky);border-radius:20px;padding:3px 10px;font-weight:700;">Pré-vente</div>
             </div>
             <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px;">Villa duplex — 120m²</div>
             <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">Programme neuf · Livraison 18 mois · Financement tontine accepté</div>
@@ -1221,20 +1242,20 @@ footer{
     </div>
 
     <!-- ══ PARTNER 2 : ASSURANCE DIASPORA ══ -->
-    <div class="reveal" style="background:linear-gradient(135deg,rgba(29,184,138,.05) 0%,rgba(7,8,15,.8) 60%);border:1px solid rgba(29,184,138,.2);border-radius:28px;overflow:hidden;margin-bottom:24px;">
+    <div class="reveal" style="background:linear-gradient(135deg,rgba(43,173,122,.05) 0%,rgba(14,12,26,.8) 60%);border:1px solid rgba(43,173,122,.2);border-radius:28px;overflow:hidden;margin-bottom:24px;">
       <!-- Header -->
-      <div style="background:linear-gradient(90deg,rgba(29,184,138,.12),transparent);border-bottom:1px solid rgba(29,184,138,.1);padding:16px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div style="background:linear-gradient(90deg,rgba(43,173,122,.12),transparent);border-bottom:1px solid rgba(43,173,122,.1);padding:16px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
         <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--em),var(--em2));display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 16px rgba(29,184,138,.3);">🛡️</div>
+          <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--em),var(--em2));display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 16px rgba(43,173,122,.3);">🛡️</div>
           <div>
             <div style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--text);">Assurance Diaspora</div>
             <div style="font-size:12px;color:var(--muted);">Partenaire Assurance Officiel NEO-SUSU</div>
           </div>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <span style="font-size:12px;font-weight:700;background:rgba(29,184,138,.1);color:var(--em);border-radius:20px;padding:4px 14px;border:1px solid rgba(29,184,138,.2);">🇪🇺 Europe</span>
-          <span style="font-size:12px;font-weight:700;background:rgba(29,184,138,.1);color:var(--em);border-radius:20px;padding:4px 14px;border:1px solid rgba(29,184,138,.2);">🌍 Afrique</span>
-          <span style="font-size:12px;font-weight:700;background:rgba(29,184,138,.1);color:var(--em);border-radius:20px;padding:4px 14px;border:1px solid rgba(29,184,138,.2);">✅ Bi-national</span>
+          <span style="font-size:12px;font-weight:700;background:rgba(43,173,122,.1);color:var(--em);border-radius:20px;padding:4px 14px;border:1px solid rgba(43,173,122,.2);">🇪🇺 Europe</span>
+          <span style="font-size:12px;font-weight:700;background:rgba(43,173,122,.1);color:var(--em);border-radius:20px;padding:4px 14px;border:1px solid rgba(43,173,122,.2);">🌍 Afrique</span>
+          <span style="font-size:12px;font-weight:700;background:rgba(43,173,122,.1);color:var(--em);border-radius:20px;padding:4px 14px;border:1px solid rgba(43,173,122,.2);">✅ Bi-national</span>
         </div>
       </div>
 
@@ -1249,35 +1270,35 @@ footer{
           </p>
           <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:28px;">
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(29,184,138,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">✈️</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(43,173,122,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">✈️</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Rapatriement & assistance internationale</div>
                 <div style="font-size:13px;color:var(--muted);">Couverture rapatriement de corps, transport médical urgent, frais obsèques en Afrique</div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(29,184,138,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">💊</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(43,173,122,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">💊</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Santé bi-nationale</div>
                 <div style="font-size:13px;color:var(--muted);">Remboursements santé valables en Europe ET en Afrique — idéal lors des voyages au pays</div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(29,184,138,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">👨‍👩‍👧</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(43,173,122,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">👨‍👩‍👧</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Prévoyance famille étendue</div>
                 <div style="font-size:13px;color:var(--muted);">Protégez vos parents restés en Afrique — capital décès, invalidité, soutien scolaire enfants</div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(29,184,138,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">📱</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(43,173,122,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">📱</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Souscription directement dans NEO-SUSU</div>
                 <div style="font-size:13px;color:var(--muted);">En 3 clics depuis l'app — paiement via votre tontine ou carte bancaire</div>
               </div>
             </div>
           </div>
-          <a href="#" class="btn btn-em" style="display:inline-flex;padding:14px 28px;font-size:14px;background:linear-gradient(135deg,var(--em),var(--em2));color:var(--ink);font-weight:700;border-radius:50px;box-shadow:0 6px 24px rgba(29,184,138,.25);">
+          <a href="#" class="btn btn-em" style="display:inline-flex;padding:14px 28px;font-size:14px;background:linear-gradient(135deg,var(--em),var(--em2));color:var(--ink);font-weight:700;border-radius:50px;box-shadow:0 6px 24px rgba(43,173,122,.25);">
             🛡️ Obtenir un devis gratuit →
           </a>
         </div>
@@ -1285,7 +1306,7 @@ footer{
         <!-- Right: Insurance offers -->
         <div style="display:flex;flex-direction:column;gap:14px;">
           <!-- Offer 1 -->
-          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(29,184,138,.15);border-radius:20px;padding:22px;position:relative;transition:all .3s;" onmouseover="this.style.borderColor='rgba(29,184,138,.4)'" onmouseout="this.style.borderColor='rgba(29,184,138,.15)'">
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(43,173,122,.15);border-radius:20px;padding:22px;position:relative;transition:all .3s;" onmouseover="this.style.borderColor='rgba(43,173,122,.4)'" onmouseout="this.style.borderColor='rgba(43,173,122,.15)'">
             <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
               <div>
                 <div style="font-size:13px;font-weight:700;color:var(--em);margin-bottom:4px;">ESSENTIEL DIASPORA</div>
@@ -1304,7 +1325,7 @@ footer{
           </div>
 
           <!-- Offer 2 (featured) -->
-          <div style="background:linear-gradient(135deg,rgba(29,184,138,.1),rgba(7,8,15,.8));border:2px solid rgba(29,184,138,.35);border-radius:20px;padding:22px;position:relative;box-shadow:0 0 40px rgba(29,184,138,.08);transition:all .3s;" onmouseover="this.style.boxShadow='0 0 60px rgba(29,184,138,.15)'" onmouseout="this.style.boxShadow='0 0 40px rgba(29,184,138,.08)'">
+          <div style="background:linear-gradient(135deg,rgba(43,173,122,.1),rgba(14,12,26,.8));border:2px solid rgba(43,173,122,.35);border-radius:20px;padding:22px;position:relative;box-shadow:0 0 40px rgba(43,173,122,.08);transition:all .3s;" onmouseover="this.style.boxShadow='0 0 60px rgba(43,173,122,.15)'" onmouseout="this.style.boxShadow='0 0 40px rgba(43,173,122,.08)'">
             <div style="position:absolute;top:-12px;left:20px;background:linear-gradient(135deg,var(--em),var(--em2));color:var(--ink);font-size:11px;font-weight:800;padding:4px 14px;border-radius:20px;">⭐ Le plus choisi</div>
             <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
               <div>
@@ -1317,15 +1338,15 @@ footer{
               </div>
             </div>
             <div style="display:flex;flex-wrap:wrap;gap:6px;">
-              <span style="font-size:11px;color:var(--em);background:rgba(29,184,138,.1);border-radius:20px;padding:3px 10px;">✓ Tout Essentiel +</span>
-              <span style="font-size:11px;color:var(--em);background:rgba(29,184,138,.1);border-radius:20px;padding:3px 10px;">✓ Santé EU + Afrique</span>
-              <span style="font-size:11px;color:var(--em);background:rgba(29,184,138,.1);border-radius:20px;padding:3px 10px;">✓ Parents au pays</span>
-              <span style="font-size:11px;color:var(--em);background:rgba(29,184,138,.1);border-radius:20px;padding:3px 10px;">✓ Scolaire enfants</span>
+              <span style="font-size:11px;color:var(--em);background:rgba(43,173,122,.1);border-radius:20px;padding:3px 10px;">✓ Tout Essentiel +</span>
+              <span style="font-size:11px;color:var(--em);background:rgba(43,173,122,.1);border-radius:20px;padding:3px 10px;">✓ Santé EU + Afrique</span>
+              <span style="font-size:11px;color:var(--em);background:rgba(43,173,122,.1);border-radius:20px;padding:3px 10px;">✓ Parents au pays</span>
+              <span style="font-size:11px;color:var(--em);background:rgba(43,173,122,.1);border-radius:20px;padding:3px 10px;">✓ Scolaire enfants</span>
             </div>
           </div>
 
           <!-- Offer 3 -->
-          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(29,184,138,.15);border-radius:20px;padding:22px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(29,184,138,.4)'" onmouseout="this.style.borderColor='rgba(29,184,138,.15)'">
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(43,173,122,.15);border-radius:20px;padding:22px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(43,173,122,.4)'" onmouseout="this.style.borderColor='rgba(43,173,122,.15)'">
             <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
               <div>
                 <div style="font-size:13px;font-weight:700;color:var(--em);margin-bottom:4px;">ENTREPRENEUR DIASPORA</div>
@@ -1347,7 +1368,7 @@ footer{
     </div>
 
     <!-- ══ TONTINE PROJET CTA ══ -->
-    <div class="reveal" style="background:linear-gradient(135deg,rgba(212,160,23,.07),rgba(29,184,138,.05));border:1px solid rgba(212,160,23,.2);border-radius:24px;padding:40px 48px;text-align:center;">
+    <div class="reveal" style="background:linear-gradient(135deg,rgba(179,147,244,.07),rgba(43,173,122,.05));border:1px solid rgba(179,147,244,.2);border-radius:24px;padding:40px 48px;text-align:center;">
       <div style="font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">✦ La puissance des partenariats</div>
       <h3 style="font-family:var(--font-display);font-size:36px;font-weight:700;color:var(--text);margin-bottom:14px;line-height:1.2;">
         Épargnez ensemble.<br>Investissez <em style="color:var(--gold);">intelligemment.</em>
@@ -1357,10 +1378,10 @@ footer{
       </p>
       <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
         <a href="#" class="btn btn-gold" style="padding:15px 32px;">
-          🏠 Tontine Immobilier
+          🏠 Tontine Immobilier · bientôt
         </a>
-        <a href="#" class="btn" style="padding:15px 32px;background:linear-gradient(135deg,var(--em),var(--em2));color:var(--ink);font-weight:700;border-radius:50px;box-shadow:0 6px 24px rgba(29,184,138,.25);">
-          🛡️ Tontine Assurance
+        <a href="#" class="btn" style="padding:15px 32px;background:linear-gradient(135deg,var(--em),var(--em2));color:var(--ink);font-weight:700;border-radius:50px;box-shadow:0 6px 24px rgba(43,173,122,.25);">
+          🛡️ Tontine Assurance · bientôt
         </a>
         <a href="#" class="btn btn-ghost" style="padding:15px 32px;">
           En savoir plus →
@@ -1418,12 +1439,12 @@ footer{
         <a href="#">Fonctionnalités</a>
         <a href="#">Tarifs</a>
         <a href="#">Sécurité</a>
-        <a href="#">Agents cash</a>
+        <a href="#">Agents cash · bientôt en Afrique</a>
       </div>
       <div class="footer-col">
         <h4>Partenaires</h4>
-        <a href="#partenaires">🏠 Tontine Appartement</a>
-        <a href="#partenaires">🛡️ Assurance Diaspora</a>
+        <a href="#partenaires">🏠 Tontine Appartement · bientôt</a>
+        <a href="#partenaires">🛡️ Assurance Diaspora · bientôt</a>
         <a href="#">Devenir partenaire</a>
         <a href="#">Programme ambassadeurs</a>
         <a href="#" onclick="openCopilot()">IA Copilot</a>
@@ -1531,13 +1552,13 @@ function drawCanvas(){
     if(p.y<0||p.y>cv.height) p.vy*=-1;
     const glow = Math.sin(p.a)*.5+.5;
     ctx2.beginPath(); ctx2.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx2.fillStyle = `rgba(212,160,23,${.04+glow*.06})`; ctx2.fill();
+    ctx2.fillStyle = `rgba(179,147,244,${.04+glow*.06})`; ctx2.fill();
   });
   for(let i=0;i<pts2.length;i++) for(let j=i+1;j<pts2.length;j++){
     const d = Math.hypot(pts2[i].x-pts2[j].x, pts2[i].y-pts2[j].y);
     if(d<120){
       ctx2.beginPath(); ctx2.moveTo(pts2[i].x,pts2[i].y); ctx2.lineTo(pts2[j].x,pts2[j].y);
-      ctx2.strokeStyle = `rgba(212,160,23,${.025*(1-d/120)})`; ctx2.lineWidth=.5; ctx2.stroke();
+      ctx2.strokeStyle = `rgba(179,147,244,${.025*(1-d/120)})`; ctx2.lineWidth=.5; ctx2.stroke();
     }
   }
   requestAnimationFrame(drawCanvas);
@@ -1578,22 +1599,27 @@ INFORMATIONS SUR NEO-SUSU :
 - NEO-SUSU n'est jamais dépositaire des fonds
 - Disponible en France, Europe et Afrique francophone/anglophone
 
-FONCTIONNALITÉS :
+FONCTIONNALITÉS DISPONIBLES :
 - Création de groupes de tontine (nombre de membres, montant, fréquence)
-- Paiements : carte bancaire, virement SEPA, Mobile Money (Orange Money, MTN, Wave)
-- Retrait cash via agents certifiés avec code OTP
-- Assistant IA vocal en 5 langues : français, anglais, yoruba, wolof, lingala
-- Score de fiabilité (0-100) basé sur l'historique de paiement
-- Recouvrement automatisé par IA (6 niveaux)
+- Paiements : carte bancaire et virement SEPA, en euros
+- Versement automatique de la cagnotte dès que tout le groupe a payé
+- Relances automatiques rédigées par l'IA : le jour du retard, à J+10 et à J+20 (mention d'un possible recours à un commissaire de justice)
 - KYC intégré via PSP
 
-TARIFS :
-- Free : €0/mois — 1 groupe, 6 membres max
-- Premium : €4,99/mois — groupes illimités, 20 membres, IA vocale
-- Business : €14,99/mois — 50 membres, API, white-label
-- Commissions : 0,5% par cotisation, 0,3% sur distribution, 1,5% retrait cash
+À VENIR (ne jamais les présenter comme disponibles) :
+- Assistant IA vocal en 5 langues (français, anglais, yoruba, wolof, lingala) : prévu pour la version 3 de NEO-SUSU
+- Mobile Money (Orange Money, MTN, Wave) et retrait cash via agents avec code OTP : au lancement en Afrique, pas encore de date
+- Score de fiabilité (0-100), notifications temps réel, partenaires Tontine Appartement et Assurance Diaspora, Tontines Projet : bientôt disponibles
 
-PARTENAIRES EXCLUSIFS NEO-SUSU :
+TARIFS (prix TTC, abonnement pris par l'organisateur de la tontine ; les membres ne paient que leur cotisation) :
+- Gratuit : 0 € — 1 tontine active, jusqu'à 10 membres, commission de 1,5 % prélevée sur la cagnotte
+- Essentiel : 4,99 €/mois ou 49,90 €/an — 3 tontines actives, 20 membres par tontine, commission de 0,5 %
+- Pro : 14,99 €/mois ou 149,90 €/an — tontines illimitées, 50 membres par tontine, aucune commission
+- La commission est prélevée sur la cagnotte versée au bénéficiaire, jamais ajoutée à la cotisation
+- Option garantie de paiement (+3 % prélevés sur la cagnotte) : si un membre ne paie pas, la réserve de solidarité du groupe verse sa part 20 jours après l'échéance ; le reliquat est rendu aux membres en fin de tontine. Ce n'est pas une assurance.
+- Abonnements sans engagement, résiliables à tout moment
+
+PARTENAIRES (BIENTÔT DISPONIBLES — à présenter comme à venir, sans souscription possible aujourd'hui) :
 
 1. TONTINE APPARTEMENT (Partenaire Immobilier) :
 - Partenaire immobilier officiel NEO-SUSU pour la diaspora africaine
@@ -1616,7 +1642,7 @@ PARTENAIRES EXCLUSIFS NEO-SUSU :
 - Souscription directement depuis l'app NEO-SUSU en 3 clics
 - Paiement via tontine ou carte bancaire
 
-TONTINES PROJET (nouveau concept) :
+TONTINES PROJET (bientôt disponibles) :
 - Tontine Immobilier : épargne collective orientée achat de bien en Afrique via Tontine Appartement
 - Tontine Assurance : cotisations groupées pour couvrir toute une famille ou une communauté via Assurance Diaspora
 - Durée : 12 à 36 mois selon l'objectif
@@ -1758,19 +1784,19 @@ async function sendMessage(){
 function getFallbackResponse(question) {
   const q = question.toLowerCase();
   if(q.includes('appartement') || q.includes('immobilier') || q.includes('terrain') || q.includes('maison') || q.includes('logement') || q.includes('propriété'))
-    return "🏠 <strong>Tontine Appartement</strong> — notre partenaire immobilier officiel !<br><br>Avec NEO-SUSU, vous pouvez créer une <strong>Tontine Projet Immobilier</strong> et utiliser votre pot pour acheter un bien en Afrique :<br><br>🇸🇳 Appartement T3 à Dakar — <strong>€28 000</strong><br>🇨🇮 Terrain viabilisé à Abidjan — <strong>€12 500</strong><br>🇨🇲 Villa à Douala — <strong>€45 000</strong><br><br>✅ Titres fonciers légaux · Actes notariés · Réservation depuis l'app<br><br>Faites défiler la page vers la section <strong>Partenaires</strong> pour voir tous les biens !";
+    return "⏳ <strong>Bientôt disponible.</strong><br><br>🏠 <strong>Tontine Appartement</strong> — notre partenaire immobilier officiel !<br><br>Avec NEO-SUSU, vous pouvez créer une <strong>Tontine Projet Immobilier</strong> et utiliser votre pot pour acheter un bien en Afrique :<br><br>🇸🇳 Appartement T3 à Dakar — <strong>€28 000</strong><br>🇨🇮 Terrain viabilisé à Abidjan — <strong>€12 500</strong><br>🇨🇲 Villa à Douala — <strong>€45 000</strong><br><br>✅ Titres fonciers légaux · Actes notariés · Réservation depuis l'app<br><br>Faites défiler la page vers la section <strong>Partenaires</strong> pour voir tous les biens !";
   if(q.includes('assurance') || q.includes('rapatriement') || q.includes('santé') || q.includes('décès') || q.includes('protection') || q.includes('diaspora'))
-    return "🛡️ <strong>Assurance Diaspora</strong> — notre partenaire assurance officiel !<br><br>3 formules conçues pour les personnes vivant entre l'Europe et l'Afrique :<br><br>✦ <strong>Essentiel</strong> — €8/mois : rapatriement corps + frais obsèques<br>⭐ <strong>Famille (le plus choisi)</strong> — €19/mois : santé EU + Afrique + parents au pays<br>✦ <strong>Entrepreneur</strong> — €34/mois : tout + RC Pro + Cyber<br><br>Souscription directement depuis l'app NEO-SUSU en 3 clics ! 📱";
+    return "⏳ <strong>Bientôt disponible.</strong><br><br>🛡️ <strong>Assurance Diaspora</strong> — notre partenaire assurance officiel !<br><br>3 formules conçues pour les personnes vivant entre l'Europe et l'Afrique :<br><br>✦ <strong>Essentiel</strong> — €8/mois : rapatriement corps + frais obsèques<br>⭐ <strong>Famille (le plus choisi)</strong> — €19/mois : santé EU + Afrique + parents au pays<br>✦ <strong>Entrepreneur</strong> — €34/mois : tout + RC Pro + Cyber<br><br>Souscription directement depuis l'app NEO-SUSU en 3 clics ! 📱";
   if(q.includes('partenaire') || q.includes('partenariat'))
-    return "NEO-SUSU a deux partenaires exclusifs pour transformer votre épargne en projet de vie :<br><br>🏠 <strong>Tontine Appartement</strong> — achetez des terrains et appartements en Afrique grâce à votre tontine (dès €5 000 — 8 pays africains)<br><br>🛡️ <strong>Assurance Diaspora</strong> — protégez votre famille sur deux continents (dès €8/mois)<br><br>Faites défiler la page vers la section <strong>Partenaires</strong> pour en savoir plus !";
+    return "⏳ <strong>Bientôt disponible.</strong><br><br>NEO-SUSU prépare deux partenariats pour transformer votre épargne en projet de vie :<br><br>🏠 <strong>Tontine Appartement</strong> — achetez des terrains et appartements en Afrique grâce à votre tontine (dès €5 000 — 8 pays africains)<br><br>🛡️ <strong>Assurance Diaspora</strong> — protégez votre famille sur deux continents (dès €8/mois)<br><br>Faites défiler la page vers la section <strong>Partenaires</strong> pour en savoir plus !";
   if(q.includes('tontine') || q.includes('fonctionne') || q.includes('comment'))
-    return "La tontine NEO-SUSU fonctionne en 4 étapes :<br><br>1️⃣ <strong>Créez votre groupe</strong> — Invitez vos membres par lien<br>2️⃣ <strong>KYC automatique</strong> — Chaque membre est vérifié<br>3️⃣ <strong>Cotisez</strong> — Carte, virement, Mobile Money ou cash agent<br>4️⃣ <strong>Recevez</strong> — Distribution automatique à chaque tour<br><br>💡 Vous pouvez aussi créer une <strong>Tontine Projet</strong> orientée immobilier ou assurance avec nos partenaires ! 🏠🛡️";
+    return "La tontine NEO-SUSU fonctionne en 4 étapes :<br><br>1️⃣ <strong>Créez votre groupe</strong> — Invitez vos membres par lien<br>2️⃣ <strong>KYC automatique</strong> — Chaque membre est vérifié<br>3️⃣ <strong>Cotisez</strong> — Carte bancaire ou virement SEPA (Mobile Money et cash : bientôt en Afrique)<br>4️⃣ <strong>Recevez</strong> — Distribution automatique à chaque tour<br><br>💡 Bientôt : les <strong>Tontines Projet</strong> orientées immobilier ou assurance avec nos partenaires 🏠🛡️";
   if(q.includes('sécu') || q.includes('fiable') || q.includes('confian'))
     return "Votre sécurité est notre priorité absolue :<br><br>🔒 <strong>Zéro fonds détenus</strong> par NEO-SUSU<br>💳 Tous les fonds via <strong>Mangopay / Stripe</strong> (PSP agréés DSP2)<br>🛡️ <strong>KYC obligatoire</strong> avant tout paiement<br>🇪🇺 <strong>RGPD</strong> — Hébergement France (AWS Paris)<br>🔐 Chiffrement <strong>TLS 1.3 + AES-256</strong>";
   if(q.includes('tarif') || q.includes('prix') || q.includes('coût') || q.includes('gratuit'))
-    return "Nos tarifs sont simples :<br><br>🆓 <strong>Free</strong> — €0/mois : 1 groupe, 6 membres<br>⭐ <strong>Premium</strong> — €4,99/mois : groupes illimités, IA vocale<br>🏢 <strong>Business</strong> — €14,99/mois : API, 50 membres<br><br>+ 0,5% par cotisation · 1,5% retrait cash · 0% virement SEPA<br><br>💡 Les assurances Assurance Diaspora commencent à <strong>€8/mois</strong> !";
+    return "Nos tarifs sont simples :<br><br>🆓 <strong>Gratuit</strong> — 0 € : 1 tontine, jusqu'à 10 membres, commission 1,5 %<br>⭐ <strong>Essentiel</strong> — 4,99 €/mois : 3 tontines, 20 membres, commission 0,5 %<br>🏢 <strong>Pro</strong> — 14,99 €/mois : tontines illimitées, 50 membres, aucune commission<br><br>🛡️ Option <strong>garantie de paiement</strong> : +3 % sur la cagnotte, la réserve du groupe paie à la place d'un membre défaillant.<br><br>Les membres ne paient que leur cotisation : la commission est prélevée sur la cagnotte.";
   if(q.includes('cash') || q.includes('agent') || q.includes('retrait'))
-    return "Le retrait cash fonctionne ainsi :<br><br>1. Demandez un retrait dans l'app<br>2. Recevez un <strong>code OTP à 4 chiffres</strong><br>3. Rendez-vous chez un <strong>agent certifié NEO-SUSU</strong><br>4. L'agent valide et vous remet les fonds en espèces<br>5. Confirmation SMS instantanée ✓<br><br>💡 Frais : 1,5% · Disponible au Sénégal, Côte d'Ivoire, Nigeria...";
+    return "💵 Le retrait cash via agents et le Mobile Money (Orange Money, MTN, Wave) arriveront <strong>au lancement de NEO-SUSU en Afrique</strong>. Pour l'instant, les cotisations se paient par carte bancaire ou virement SEPA, en euros.";
   return "Merci pour votre question ! 😊 Je peux vous renseigner sur :<br>🔄 <strong>Les tontines NEO-SUSU</strong><br>🏠 <strong>Tontine Appartement</strong> — acheter en Afrique<br>🛡️ <strong>Assurance Diaspora</strong> — se protéger<br>💰 <strong>Nos tarifs</strong><br><br>Posez-moi une question précise ou cliquez sur une suggestion !";
 }
 </script>
