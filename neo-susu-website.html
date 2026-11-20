@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NEO-SUSU — L'épargne communautaire intelligente</title>
+<link rel="icon" type="image/png" href="./assets/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ════════════════════════════════════════════════════
@@ -11,32 +12,32 @@
 ════════════════════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --ink:#0E0C1A;
-  --deep:#151328;
-  --surface:#191E31;
-  --panel:#201C3C;
-  --card:#262145;
-  --gold:#B393F4;
-  --gold2:#8B6FD6;
-  --gold-pale:#E5DAFE;
-  --gold-glow:rgba(179,147,244,.18);
-  --em:#2BAD7A;
-  --em2:#1F8A60;
-  --em-bg:rgba(43,173,122,.08);
-  --red:#D4524A;
-  --sky:#A2AFD8;
-  --violet:#B890FD;
-  --text:#F4F2FB;
-  --muted:#A39FBE;
-  --border:#2A2548;
-  --border2:#403965;
+  --ink:#0B0912;
+  --deep:#110E1A;
+  --surface:#17131F;
+  --panel:#1E1928;
+  --card:#2A2236;
+  --gold:#D4AF37;
+  --gold2:#A8862A;
+  --gold-pale:#F3DB8E;
+  --gold-glow:rgba(212,175,55,.18);
+  --em:#10B981;
+  --em2:#059669;
+  --em-bg:rgba(16,185,129,.08);
+  --red:#EF5B5B;
+  --sky:#7AB8E0;
+  --violet:#A78BFA;
+  --text:#F4EFFA;
+  --muted:#A79FB8;
+  --border:#2A2236;
+  --border2:#3B3150;
   --font-display:'Cormorant Garamond',Georgia,serif;
   --font-body:'Outfit',sans-serif;
   scroll-behavior:smooth;
 }
 html{font-size:16px;}
 body{
-  background:var(--ink) linear-gradient(160deg,#231D43 0%,#191E31 45%,#0E0C1A 100%) fixed;
+  background:var(--ink) linear-gradient(160deg,#1A1230 0%,#110E1A 45%,#0B0912 100%) fixed;
   color:var(--text);
   font-family:var(--font-body);
   overflow-x:hidden;
@@ -53,7 +54,7 @@ body{
 }
 #cursor-ring{
   width:38px;height:38px;border-radius:50%;
-  border:1.5px solid rgba(179,147,244,.5);
+  border:1.5px solid rgba(212,175,55,.5);
   position:fixed;pointer-events:none;z-index:9998;
   transition:all .22s ease;
 }
@@ -73,26 +74,24 @@ nav{
   transition:background .4s,backdrop-filter .4s,box-shadow .4s;
 }
 nav.scrolled{
-  background:rgba(14,12,26,.88);
+  background:rgba(11,9,18,.88);
   backdrop-filter:blur(20px);
   box-shadow:0 1px 0 var(--border);
 }
-.nav-logo{
+.nav-logo{margin-right:28px;flex:none;
   display:flex;align-items:center;gap:12px;
   text-decoration:none;
 }
-.nav-logo-mark{
-  width:40px;height:40px;border-radius:12px;
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-display);font-size:22px;font-weight:700;
-  color:var(--ink);box-shadow:0 4px 16px rgba(179,147,244,.3);
-}
+.nav-logo-mark{width:48px;height:auto;filter:drop-shadow(0 4px 14px rgba(139,92,246,.40));}
 .nav-logo-text{
-  font-family:var(--font-display);font-size:20px;font-weight:700;
-  color:var(--text);letter-spacing:.5px;
+  font-family:var(--font-display);font-size:22px;font-weight:700;letter-spacing:1px;
+  background:linear-gradient(90deg,#C4B5FD 0%,#8B5CF6 45%,#7AB8E0 55%,#A9D3F5 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
 }
-.nav-links{display:flex;gap:36px;align-items:center;}
+.nav-logo-text small{font-family:var(--font-body);font-size:10px;letter-spacing:3px;text-transform:uppercase;-webkit-text-fill-color:var(--gold);margin-left:4px;}
+.nav-links{display:flex;gap:22px;align-items:center;}
+.nav-links a{white-space:nowrap;}
+.nav-logo-text{white-space:nowrap;}
 .nav-links a{
   font-size:14px;font-weight:500;color:var(--muted);
   text-decoration:none;letter-spacing:.3px;
@@ -103,10 +102,13 @@ nav.scrolled{
   background:linear-gradient(135deg,var(--gold),var(--gold2));
   color:var(--ink)!important;font-weight:700!important;
   padding:10px 22px;border-radius:24px;
-  box-shadow:0 4px 16px rgba(179,147,244,.25);
+  box-shadow:0 4px 16px rgba(212,175,55,.25);
   transition:all .2s!important;
 }
-.nav-cta:hover{box-shadow:0 6px 24px rgba(179,147,244,.45)!important;transform:translateY(-1px);}
+.nav-cta:hover{box-shadow:0 6px 24px rgba(212,175,55,.45)!important;transform:translateY(-1px);}
+.nav-soon{font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;background:rgba(212,175,55,.14);color:var(--gold);border:1px solid rgba(212,175,55,.32);margin-left:4px;vertical-align:middle;}
+.nav-heart{color:#F59A9A!important;}
+.hero-logo{width:min(320px,80%);height:auto;display:block;margin:0 0 22px;filter:drop-shadow(0 10px 40px rgba(139,92,246,.35));}
 .nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
 .nav-ham span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px;transition:all .3s;}
 
@@ -117,8 +119,8 @@ nav.scrolled{
   min-height:100vh;
   display:flex;align-items:center;
   position:relative;overflow:hidden;
-  background:radial-gradient(ellipse 80% 60% at 20% 30%,rgba(179,147,244,.07) 0,transparent 60%),
-             radial-gradient(ellipse 60% 50% at 80% 70%,rgba(43,173,122,.05) 0,transparent 55%),
+  background:radial-gradient(ellipse 80% 60% at 20% 30%,rgba(139,92,246,.16) 0,transparent 60%),radial-gradient(ellipse 50% 40% at 85% 15%,rgba(212,175,55,.08) 0,transparent 60%),
+             radial-gradient(ellipse 60% 50% at 80% 70%,rgba(16,185,129,.05) 0,transparent 55%),
              var(--ink);
 }
 .hero-grid{
@@ -137,7 +139,7 @@ nav.scrolled{
 }
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
-  background:rgba(179,147,244,.08);border:1px solid rgba(179,147,244,.2);
+  background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.2);
   border-radius:30px;padding:6px 16px;margin-bottom:28px;
   font-size:12px;font-weight:600;color:var(--gold);letter-spacing:1.5px;
   text-transform:uppercase;
@@ -179,9 +181,9 @@ nav.scrolled{
 .btn-gold{
   background:linear-gradient(135deg,var(--gold),var(--gold2));
   color:var(--ink);
-  box-shadow:0 8px 28px rgba(179,147,244,.3);
+  box-shadow:0 8px 28px rgba(212,175,55,.3);
 }
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(179,147,244,.45);}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(212,175,55,.45);}
 .btn-ghost{
   background:transparent;color:var(--text);
   border:1.5px solid var(--border2);
@@ -197,7 +199,7 @@ nav.scrolled{
   width:260px;margin:0 auto;
   background:var(--panel);
   border-radius:40px;border:2px solid var(--border2);
-  box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 60px rgba(179,147,244,.08);
+  box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 60px rgba(212,175,55,.08);
   overflow:hidden;position:relative;
 }
 .hero-phone-notch{
@@ -209,7 +211,7 @@ nav.scrolled{
 }
 .hero-phone-screen{
   padding:44px 18px 24px;
-  background:linear-gradient(160deg,#231D43 0%,#0E0C1A 100%);
+  background:linear-gradient(160deg,#1A1230 0%,#0B0912 100%);
   min-height:480px;
 }
 .phone-header{
@@ -223,14 +225,14 @@ nav.scrolled{
   font-size:18px;
 }
 .phone-balance{
-  background:linear-gradient(135deg,rgba(179,147,244,.08),rgba(43,173,122,.05));
-  border:1px solid rgba(179,147,244,.15);
+  background:linear-gradient(135deg,rgba(212,175,55,.08),rgba(16,185,129,.05));
+  border:1px solid rgba(212,175,55,.15);
   border-radius:18px;padding:18px;margin-bottom:14px;
 }
 .phone-bal-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
 .phone-bal-value{
   font-family:var(--font-display);font-size:34px;font-weight:700;
-  background:linear-gradient(135deg,var(--text),rgba(179,147,244,.8));
+  background:linear-gradient(135deg,var(--text),rgba(212,175,55,.8));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
 .phone-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;}
@@ -246,7 +248,7 @@ nav.scrolled{
 }
 .phone-tontine-icon{
   width:36px;height:36px;border-radius:11px;
-  background:rgba(179,147,244,.1);
+  background:rgba(212,175,55,.1);
   display:flex;align-items:center;justify-content:center;font-size:18px;
   flex-shrink:0;
 }
@@ -270,9 +272,9 @@ nav.scrolled{
 
 /* ── STATS TICKER ── */
 .stats-ticker{
-  background:rgba(179,147,244,.05);
-  border-top:1px solid rgba(179,147,244,.1);
-  border-bottom:1px solid rgba(179,147,244,.1);
+  background:rgba(212,175,55,.05);
+  border-top:1px solid rgba(212,175,55,.1);
+  border-bottom:1px solid rgba(212,175,55,.1);
   padding:14px 0;overflow:hidden;
   position:relative;z-index:2;
 }
@@ -283,7 +285,7 @@ nav.scrolled{
 }
 .ticker-item{
   padding:0 40px;font-size:13px;font-weight:600;
-  color:rgba(179,147,244,.7);letter-spacing:.5px;
+  color:rgba(212,175,55,.7);letter-spacing:.5px;
 }
 .ticker-dot{color:var(--gold);margin-right:40px;}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -343,7 +345,7 @@ section{padding:100px 5vw;}
 .step-num{
   font-family:var(--font-display);
   font-size:60px;font-weight:700;
-  color:rgba(179,147,244,.1);
+  color:rgba(212,175,55,.1);
   line-height:1;margin-bottom:16px;
 }
 .step-icon{font-size:36px;margin-bottom:16px;display:block;}
@@ -365,10 +367,10 @@ section{padding:100px 5vw;}
   border-radius:24px;padding:32px;overflow:hidden;position:relative;
   transition:all .3s;cursor:default;
 }
-.bento-card:hover{border-color:rgba(179,147,244,.25);transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.bento-card:hover{border-color:rgba(212,175,55,.25);transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,.3);}
 .bento-card::after{
   content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(179,147,244,.04) 0,transparent 60%);
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(212,175,55,.04) 0,transparent 60%);
   pointer-events:none;
 }
 .bc-a{grid-column:span 5;grid-row:span 2;}
@@ -379,8 +381,8 @@ section{padding:100px 5vw;}
 .bc-f{grid-column:span 5;}
 .bc-g{grid-column:span 4;grid-row:span 1;}
 .bento-icon{font-size:40px;margin-bottom:18px;}
-.soon{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(179,147,244,.14);color:var(--gold);border:1px solid rgba(179,147,244,.32);white-space:nowrap;vertical-align:middle;}
-.soon-africa{background:rgba(162,175,216,.12);color:var(--sky);border-color:rgba(162,175,216,.32);}
+.soon{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(212,175,55,.14);color:var(--gold);border:1px solid rgba(212,175,55,.32);white-space:nowrap;vertical-align:middle;}
+.soon-africa{background:rgba(122,184,224,.12);color:var(--sky);border-color:rgba(122,184,224,.32);}
 .soon-row{margin-bottom:10px;}
 .bento-title{font-size:20px;font-weight:700;color:var(--text);margin-bottom:10px;}
 .bento-body{font-size:14px;color:var(--muted);line-height:1.6;}
@@ -389,10 +391,10 @@ section{padding:100px 5vw;}
   font-size:11px;font-weight:700;letter-spacing:1px;
   border-radius:20px;padding:4px 12px;
 }
-.tag-gold{background:rgba(179,147,244,.1);color:var(--gold);}
-.tag-em{background:rgba(43,173,122,.1);color:var(--em);}
-.tag-sky{background:rgba(162,175,216,.1);color:var(--sky);}
-.tag-vi{background:rgba(184,144,253,.1);color:var(--violet);}
+.tag-gold{background:rgba(212,175,55,.1);color:var(--gold);}
+.tag-em{background:rgba(16,185,129,.1);color:var(--em);}
+.tag-sky{background:rgba(122,184,224,.1);color:var(--sky);}
+.tag-vi{background:rgba(139,92,246,.1);color:var(--violet);}
 
 /* Big feature in bento */
 .bc-a .big-number{
@@ -416,13 +418,13 @@ section{padding:100px 5vw;}
    NUMBERS / SOCIAL PROOF
 ──────────────────────────────────────────────── */
 #numbers{
-  background:linear-gradient(135deg,var(--deep) 0%,#0E0C1A 100%);
+  background:linear-gradient(135deg,var(--deep) 0%,#0B0912 100%);
   position:relative;overflow:hidden;
 }
 #numbers::before{
   content:'';position:absolute;
   width:600px;height:600px;border-radius:50%;
-  background:radial-gradient(circle,rgba(179,147,244,.05),transparent 70%);
+  background:radial-gradient(circle,rgba(212,175,55,.05),transparent 70%);
   top:-200px;right:-100px;
 }
 .numbers-grid{
@@ -457,7 +459,7 @@ section{padding:100px 5vw;}
   background:var(--panel);border:1px solid var(--border);
   border-radius:24px;padding:32px;transition:all .3s;
 }
-.testi-card:hover{transform:translateY(-4px);border-color:rgba(179,147,244,.2);}
+.testi-card:hover{transform:translateY(-4px);border-color:rgba(212,175,55,.2);}
 .testi-stars{display:flex;gap:4px;margin-bottom:16px;}
 .star{color:var(--gold);font-size:16px;}
 .testi-text{
@@ -487,9 +489,9 @@ section{padding:100px 5vw;}
 }
 .price-card:hover{transform:translateY(-4px);}
 .price-card.featured{
-  background:linear-gradient(160deg,#201C3C,#191E31);
-  border-color:rgba(179,147,244,.4);
-  box-shadow:0 0 60px rgba(179,147,244,.08);
+  background:linear-gradient(160deg,#1E1928,#110E1A);
+  border-color:rgba(212,175,55,.4);
+  box-shadow:0 0 60px rgba(212,175,55,.08);
 }
 .price-badge{
   position:absolute;top:-14px;left:50%;transform:translateX(-50%);
@@ -513,7 +515,7 @@ section{padding:100px 5vw;}
 .price-features li::before{content:'✓';color:var(--em);font-weight:800;flex-shrink:0;}
 .price-features li.off::before{content:'–';color:var(--muted);}
 .price-features li.off{color:var(--muted);}
-.guarantee-band{display:flex;gap:18px;align-items:flex-start;max-width:900px;margin:36px auto 0;padding:24px 28px;border-radius:20px;background:rgba(43,173,122,.06);border:1px solid rgba(43,173,122,.28);}
+.guarantee-band{display:flex;gap:18px;align-items:flex-start;max-width:900px;margin:36px auto 0;padding:24px 28px;border-radius:20px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.28);}
 .guarantee-ico{font-size:30px;line-height:1;flex-shrink:0;}
 .guarantee-title{font-size:17px;font-weight:700;margin-bottom:6px;}
 .guarantee-title span{color:var(--em);margin-left:6px;}
@@ -525,13 +527,13 @@ section{padding:100px 5vw;}
    CTA SECTION
 ──────────────────────────────────────────────── */
 #cta{
-  background:linear-gradient(135deg,#151328,#0E0C1A);
+  background:linear-gradient(135deg,#110E1A,#0B0912);
   position:relative;overflow:hidden;text-align:center;
 }
 #cta::before{
   content:'';position:absolute;
   width:800px;height:800px;border-radius:50%;
-  background:radial-gradient(circle,rgba(179,147,244,.07),transparent 70%);
+  background:radial-gradient(circle,rgba(212,175,55,.07),transparent 70%);
   top:50%;left:50%;transform:translate(-50%,-50%);
 }
 .cta-content{position:relative;z-index:1;}
@@ -569,20 +571,20 @@ footer{
   width:60px;height:60px;border-radius:50%;border:none;
   background:linear-gradient(135deg,var(--gold),var(--gold2));
   cursor:pointer;
-  box-shadow:0 8px 32px rgba(179,147,244,.4);
+  box-shadow:0 8px 32px rgba(212,175,55,.4);
   display:flex;align-items:center;justify-content:center;
   font-size:26px;transition:all .3s;
   animation:copilotPulse 3s ease infinite;
 }
 @keyframes copilotPulse{
-  0%,100%{box-shadow:0 8px 32px rgba(179,147,244,.4);}
-  50%{box-shadow:0 8px 48px rgba(179,147,244,.65),0 0 0 8px rgba(179,147,244,.08);}
+  0%,100%{box-shadow:0 8px 32px rgba(212,175,55,.4);}
+  50%{box-shadow:0 8px 48px rgba(212,175,55,.65),0 0 0 8px rgba(212,175,55,.08);}
 }
 #copilot-btn:hover{transform:scale(1.1);}
 #copilot-btn.open{
-  background:linear-gradient(135deg,var(--red),#A93F38);
+  background:linear-gradient(135deg,var(--red),#C24545);
   animation:none;
-  box-shadow:0 8px 32px rgba(212,82,74,.4);
+  box-shadow:0 8px 32px rgba(239,91,91,.4);
 }
 
 #copilot-panel{
@@ -592,7 +594,7 @@ footer{
   background:var(--surface);
   border:1px solid var(--border2);
   border-radius:28px;
-  box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 0 1px rgba(179,147,244,.08);
+  box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 0 1px rgba(212,175,55,.08);
   display:none;flex-direction:column;overflow:hidden;
   animation:panelOpen .4s cubic-bezier(.34,1.56,.64,1);
 }
@@ -610,14 +612,14 @@ footer{
   font-size:22px;
 }
 .cp-title{font-weight:800;font-size:16px;color:var(--ink);}
-.cp-sub{font-size:12px;color:rgba(14,12,26,.65);}
+.cp-sub{font-size:12px;color:rgba(11,9,18,.65);}
 .cp-status{
   margin-left:auto;display:flex;align-items:center;gap:6px;
-  font-size:12px;font-weight:700;color:rgba(14,12,26,.7);
+  font-size:12px;font-weight:700;color:rgba(11,9,18,.7);
 }
 .cp-status-dot{
   width:8px;height:8px;border-radius:50%;
-  background:#2BAD7A;animation:pulse 2s infinite;
+  background:#10B981;animation:pulse 2s infinite;
 }
 
 .cp-messages{
@@ -692,7 +694,7 @@ footer{
   transition:border-color .2s;
   line-height:1.4;
 }
-#cp-input:focus{border-color:rgba(179,147,244,.5);}
+#cp-input:focus{border-color:rgba(212,175,55,.5);}
 #cp-input::placeholder{color:var(--muted);}
 #cp-send{
   width:42px;height:42px;border-radius:50%;
@@ -726,7 +728,12 @@ footer{
   .testi-grid{grid-template-columns:1fr;}
   .pricing-grid{grid-template-columns:1fr;}
   .footer-top{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:1240px){
   .nav-links{display:none;}
+  .nav-links.open{display:flex;flex-direction:column;align-items:stretch;gap:4px;position:fixed;top:72px;left:0;right:0;padding:16px 5vw 24px;background:rgba(11,9,18,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+  .nav-links.open a{padding:12px 4px;font-size:16px;}
+  .nav-links.open .nav-cta{text-align:center;margin-top:8px;}
   .nav-ham{display:flex;}
 }
 @media(max-width:600px){
@@ -739,6 +746,27 @@ footer{
   .numbers-grid{grid-template-columns:1fr 1fr;}
   .footer-top{grid-template-columns:1fr;}
 }
+
+/* ── MARKETPLACE ── */
+#marketplace{background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(139,92,246,.12),transparent 70%),var(--deep);}
+.mk-status{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:9px 18px;border-radius:999px;background:rgba(212,175,55,.10);border:1px solid rgba(212,175,55,.35);color:var(--gold-pale);font-weight:700;font-size:14px;}
+.mk-dot{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(212,175,55,.6);animation:mkpulse 2s infinite;}
+@keyframes mkpulse{70%{box-shadow:0 0 0 10px rgba(212,175,55,0);}100%{box-shadow:0 0 0 0 rgba(212,175,55,0);}}
+.mk-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:48px;}
+.mk-card{background:var(--panel);border:1px dashed rgba(167,139,250,.35);border-radius:22px;padding:28px;position:relative;}
+.mk-icon{font-size:34px;margin-bottom:14px;filter:grayscale(.2);}
+.mk-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px;}
+.mk-body{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:14px;}
+.mk-progress{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:28px;}
+.mk-step{border-top:4px solid var(--card);padding-top:10px;}
+.mk-step b{display:block;font-size:14px;color:var(--muted);}
+.mk-step small{font-size:12px;color:var(--muted);opacity:.8;}
+.mk-step.done{border-top-color:var(--em);}
+.mk-step.done b{color:var(--text);}
+.mk-step.now{border-top-color:var(--gold);}
+.mk-step.now b{color:var(--gold-pale);}
+@media(prefers-reduced-motion:reduce){.mk-dot{animation:none;}}
+@media(max-width:900px){.mk-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -750,14 +778,16 @@ footer{
 <!-- ════════════════ NAV ════════════════ -->
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-mark">N</div>
-    <span class="nav-logo-text">NEO-SUSU</span>
+    <img class="nav-logo-mark" src="./assets/logo-emblem.png" alt="" width="48" height="40">
+    <span class="nav-logo-text">NEOSUSU <small>Tontine</small></span>
   </a>
   <div class="nav-links">
     <a href="#how">Comment ça marche</a>
     <a href="#features">Fonctionnalités</a>
     <a href="#pricing">Tarifs</a>
+    <a href="#marketplace">Marketplace <span class="nav-soon">en cours</span></a>
     <a href="#partenaires">Partenaires</a>
+    <a href="./drepanocytose.html" class="nav-heart">❤ Drépanocytose</a>
     <a href="#" onclick="openCopilot()">IA Assistant</a>
     <a href="#cta" class="nav-cta btn">Commencer gratuitement</a>
   </div>
@@ -772,6 +802,7 @@ footer{
   <div class="hero-grid"></div>
   <div class="hero-content">
     <div class="hero-left">
+      <img class="hero-logo" src="./assets/logo-full.png" alt="NEOSUSU Tontine — Épargner, financer, bâtir demain" width="720" height="486">
       <div class="hero-eyebrow">
         <span class="hero-eyebrow-dot"></span>
         Fintech · Afrique & Diaspora
@@ -832,7 +863,7 @@ footer{
       </div>
       <div class="float-badge badge-1">✅ Paiement confirmé +€500</div>
       <div class="float-badge badge-2">🤖 IA Relance envoyée</div>
-      <div class="float-badge badge-3">🏦 Mangopay · Sécurisé</div>
+      <div class="float-badge badge-3">🏦 Prestataire agréé ACPR</div>
     </div>
   </div>
 </section>
@@ -847,7 +878,7 @@ footer{
     <span class="ticker-item">✦ 🏠 Tontine Appartement — Bientôt disponible</span>
     <span class="ticker-item">✦ 🛡️ Assurance Diaspora — Bientôt disponible</span>
     <span class="ticker-item">✦ KYC Intégré — RGPD Conforme</span>
-    <span class="ticker-item">✦ Paiements sécurisés Mangopay · Stripe</span>
+    <span class="ticker-item">✦ Paiements via un prestataire agréé ACPR</span>
     <span class="ticker-item">✦ 100% Sécurisé — PSP Agréé</span>
     <span class="ticker-item">✦ 0 Fonds Détenus — DSP2 Compliant</span>
     <span class="ticker-item">✦ IA Vocale 5 langues — Version 3</span>
@@ -855,7 +886,7 @@ footer{
     <span class="ticker-item">✦ 🏠 Tontine Appartement — Bientôt disponible</span>
     <span class="ticker-item">✦ 🛡️ Assurance Diaspora — Bientôt disponible</span>
     <span class="ticker-item">✦ KYC Intégré — RGPD Conforme</span>
-    <span class="ticker-item">✦ Paiements sécurisés Mangopay · Stripe</span>
+    <span class="ticker-item">✦ Paiements via un prestataire agréé ACPR</span>
   </div>
 </div>
 
@@ -924,7 +955,7 @@ footer{
       <div class="bento-card bc-b">
         <div class="bento-icon">🔒</div>
         <div class="bento-title">Zéro fonds détenus</div>
-        <div class="bento-body">NEO-SUSU est un orchestrateur pur. Tous les fonds transitent via Mangopay ou Stripe — PSP agréés DSP2. Vous êtes protégés comme dans une banque.</div>
+        <div class="bento-body">NEO-SUSU est un orchestrateur pur. Tous les fonds transitent par un prestataire de paiement agréé par l'ACPR. Vous êtes protégés comme dans une banque.</div>
         <span class="bento-tag tag-gold">DSP2 · ACPR Compliant</span>
       </div>
 
@@ -1013,7 +1044,7 @@ footer{
         <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
         <p class="testi-text">"Avant NEO-SUSU, notre tontine familiale était gérée sur WhatsApp. Des retards, des oublis, des tensions. Maintenant tout est automatique et transparent. L'IA nous rappelle en français, c'est magique."</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background:rgba(179,147,244,.1);">👩🏾</div>
+          <div class="testi-avatar" style="background:rgba(212,175,55,.1);">👩🏾</div>
           <div><div class="testi-name">Aïcha Konaté</div><div class="testi-role">Paris, France · Tontine 12 membres</div></div>
         </div>
       </div>
@@ -1021,7 +1052,7 @@ footer{
         <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
         <p class="testi-text">"Je retire mon argent cash à Dakar via un agent NEO-SUSU. En 5 minutes, le code OTP, l'agent valide, je récupère mes CFA. Incroyable pour quelqu'un basé à Lyon."</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background:rgba(43,173,122,.1);">👨🏿</div>
+          <div class="testi-avatar" style="background:rgba(16,185,129,.1);">👨🏿</div>
           <div><div class="testi-name">Mamadou Diallo</div><div class="testi-role">Lyon → Dakar · Retrait Cash Agent</div></div>
         </div>
       </div>
@@ -1029,7 +1060,7 @@ footer{
         <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
         <p class="testi-text">"L'assistant vocal en yoruba, c'est ce qui m'a convaincu. Mes parents à Lagos comprennent tout. Le score de fiabilité a réduit nos problèmes de retard de 90%."</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background:rgba(162,175,216,.1);">👩🏽</div>
+          <div class="testi-avatar" style="background:rgba(122,184,224,.1);">👩🏽</div>
           <div><div class="testi-name">Chidinma Okafor</div><div class="testi-role">Londres, UK · Groupe 20 membres</div></div>
         </div>
       </div>
@@ -1102,10 +1133,33 @@ footer{
 </section>
 
 <!-- ════════════════ PARTENAIRES ════════════════ -->
+
+<!-- ════════════════ MARKETPLACE (EN COURS) ════════════════ -->
+<section id="marketplace">
+  <div class="section-wrap">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-eyebrow">NEO Marketplace</div>
+      <h2 class="section-title">La place de marché <em>de la communauté</em></h2>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto;">Un espace pour acheter, vendre et proposer ses services entre membres NEOSUSU. Nous y travaillons.</p>
+      <div class="mk-status"><span class="mk-dot"></span>En cours de développement</div>
+    </div>
+    <div class="mk-grid reveal">
+      <div class="mk-card"><div class="mk-icon">🛍️</div><div class="mk-title">Commerçants & artisans</div><div class="mk-body">Mettre en avant les boutiques et créateurs de la diaspora.</div><span class="soon">Bientôt</span></div>
+      <div class="mk-card"><div class="mk-icon">🤝</div><div class="mk-title">Services entre membres</div><div class="mk-body">Trouver un traiteur, une coiffeuse, un déménageur de confiance dans la communauté.</div><span class="soon">Bientôt</span></div>
+      <div class="mk-card"><div class="mk-icon">🌍</div><div class="mk-title">Produits du pays</div><div class="mk-body">Retrouver les saveurs et produits d'Afrique, ici en France.</div><span class="soon">Bientôt</span></div>
+    </div>
+    <div class="mk-progress reveal" aria-label="Avancement">
+      <div class="mk-step done"><b>Idée & cadrage</b><small>Terminé</small></div>
+      <div class="mk-step now"><b>Conception</b><small>En cours</small></div>
+      <div class="mk-step"><b>Ouverture</b><small>À venir</small></div>
+    </div>
+  </div>
+</section>
+
 <section id="partenaires" style="background:var(--deep);position:relative;overflow:hidden;">
   <!-- Background glow -->
-  <div style="position:absolute;top:-200px;right:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(179,147,244,.04),transparent 70%);pointer-events:none;"></div>
-  <div style="position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(43,173,122,.04),transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;top:-200px;right:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.04),transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,.04),transparent 70%);pointer-events:none;"></div>
 
   <div class="section-wrap">
     <div class="reveal" style="text-align:center;">
@@ -1121,35 +1175,35 @@ footer{
 
     <!-- ── PARTNER INTRO STRIP ── -->
     <div class="reveal" style="display:flex;align-items:center;gap:24px;justify-content:center;margin:28px 0 56px;flex-wrap:wrap;">
-      <div style="display:flex;align-items:center;gap:10px;background:rgba(179,147,244,.08);border:1px solid rgba(179,147,244,.2);border-radius:50px;padding:10px 22px;">
+      <div style="display:flex;align-items:center;gap:10px;background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.2);border-radius:50px;padding:10px 22px;">
         <span style="font-size:20px;">🏠</span>
         <span style="font-size:14px;font-weight:700;color:var(--gold);">Tontine Appartement</span>
-        <span style="font-size:12px;background:rgba(179,147,244,.2);color:var(--gold);border-radius:20px;padding:2px 10px;font-weight:700;">Immobilier · bientôt</span>
+        <span style="font-size:12px;background:rgba(212,175,55,.2);color:var(--gold);border-radius:20px;padding:2px 10px;font-weight:700;">Immobilier · bientôt</span>
       </div>
       <div style="width:40px;height:1px;background:var(--border);"></div>
-      <div style="display:flex;align-items:center;gap:10px;background:rgba(43,173,122,.08);border:1px solid rgba(43,173,122,.2);border-radius:50px;padding:10px 22px;">
+      <div style="display:flex;align-items:center;gap:10px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:50px;padding:10px 22px;">
         <span style="font-size:20px;">🛡️</span>
         <span style="font-size:14px;font-weight:700;color:var(--em);">Assurance Diaspora</span>
-        <span style="font-size:12px;background:rgba(43,173,122,.2);color:var(--em);border-radius:20px;padding:2px 10px;font-weight:700;">Assurance · bientôt</span>
+        <span style="font-size:12px;background:rgba(16,185,129,.2);color:var(--em);border-radius:20px;padding:2px 10px;font-weight:700;">Assurance · bientôt</span>
       </div>
     </div>
 
     <!-- ══ PARTNER 1 : TONTINE APPARTEMENT ══ -->
-    <div class="reveal" style="background:linear-gradient(135deg,rgba(179,147,244,.06) 0%,rgba(14,12,26,.8) 60%);border:1px solid rgba(179,147,244,.2);border-radius:28px;padding:0;overflow:hidden;margin-bottom:24px;">
+    <div class="reveal" style="background:linear-gradient(135deg,rgba(212,175,55,.06) 0%,rgba(11,9,18,.8) 60%);border:1px solid rgba(212,175,55,.2);border-radius:28px;padding:0;overflow:hidden;margin-bottom:24px;">
       <!-- Header badge -->
-      <div style="background:linear-gradient(90deg,rgba(179,147,244,.15),transparent);border-bottom:1px solid rgba(179,147,244,.1);padding:16px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div style="background:linear-gradient(90deg,rgba(212,175,55,.15),transparent);border-bottom:1px solid rgba(212,175,55,.1);padding:16px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
         <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 16px rgba(179,147,244,.3);">🏠</div>
+          <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 16px rgba(212,175,55,.3);">🏠</div>
           <div>
             <div style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--text);">Tontine Appartement</div>
             <div style="font-size:12px;color:var(--muted);">Partenaire Immobilier Officiel NEO-SUSU</div>
           </div>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <span style="font-size:12px;font-weight:700;background:rgba(179,147,244,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(179,147,244,.2);">🇸🇳 Sénégal</span>
-          <span style="font-size:12px;font-weight:700;background:rgba(179,147,244,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(179,147,244,.2);">🇨🇮 Côte d'Ivoire</span>
-          <span style="font-size:12px;font-weight:700;background:rgba(179,147,244,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(179,147,244,.2);">🇨🇲 Cameroun</span>
-          <span style="font-size:12px;font-weight:700;background:rgba(179,147,244,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(179,147,244,.2);">🇲🇦 Maroc</span>
+          <span style="font-size:12px;font-weight:700;background:rgba(212,175,55,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(212,175,55,.2);">🇸🇳 Sénégal</span>
+          <span style="font-size:12px;font-weight:700;background:rgba(212,175,55,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(212,175,55,.2);">🇨🇮 Côte d'Ivoire</span>
+          <span style="font-size:12px;font-weight:700;background:rgba(212,175,55,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(212,175,55,.2);">🇨🇲 Cameroun</span>
+          <span style="font-size:12px;font-weight:700;background:rgba(212,175,55,.12);color:var(--gold);border-radius:20px;padding:4px 14px;border:1px solid rgba(212,175,55,.2);">🇲🇦 Maroc</span>
         </div>
       </div>
 
@@ -1164,28 +1218,28 @@ footer{
           </p>
           <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:28px;">
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(179,147,244,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">🏡</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(212,175,55,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">🏡</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Appartements & Terrains dès €5 000</div>
                 <div style="font-size:13px;color:var(--muted);">Résidences sécurisées, lotissements viabilisés, programmes neufs dans 8 pays africains</div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(179,147,244,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">🤝</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(212,175,55,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">🤝</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Réservation depuis l'app NEO-SUSU</div>
                 <div style="font-size:13px;color:var(--muted);">Visualisez les biens disponibles, réservez en ligne, financez via votre tontine active</div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(179,147,244,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">💰</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(212,175,55,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">💰</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Tontine dédiée acquisition immobilière</div>
                 <div style="font-size:13px;color:var(--muted);">Créez un groupe NEO-SUSU orienté épargne-logement — jusqu'à 36 mois de capitalisation</div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(179,147,244,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">⚖️</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(212,175,55,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">⚖️</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Titres de propriété légaux garantis</div>
                 <div style="font-size:13px;color:var(--muted);">Actes notariés, certificats fonciers, accompagnement juridique local inclus</div>
@@ -1199,10 +1253,10 @@ footer{
 
         <!-- Right: Property cards -->
         <div style="display:flex;flex-direction:column;gap:14px;">
-          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(179,147,244,.15);border-radius:20px;padding:20px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(179,147,244,.4)'" onmouseout="this.style.borderColor='rgba(179,147,244,.15)'">
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(212,175,55,.15);border-radius:20px;padding:20px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(212,175,55,.4)'" onmouseout="this.style.borderColor='rgba(212,175,55,.15)'">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
               <div style="font-size:13px;font-weight:700;color:var(--gold);">🇸🇳 DAKAR — Almadies</div>
-              <div style="font-size:12px;background:rgba(43,173,122,.1);color:var(--em);border-radius:20px;padding:3px 10px;font-weight:700;">Disponible</div>
+              <div style="font-size:12px;background:rgba(16,185,129,.1);color:var(--em);border-radius:20px;padding:3px 10px;font-weight:700;">Disponible</div>
             </div>
             <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px;">Appartement T3 — 85m²</div>
             <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">Résidence sécurisée · Vue mer · Parking · Gardiennage 24h</div>
@@ -1212,10 +1266,10 @@ footer{
             </div>
           </div>
 
-          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(179,147,244,.15);border-radius:20px;padding:20px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(179,147,244,.4)'" onmouseout="this.style.borderColor='rgba(179,147,244,.15)'">
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(212,175,55,.15);border-radius:20px;padding:20px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(212,175,55,.4)'" onmouseout="this.style.borderColor='rgba(212,175,55,.15)'">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
               <div style="font-size:13px;font-weight:700;color:var(--gold);">🇨🇮 ABIDJAN — Cocody</div>
-              <div style="font-size:12px;background:rgba(179,147,244,.1);color:var(--gold);border-radius:20px;padding:3px 10px;font-weight:700;">3 restants</div>
+              <div style="font-size:12px;background:rgba(212,175,55,.1);color:var(--gold);border-radius:20px;padding:3px 10px;font-weight:700;">3 restants</div>
             </div>
             <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px;">Terrain viabilisé — 300m²</div>
             <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">Lotissement clôturé · Eau · Électricité · Titre foncier inclus</div>
@@ -1225,10 +1279,10 @@ footer{
             </div>
           </div>
 
-          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(179,147,244,.15);border-radius:20px;padding:20px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(179,147,244,.4)'" onmouseout="this.style.borderColor='rgba(179,147,244,.15)'">
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(212,175,55,.15);border-radius:20px;padding:20px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(212,175,55,.4)'" onmouseout="this.style.borderColor='rgba(212,175,55,.15)'">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
               <div style="font-size:13px;font-weight:700;color:var(--gold);">🇨🇲 DOUALA — Bonamoussadi</div>
-              <div style="font-size:12px;background:rgba(162,175,216,.1);color:var(--sky);border-radius:20px;padding:3px 10px;font-weight:700;">Pré-vente</div>
+              <div style="font-size:12px;background:rgba(122,184,224,.1);color:var(--sky);border-radius:20px;padding:3px 10px;font-weight:700;">Pré-vente</div>
             </div>
             <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px;">Villa duplex — 120m²</div>
             <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">Programme neuf · Livraison 18 mois · Financement tontine accepté</div>
@@ -1242,20 +1296,20 @@ footer{
     </div>
 
     <!-- ══ PARTNER 2 : ASSURANCE DIASPORA ══ -->
-    <div class="reveal" style="background:linear-gradient(135deg,rgba(43,173,122,.05) 0%,rgba(14,12,26,.8) 60%);border:1px solid rgba(43,173,122,.2);border-radius:28px;overflow:hidden;margin-bottom:24px;">
+    <div class="reveal" style="background:linear-gradient(135deg,rgba(16,185,129,.05) 0%,rgba(11,9,18,.8) 60%);border:1px solid rgba(16,185,129,.2);border-radius:28px;overflow:hidden;margin-bottom:24px;">
       <!-- Header -->
-      <div style="background:linear-gradient(90deg,rgba(43,173,122,.12),transparent);border-bottom:1px solid rgba(43,173,122,.1);padding:16px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div style="background:linear-gradient(90deg,rgba(16,185,129,.12),transparent);border-bottom:1px solid rgba(16,185,129,.1);padding:16px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
         <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--em),var(--em2));display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 16px rgba(43,173,122,.3);">🛡️</div>
+          <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--em),var(--em2));display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 16px rgba(16,185,129,.3);">🛡️</div>
           <div>
             <div style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--text);">Assurance Diaspora</div>
             <div style="font-size:12px;color:var(--muted);">Partenaire Assurance Officiel NEO-SUSU</div>
           </div>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <span style="font-size:12px;font-weight:700;background:rgba(43,173,122,.1);color:var(--em);border-radius:20px;padding:4px 14px;border:1px solid rgba(43,173,122,.2);">🇪🇺 Europe</span>
-          <span style="font-size:12px;font-weight:700;background:rgba(43,173,122,.1);color:var(--em);border-radius:20px;padding:4px 14px;border:1px solid rgba(43,173,122,.2);">🌍 Afrique</span>
-          <span style="font-size:12px;font-weight:700;background:rgba(43,173,122,.1);color:var(--em);border-radius:20px;padding:4px 14px;border:1px solid rgba(43,173,122,.2);">✅ Bi-national</span>
+          <span style="font-size:12px;font-weight:700;background:rgba(16,185,129,.1);color:var(--em);border-radius:20px;padding:4px 14px;border:1px solid rgba(16,185,129,.2);">🇪🇺 Europe</span>
+          <span style="font-size:12px;font-weight:700;background:rgba(16,185,129,.1);color:var(--em);border-radius:20px;padding:4px 14px;border:1px solid rgba(16,185,129,.2);">🌍 Afrique</span>
+          <span style="font-size:12px;font-weight:700;background:rgba(16,185,129,.1);color:var(--em);border-radius:20px;padding:4px 14px;border:1px solid rgba(16,185,129,.2);">✅ Bi-national</span>
         </div>
       </div>
 
@@ -1270,35 +1324,35 @@ footer{
           </p>
           <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:28px;">
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(43,173,122,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">✈️</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(16,185,129,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">✈️</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Rapatriement & assistance internationale</div>
                 <div style="font-size:13px;color:var(--muted);">Couverture rapatriement de corps, transport médical urgent, frais obsèques en Afrique</div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(43,173,122,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">💊</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(16,185,129,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">💊</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Santé bi-nationale</div>
                 <div style="font-size:13px;color:var(--muted);">Remboursements santé valables en Europe ET en Afrique — idéal lors des voyages au pays</div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(43,173,122,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">👨‍👩‍👧</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(16,185,129,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">👨‍👩‍👧</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Prévoyance famille étendue</div>
                 <div style="font-size:13px;color:var(--muted);">Protégez vos parents restés en Afrique — capital décès, invalidité, soutien scolaire enfants</div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(43,173,122,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">📱</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(16,185,129,.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">📱</div>
               <div>
                 <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Souscription directement dans NEO-SUSU</div>
                 <div style="font-size:13px;color:var(--muted);">En 3 clics depuis l'app — paiement via votre tontine ou carte bancaire</div>
               </div>
             </div>
           </div>
-          <a href="#" class="btn btn-em" style="display:inline-flex;padding:14px 28px;font-size:14px;background:linear-gradient(135deg,var(--em),var(--em2));color:var(--ink);font-weight:700;border-radius:50px;box-shadow:0 6px 24px rgba(43,173,122,.25);">
+          <a href="#" class="btn btn-em" style="display:inline-flex;padding:14px 28px;font-size:14px;background:linear-gradient(135deg,var(--em),var(--em2));color:var(--ink);font-weight:700;border-radius:50px;box-shadow:0 6px 24px rgba(16,185,129,.25);">
             🛡️ Obtenir un devis gratuit →
           </a>
         </div>
@@ -1306,7 +1360,7 @@ footer{
         <!-- Right: Insurance offers -->
         <div style="display:flex;flex-direction:column;gap:14px;">
           <!-- Offer 1 -->
-          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(43,173,122,.15);border-radius:20px;padding:22px;position:relative;transition:all .3s;" onmouseover="this.style.borderColor='rgba(43,173,122,.4)'" onmouseout="this.style.borderColor='rgba(43,173,122,.15)'">
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(16,185,129,.15);border-radius:20px;padding:22px;position:relative;transition:all .3s;" onmouseover="this.style.borderColor='rgba(16,185,129,.4)'" onmouseout="this.style.borderColor='rgba(16,185,129,.15)'">
             <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
               <div>
                 <div style="font-size:13px;font-weight:700;color:var(--em);margin-bottom:4px;">ESSENTIEL DIASPORA</div>
@@ -1325,7 +1379,7 @@ footer{
           </div>
 
           <!-- Offer 2 (featured) -->
-          <div style="background:linear-gradient(135deg,rgba(43,173,122,.1),rgba(14,12,26,.8));border:2px solid rgba(43,173,122,.35);border-radius:20px;padding:22px;position:relative;box-shadow:0 0 40px rgba(43,173,122,.08);transition:all .3s;" onmouseover="this.style.boxShadow='0 0 60px rgba(43,173,122,.15)'" onmouseout="this.style.boxShadow='0 0 40px rgba(43,173,122,.08)'">
+          <div style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(11,9,18,.8));border:2px solid rgba(16,185,129,.35);border-radius:20px;padding:22px;position:relative;box-shadow:0 0 40px rgba(16,185,129,.08);transition:all .3s;" onmouseover="this.style.boxShadow='0 0 60px rgba(16,185,129,.15)'" onmouseout="this.style.boxShadow='0 0 40px rgba(16,185,129,.08)'">
             <div style="position:absolute;top:-12px;left:20px;background:linear-gradient(135deg,var(--em),var(--em2));color:var(--ink);font-size:11px;font-weight:800;padding:4px 14px;border-radius:20px;">⭐ Le plus choisi</div>
             <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
               <div>
@@ -1338,15 +1392,15 @@ footer{
               </div>
             </div>
             <div style="display:flex;flex-wrap:wrap;gap:6px;">
-              <span style="font-size:11px;color:var(--em);background:rgba(43,173,122,.1);border-radius:20px;padding:3px 10px;">✓ Tout Essentiel +</span>
-              <span style="font-size:11px;color:var(--em);background:rgba(43,173,122,.1);border-radius:20px;padding:3px 10px;">✓ Santé EU + Afrique</span>
-              <span style="font-size:11px;color:var(--em);background:rgba(43,173,122,.1);border-radius:20px;padding:3px 10px;">✓ Parents au pays</span>
-              <span style="font-size:11px;color:var(--em);background:rgba(43,173,122,.1);border-radius:20px;padding:3px 10px;">✓ Scolaire enfants</span>
+              <span style="font-size:11px;color:var(--em);background:rgba(16,185,129,.1);border-radius:20px;padding:3px 10px;">✓ Tout Essentiel +</span>
+              <span style="font-size:11px;color:var(--em);background:rgba(16,185,129,.1);border-radius:20px;padding:3px 10px;">✓ Santé EU + Afrique</span>
+              <span style="font-size:11px;color:var(--em);background:rgba(16,185,129,.1);border-radius:20px;padding:3px 10px;">✓ Parents au pays</span>
+              <span style="font-size:11px;color:var(--em);background:rgba(16,185,129,.1);border-radius:20px;padding:3px 10px;">✓ Scolaire enfants</span>
             </div>
           </div>
 
           <!-- Offer 3 -->
-          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(43,173,122,.15);border-radius:20px;padding:22px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(43,173,122,.4)'" onmouseout="this.style.borderColor='rgba(43,173,122,.15)'">
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(16,185,129,.15);border-radius:20px;padding:22px;transition:all .3s;" onmouseover="this.style.borderColor='rgba(16,185,129,.4)'" onmouseout="this.style.borderColor='rgba(16,185,129,.15)'">
             <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
               <div>
                 <div style="font-size:13px;font-weight:700;color:var(--em);margin-bottom:4px;">ENTREPRENEUR DIASPORA</div>
@@ -1368,7 +1422,7 @@ footer{
     </div>
 
     <!-- ══ TONTINE PROJET CTA ══ -->
-    <div class="reveal" style="background:linear-gradient(135deg,rgba(179,147,244,.07),rgba(43,173,122,.05));border:1px solid rgba(179,147,244,.2);border-radius:24px;padding:40px 48px;text-align:center;">
+    <div class="reveal" style="background:linear-gradient(135deg,rgba(212,175,55,.07),rgba(16,185,129,.05));border:1px solid rgba(212,175,55,.2);border-radius:24px;padding:40px 48px;text-align:center;">
       <div style="font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">✦ La puissance des partenariats</div>
       <h3 style="font-family:var(--font-display);font-size:36px;font-weight:700;color:var(--text);margin-bottom:14px;line-height:1.2;">
         Épargnez ensemble.<br>Investissez <em style="color:var(--gold);">intelligemment.</em>
@@ -1380,7 +1434,7 @@ footer{
         <a href="#" class="btn btn-gold" style="padding:15px 32px;">
           🏠 Tontine Immobilier · bientôt
         </a>
-        <a href="#" class="btn" style="padding:15px 32px;background:linear-gradient(135deg,var(--em),var(--em2));color:var(--ink);font-weight:700;border-radius:50px;box-shadow:0 6px 24px rgba(43,173,122,.25);">
+        <a href="#" class="btn" style="padding:15px 32px;background:linear-gradient(135deg,var(--em),var(--em2));color:var(--ink);font-weight:700;border-radius:50px;box-shadow:0 6px 24px rgba(16,185,129,.25);">
           🛡️ Tontine Assurance · bientôt
         </a>
         <a href="#" class="btn btn-ghost" style="padding:15px 32px;">
@@ -1419,8 +1473,8 @@ footer{
     <div class="footer-top">
       <div class="footer-brand">
         <a href="#" class="nav-logo" style="text-decoration:none;">
-          <div class="nav-logo-mark">N</div>
-          <span class="nav-logo-text">NEO-SUSU</span>
+          <img class="nav-logo-mark" src="./assets/logo-emblem.png" alt="" width="48" height="40">
+          <span class="nav-logo-text">NEOSUSU <small>Tontine</small></span>
         </a>
         <p>L'épargne communautaire intelligente pour la diaspora africaine et les communautés sur le continent.</p>
         <div class="footer-flags" style="margin-top:16px;">
@@ -1443,6 +1497,8 @@ footer{
       </div>
       <div class="footer-col">
         <h4>Partenaires</h4>
+        <a href="#marketplace">🛍️ NEO Marketplace · en cours</a>
+        <a href="./drepanocytose.html">❤ Drépanocytose · associations partenaires</a>
         <a href="#partenaires">🏠 Tontine Appartement · bientôt</a>
         <a href="#partenaires">🛡️ Assurance Diaspora · bientôt</a>
         <a href="#">Devenir partenaire</a>
@@ -1459,7 +1515,7 @@ footer{
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 NEO-SUSU SAS — Paris, France. Tous droits réservés.</span>
+      <span>© 2026 NEO-SUSU SAS — Paris, France · SIREN 914 419 494. Tous droits réservés.</span>
       <span>Fonds gérés par PSP agréé · DSP2 · RGPD · ACPR</span>
     </div>
   </div>
@@ -1552,13 +1608,13 @@ function drawCanvas(){
     if(p.y<0||p.y>cv.height) p.vy*=-1;
     const glow = Math.sin(p.a)*.5+.5;
     ctx2.beginPath(); ctx2.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx2.fillStyle = `rgba(179,147,244,${.04+glow*.06})`; ctx2.fill();
+    ctx2.fillStyle = `rgba(212,175,55,${.04+glow*.06})`; ctx2.fill();
   });
   for(let i=0;i<pts2.length;i++) for(let j=i+1;j<pts2.length;j++){
     const d = Math.hypot(pts2[i].x-pts2[j].x, pts2[i].y-pts2[j].y);
     if(d<120){
       ctx2.beginPath(); ctx2.moveTo(pts2[i].x,pts2[i].y); ctx2.lineTo(pts2[j].x,pts2[j].y);
-      ctx2.strokeStyle = `rgba(179,147,244,${.025*(1-d/120)})`; ctx2.lineWidth=.5; ctx2.stroke();
+      ctx2.strokeStyle = `rgba(212,175,55,${.025*(1-d/120)})`; ctx2.lineWidth=.5; ctx2.stroke();
     }
   }
   requestAnimationFrame(drawCanvas);
@@ -1582,9 +1638,9 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ── MOBILE NAV ──
 function toggleMobileNav(){
-  document.querySelector('.nav-links').style.display =
-    document.querySelector('.nav-links').style.display === 'flex' ? 'none' : 'flex';
+  document.querySelector('.nav-links').classList.toggle('open');
 }
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open')));
 
 // ── COPILOT ──
 let panelOpen = false;
@@ -1595,7 +1651,7 @@ const SYSTEM_PROMPT = `Tu es le Copilot IA officiel de NEO-SUSU, une application
 
 INFORMATIONS SUR NEO-SUSU :
 - NEO-SUSU digitalise les tontines : groupes d'épargne rotatifs où chaque membre cotise et reçoit la cagnotte à tour de rôle
-- NEO-SUSU n'est PAS un établissement de paiement — tous les fonds transitent via Mangopay/Stripe (PSP agréés DSP2)
+- NEO-SUSU n'est PAS un établissement de paiement — tous les fonds transitent par un prestataire de paiement agréé par l'ACPR (DSP2)
 - NEO-SUSU n'est jamais dépositaire des fonds
 - Disponible en France, Europe et Afrique francophone/anglophone
 
@@ -1792,7 +1848,7 @@ function getFallbackResponse(question) {
   if(q.includes('tontine') || q.includes('fonctionne') || q.includes('comment'))
     return "La tontine NEO-SUSU fonctionne en 4 étapes :<br><br>1️⃣ <strong>Créez votre groupe</strong> — Invitez vos membres par lien<br>2️⃣ <strong>KYC automatique</strong> — Chaque membre est vérifié<br>3️⃣ <strong>Cotisez</strong> — Carte bancaire ou virement SEPA (Mobile Money et cash : bientôt en Afrique)<br>4️⃣ <strong>Recevez</strong> — Distribution automatique à chaque tour<br><br>💡 Bientôt : les <strong>Tontines Projet</strong> orientées immobilier ou assurance avec nos partenaires 🏠🛡️";
   if(q.includes('sécu') || q.includes('fiable') || q.includes('confian'))
-    return "Votre sécurité est notre priorité absolue :<br><br>🔒 <strong>Zéro fonds détenus</strong> par NEO-SUSU<br>💳 Tous les fonds via <strong>Mangopay / Stripe</strong> (PSP agréés DSP2)<br>🛡️ <strong>KYC obligatoire</strong> avant tout paiement<br>🇪🇺 <strong>RGPD</strong> — Hébergement France (AWS Paris)<br>🔐 Chiffrement <strong>TLS 1.3 + AES-256</strong>";
+    return "Votre sécurité est notre priorité absolue :<br><br>🔒 <strong>Zéro fonds détenus</strong> par NEO-SUSU<br>💳 Tous les fonds via un <strong>prestataire de paiement agréé ACPR</strong> (DSP2)<br>🛡️ <strong>KYC obligatoire</strong> avant tout paiement<br>🇪🇺 <strong>RGPD</strong> — Hébergement France (AWS Paris)<br>🔐 Chiffrement <strong>TLS 1.3 + AES-256</strong>";
   if(q.includes('tarif') || q.includes('prix') || q.includes('coût') || q.includes('gratuit'))
     return "Nos tarifs sont simples :<br><br>🆓 <strong>Gratuit</strong> — 0 € : 1 tontine, jusqu'à 10 membres, commission 1,5 %<br>⭐ <strong>Essentiel</strong> — 4,99 €/mois : 3 tontines, 20 membres, commission 0,5 %<br>🏢 <strong>Pro</strong> — 14,99 €/mois : tontines illimitées, 50 membres, aucune commission<br><br>🛡️ Option <strong>garantie de paiement</strong> : +3 % sur la cagnotte, la réserve du groupe paie à la place d'un membre défaillant.<br><br>Les membres ne paient que leur cotisation : la commission est prélevée sur la cagnotte.";
   if(q.includes('cash') || q.includes('agent') || q.includes('retrait'))
