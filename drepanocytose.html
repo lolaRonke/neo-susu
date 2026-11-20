@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NEOSUSU s'engage contre la drépanocytose aux côtés de trois associations partenaires.">
+<title>NEOSUSU — Engagement drépanocytose</title>
+<link rel="icon" type="image/png" href="./assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: tendre et sérieux — une cause de santé, pas une vente
+   IDEA: une planche de biologie : le globule rond face au globule en faucille
+   PICTURE: SVG d'un vaisseau où circulent globules sains et drépanocytaires
+   COLOUR and TYPE: nuit NEOSUSU, or, violet, rouge sang doux pour les globules ; Cormorant + Outfit
+   LAYOUT: nav, héros (texte + planche), comprendre, chiffres sourcés, partenaires, don, sources */
+:root{color-scheme:dark;--ink:#0B0912;--deep:#110E1A;--panel:#1E1928;--card:#2A2236;--gold:#D4AF37;--gold-pale:#F3DB8E;--violet:#8B5CF6;--violet-pale:#C4B5FD;--em:#10B981;--blood:#E5484D;--blood-pale:#F59A9A;--text:#F4EFFA;--muted:#A79FB8;--line:rgba(244,239,250,.09)}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:radial-gradient(ellipse 70% 45% at 15% 0%,rgba(139,92,246,.16),transparent 60%),radial-gradient(ellipse 50% 40% at 90% 20%,rgba(229,72,77,.10),transparent 60%),var(--ink);color:var(--text);font:16px/1.6 Outfit,system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 max(5vw,16px)}
+nav{position:sticky;top:0;z-index:10;background:rgba(11,9,18,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{width:42px;height:auto;filter:drop-shadow(0 4px 14px rgba(139,92,246,.4))}
+.brand span{font-family:"Cormorant Garamond",serif;font-weight:700;font-size:21px;letter-spacing:1px;background:linear-gradient(90deg,#C4B5FD,#8B5CF6 45%,#7AB8E0 55%,#A9D3F5);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.back{font-size:14px;font-weight:600;color:var(--muted);text-decoration:none;padding:10px 4px;white-space:nowrap}
+.back:hover{color:var(--text)}
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(36px,6vw,80px) 0 clamp(28px,4vw,56px)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--blood-pale);margin-bottom:14px}
+h1{font-family:"Cormorant Garamond",serif;font-weight:700;font-size:clamp(38px,5.6vw,52px);line-height:1.05;margin:0 0 16px;text-wrap:balance}
+h1 em{font-style:italic;color:var(--gold-pale)}
+.lede{color:var(--muted);font-size:17px;max-width:56ch;margin:0 0 26px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 22px;border-radius:14px;font:700 15px Outfit,sans-serif;text-decoration:none;border:0;cursor:pointer}
+.btn-gold{background:linear-gradient(135deg,var(--gold-pale),var(--gold));color:#0B0912;box-shadow:0 10px 28px rgba(212,175,55,.25)}
+.btn-ghost{background:rgba(139,92,246,.12);color:var(--violet-pale);border:1px solid rgba(139,92,246,.35)}
+.btn:focus-visible{outline:3px solid var(--violet-pale);outline-offset:3px}
+.plate{position:relative;aspect-ratio:1/1;border-radius:28px;background:radial-gradient(circle at 50% 45%,rgba(229,72,77,.10),transparent 65%),var(--deep);border:1px solid var(--line);overflow:hidden}
+.plate svg{position:absolute;inset:0;width:100%;height:100%}
+.legend{position:absolute;left:16px;right:16px;bottom:14px;display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+section{padding:clamp(36px,5vw,72px) 0;border-top:1px solid var(--line)}
+h2{font-family:"Cormorant Garamond",serif;font-weight:700;font-size:clamp(30px,4vw,40px);line-height:1.1;margin:0 0 10px;text-wrap:balance}
+.sub{color:var(--muted);max-width:62ch;margin:0 0 28px}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:24px}
+.box h3{font-size:17px;margin:0 0 6px}
+.box p{margin:0;color:var(--muted);font-size:15px}
+.figs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.fig{padding:22px;border-radius:20px;background:linear-gradient(160deg,rgba(139,92,246,.12),rgba(30,25,40,.9));border:1px solid rgba(139,92,246,.25)}
+.fig b{display:block;font-family:"Cormorant Garamond",serif;font-size:clamp(32px,4vw,42px);line-height:1;color:var(--gold-pale);white-space:nowrap}
+.fig span{display:block;margin-top:10px;font-size:14px;color:var(--text)}
+.fig small{display:block;margin-top:8px;font-size:13px;color:var(--muted)}
+.partners{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.partner{border:1.5px dashed rgba(212,175,55,.35);border-radius:22px;padding:26px;text-align:center;background:rgba(212,175,55,.04)}
+.partner .n{width:56px;height:56px;margin:0 auto 14px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:700;color:var(--gold);border:1.5px solid rgba(212,175,55,.45)}
+.partner h3{margin:0 0 6px;font-size:17px}
+.chip{display:inline-block;font-size:13px;font-weight:700;padding:4px 12px;border-radius:999px;background:rgba(212,175,55,.12);color:var(--gold-pale)}
+.don{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px;align-items:center;padding:clamp(24px,4vw,44px);border-radius:28px;background:radial-gradient(ellipse 70% 90% at 100% 0%,rgba(229,72,77,.16),transparent 70%),linear-gradient(160deg,#1E1928,#140F1E);border:1px solid rgba(229,72,77,.3)}
+.don h2{margin-bottom:8px}
+.don p{color:var(--muted);margin:0}
+.don-side{display:flex;flex-direction:column;gap:10px;align-items:stretch}
+.btn-don{background:linear-gradient(135deg,#F5787C,var(--blood));color:#fff;min-height:54px;font-size:16px;box-shadow:0 10px 28px rgba(229,72,77,.3)}
+.btn-don[aria-disabled=true]{opacity:.65;cursor:not-allowed}
+.don-note{font-size:13px;color:var(--muted);text-align:center}
+.note{font-size:14px;color:var(--muted);background:rgba(139,92,246,.08);border-left:3px solid var(--violet);padding:12px 16px;border-radius:10px;margin-top:22px}
+.sources ol{margin:0;padding-left:20px;color:var(--muted);font-size:14px}
+.sources li{margin-bottom:6px}
+.sources a{color:var(--violet-pale);overflow-wrap:anywhere}
+footer{padding:28px 0 40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);text-align:center}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;background:#2A2236;border:1px solid rgba(229,72,77,.45);color:var(--text);padding:12px 18px;border-radius:14px;font-size:14px;transition:all .3s;max-width:90vw;text-align:center;z-index:20}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:no-preference){.flow{animation:flow 9s ease-in-out infinite}@keyframes flow{0%,100%{transform:translateX(-14px)}50%{transform:translateX(14px)}}}
+@media(max-width:900px){.figs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.hero,.don{grid-template-columns:1fr}.cols,.partners{grid-template-columns:1fr}}
+@media(max-width:420px){.figs{grid-template-columns:1fr}.brand span{font-size:18px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="./neo-susu-website.html"><img src="./assets/logo-emblem.png" alt="" width="42" height="35"><span>NEOSUSU</span></a>
+    <a class="back" href="./neo-susu-website.html">← Retour au site</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header class="hero">
+    <div>
+      <div class="eyebrow">❤ Notre engagement solidaire</div>
+      <h1>Ensemble face à la <em>drépanocytose</em></h1>
+      <p class="lede">La drépanocytose est la maladie génétique la plus fréquente en France, et elle touche particulièrement nos communautés. NEOSUSU s'engage aux côtés de trois associations partenaires pour soutenir les malades et leurs familles.</p>
+      <div class="btns">
+        <a class="btn btn-gold" href="#don">Faire un don ✦</a>
+        <a class="btn btn-ghost" href="#comprendre">Comprendre la maladie</a>
+      </div>
+    </div>
+    <figure class="plate" aria-label="Illustration : globules rouges sains, ronds, et globules drépanocytaires en forme de faucille circulant dans un vaisseau">
+      <svg viewBox="0 0 400 400" role="img" aria-hidden="true">
+        <defs>
+          <radialGradient id="cell" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#FF8A8E"/><stop offset=".55" stop-color="#E5484D"/><stop offset="1" stop-color="#9E2A31"/></radialGradient>
+          <radialGradient id="dimple" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#9E2A31" stop-opacity=".75"/><stop offset="1" stop-color="#E5484D" stop-opacity="0"/></radialGradient>
+          <linearGradient id="sickle" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C77DFF"/><stop offset=".5" stop-color="#E5484D"/><stop offset="1" stop-color="#8E2430"/></linearGradient>
+          <linearGradient id="vessel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A1424"/><stop offset=".5" stop-color="#3A1A2C"/><stop offset="1" stop-color="#2A1424"/></linearGradient>
+          <g id="rbc"><ellipse cx="0" cy="3" rx="26" ry="24" fill="#000" opacity=".25"/><circle r="26" fill="url(#cell)"/><circle r="12" fill="url(#dimple)"/><path d="M-17 -12 A20 20 0 0 1 4 -21" stroke="#FFD0D2" stroke-width="3" fill="none" stroke-linecap="round" opacity=".6"/></g>
+          <g id="sc"><path d="M-30 6 C-22 -22 22 -22 30 6 C18 -8 -18 -8 -30 6 Z" fill="#000" opacity=".25" transform="translate(0 4)"/><path d="M-30 6 C-22 -22 22 -22 30 6 C18 -8 -18 -8 -30 6 Z" fill="url(#sickle)"/><path d="M-20 -6 C-10 -16 10 -16 20 -6" stroke="#FFD0D2" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".55"/></g>
+        </defs>
+        <path d="M-20 120 C 90 90, 300 90, 420 120 L 420 300 C 300 330, 90 330, -20 300 Z" fill="url(#vessel)"/>
+        <path d="M-20 120 C 90 90, 300 90, 420 120" stroke="#F59A9A" stroke-opacity=".35" stroke-width="3" fill="none"/>
+        <path d="M-20 300 C 90 330, 300 330, 420 300" stroke="#F59A9A" stroke-opacity=".35" stroke-width="3" fill="none"/>
+        <g class="flow">
+          <use href="#rbc" x="60" y="170"/><use href="#rbc" x="150" y="255" transform="rotate(-10 150 255)"/>
+          <use href="#rbc" x="345" y="250"/><use href="#rbc" x="-30" y="250"/>
+          <use href="#sc" x="120" y="175" transform="rotate(18 120 175)"/>
+          <use href="#sc" x="345" y="170" transform="rotate(8 345 170)"/><use href="#sc" x="40" y="265" transform="rotate(-30 40 265)"/>
+        </g>
+        <use href="#rbc" x="250" y="160"/>
+        <use href="#sc" x="225" y="245" transform="rotate(-22 225 245)"/>
+        <g font-family="Outfit, sans-serif" font-size="17" fill="#F4EFFA">
+          <line x1="252" y1="133" x2="262" y2="70" stroke="#F4EFFA" stroke-opacity=".55"/><text x="262" y="60" text-anchor="middle">Globule sain</text>
+          <line x1="222" y1="262" x2="200" y2="335" stroke="#F4EFFA" stroke-opacity=".55"/><text x="200" y="356" text-anchor="middle">Globule en faucille</text>
+        </g>
+      </svg>
+    </figure>
+  </header>
+
+  <section id="comprendre">
+    <h2>Comprendre la maladie</h2>
+    <p class="sub">La drépanocytose, aussi appelée anémie falciforme, est une maladie génétique héréditaire qui touche l'hémoglobine des globules rouges, la protéine qui transporte l'oxygène dans le corps.<sup><a href="#s1">1</a></sup></p>
+    <div class="cols">
+      <div class="box"><h3>Des globules déformés</h3><p>L'hémoglobine anormale donne aux globules rouges une forme de faucille. Rigides, ils circulent mal et bloquent les petits vaisseaux.</p></div>
+      <div class="box"><h3>Des crises douloureuses</h3><p>Elle se manifeste notamment par une anémie, des crises vaso-occlusives douloureuses et un risque accru d'infections.<sup><a href="#s1">1</a></sup></p></div>
+      <div class="box"><h3>Une maladie héréditaire</h3><p>Elle touche surtout des personnes d'origine africaine, antillaise, maghrébine, moyen-orientale ou indienne.<sup><a href="#s2">2</a></sup> C'est une maladie chronique.</p></div>
+    </div>
+    <p class="note">Ces informations sont générales. Pour toute question sur votre santé ou un dépistage, parlez-en à votre médecin.</p>
+  </section>
+
+  <section>
+    <h2>Les chiffres</h2>
+    <p class="sub">Une maladie encore méconnue du grand public, et pourtant très présente.</p>
+    <div class="figs">
+      <div class="fig"><b>≈ 30 000</b><span>patients diagnostiqués en France en 2022</span><small>Maladie rare génétique la plus fréquente en France<sup><a href="#s3">3</a></sup></small></div>
+      <div class="fig"><b>1 / 1 303</b><span>nouveau-nés testés atteints à la naissance</span><small>Dépistage néonatal en France<sup><a href="#s4">4</a></sup></small></div>
+      <div class="fig"><b>2023</b><span>le dépistage néonatal devient universel</span><small>Depuis janvier 2023, en France<sup><a href="#s5">5</a></sup></small></div>
+      <div class="fig"><b>≈ 300 000</b><span>naissances concernées chaque année dans le monde</span><small>Source Inserm<sup><a href="#s1">1</a></sup></small></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Nos associations partenaires</h2>
+    <p class="sub">NEOSUSU finalise des partenariats avec trois associations engagées auprès des malades et de leurs familles. Elles seront présentées ici dès la signature.</p>
+    <div class="partners">
+      <div class="partner"><div class="n">1</div><h3>Association partenaire</h3><span class="chip">Partenariat en cours</span></div>
+      <div class="partner"><div class="n">2</div><h3>Association partenaire</h3><span class="chip">Partenariat en cours</span></div>
+      <div class="partner"><div class="n">3</div><h3>Association partenaire</h3><span class="chip">Partenariat en cours</span></div>
+    </div>
+  </section>
+
+  <section id="don">
+    <div class="don">
+      <div>
+        <h2>Faire un don</h2>
+        <p>Vos dons seront destinés aux associations partenaires pour soutenir les malades et leurs familles. La collecte ouvrira dès la signature des partenariats.</p>
+      </div>
+      <div class="don-side">
+        <button class="btn btn-don" id="donBtn" type="button" aria-disabled="true">❤ Faire un don</button>
+        <div class="don-note">Bientôt disponible</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sources">
+    <h2 style="font-size:26px">Sources</h2>
+    <ol>
+      <li id="s1">Inserm, via Santé.fr — « Drépanocytose, la maladie génétique la plus fréquente en France » : <a href="https://www.sante.fr/node/4750839">sante.fr/node/4750839</a></li>
+      <li id="s2">Santé.fr — « La drépanocytose » : <a href="https://www.sante.fr/node/8633285">sante.fr/node/8633285</a></li>
+      <li id="s3">Assemblée nationale, réponse du ministère de la Santé à la question écrite n° 1855 (16e législature) : <a href="https://www2.assemblee-nationale.fr/questions/detail/16/qe/1855/(vue)/pdf">assemblee-nationale.fr</a></li>
+      <li id="s4">Brousse, Allaf, Benkerrou, « Dépistage néonatal de la drépanocytose en France », médecine/sciences, 2021 : <a href="https://www.medecinesciences.org/articles/medsci/pdf/2021/05/msc200519.pdf">medecinesciences.org</a></li>
+      <li id="s5">La Revue du Praticien — « Épidémiologie de la drépanocytose en France et dans le monde » : <a href="https://www.larevuedupraticien.fr/article/epidemiologie-de-la-drepanocytose-en-france-et-dans-le-monde">larevuedupraticien.fr</a></li>
+    </ol>
+  </section>
+</main>
+
+<footer>© 2026 NEO-SUSU SAS — Paris, France · SIREN 914 419 494</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+{
+  const toast = document.getElementById("toast");
+  let timer;
+  document.getElementById("donBtn").addEventListener("click", () => {
+    toast.textContent = "La collecte de dons ouvrira dès la signature des partenariats. Merci pour votre générosité ❤";
+    toast.classList.add("show");
+    clearTimeout(timer);
+    timer = setTimeout(() => toast.classList.remove("show"), 3500);
+  });
+}
+</script>
+</body>
+</html>
